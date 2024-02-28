@@ -65,14 +65,14 @@ class Enemy(pygame.sprite.Sprite):
         self.surf = pygame.image.load("missile.png").convert()
         self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
-        # The starting position is randomly generated, as is the speed
+        # The starting position is randomly generated
         self.rect = self.surf.get_rect(
             center=(
                 random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
                 random.randint(0, SCREEN_HEIGHT),
             )
         )
-        self.speed = random.randint(1, 3)
+        self.speed = 3
 
     # Move the enemy based on speed
     # Remove it when it passes the left edge of the screen
@@ -85,7 +85,7 @@ class Enemy(pygame.sprite.Sprite):
         if move_vector.length_squared() != 0:
             move_vector.normalize_ip()
 
-            angle = math.degrees(math.atan2(-move_vector.y, move_vector.x)) + 180
+            angle = math.degrees(math.atan2(move_vector.y, -move_vector.x)) 
             self.surf = pygame.transform.rotate(self.original_surf, angle)
 
             move_vector *= self.speed
