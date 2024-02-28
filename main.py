@@ -1,8 +1,9 @@
 # Import the pygame module
 import pygame
 
-from utils.sprites import Player, Enemy, Cloud
+from utils.sprites import Player, Enemy, Cloud, Bullet
 from utils.constant import *
+from utils.helper import find_closest_target, generate_clouds
 
 # Initialize pygame
 pygame.init()
@@ -14,10 +15,10 @@ clock = pygame.time.Clock()
 # The size is determined by the constant SCREEN_WIDTH and SCREEN_HEIGHT
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-# Create custom events for adding a new enemy and cloud
 ADDENEMY = pygame.USEREVENT + 1
-# pygame.time.set_timer(ADDENEMY, 250)
 ADDCLOUD = pygame.USEREVENT + 2
+ADDBULLET = pygame.USEREVENT + 3
+
 pygame.time.set_timer(ADDCLOUD, 1000)
 pygame.time.set_timer(ADDENEMY, 1000)
 
@@ -30,6 +31,7 @@ player = Player()
 # - all_sprites isused for rendering
 enemies = pygame.sprite.Group()
 clouds = pygame.sprite.Group()
+bullets = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
 
@@ -45,9 +47,9 @@ while running:
             # Was it the Escape key? If so, stop the loop
             if event.key == K_ESCAPE:
                 running = False
-            # elif event.key == K_SPACE:
-                # Fire the custom event to add an enemy
-                # pygame.event.post(pygame.event.Event(ADDENEMY))
+            elif event.key == K_SPACE:
+                # Fire the custom event to add a bullet
+                pygame.event.post(pygame.event.Event(ADDBULLET))
 
         # Did the user click the window close button? If so, stop the loop
         elif event.type == QUIT:
@@ -56,16 +58,28 @@ while running:
         # Should we add a new enemy?
         elif event.type == ADDENEMY:
             # Create the new enemy, and add it to our sprite groups
-            new_enemy = Enemy()
-            enemies.add(new_enemy)
-            all_sprites.add(new_enemy)
+            if len(enemies) < 1:
+                new_enemy = Enemy()
+                enemies.add(new_enemy)
+                all_sprites.add(new_enemy)
 
         # Should we add a new cloud?
         elif event.type == ADDCLOUD:
             # Create the new cloud, and add it to our sprite groups
-            new_cloud = Cloud()
-            clouds.add(new_cloud)
-            all_sprites.add(new_cloud)
+            if False:
+                new_cloud = Cloud()
+                clouds.add(new_cloud)
+                all_sprites.add(new_cloud)
+        
+        elif event.type == ADDBULLET:
+            # get random target in enemies
+            if len(enemies) > 0:
+                # target = random.choice(enemies.sprites())
+                # find target closest to player
+                target = find_closest_target(player, enemies)
+                new_bullet = Bullet(target)
+                bullets.add(new_bullet)
+                all_sprites.add(new_bullet)
 
     # Get the set of keys pressed and check for user input
     pressed_keys = pygame.key.get_pressed()
@@ -74,9 +88,14 @@ while running:
     offset_x = SCREEN_WIDTH // 2 - player.rect.centerx
     offset_y = SCREEN_HEIGHT // 2 - player.rect.centery
 
+    for cloud in generate_clouds(clouds):
+        clouds.add(cloud)
+        all_sprites.add(cloud)    
+
     # Update the position of our enemies and clouds
     enemies.update()
     clouds.update()
+    bullets.update(enemies)
 
     # Fill the screen with sky blue
     screen.fill((135, 206, 250))

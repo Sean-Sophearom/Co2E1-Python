@@ -9,13 +9,14 @@ from utils.helper import *
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
+        self.tag = "player"
         self.surf = pygame.image.load("sprite/player.png").convert()
         self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(
             center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         )
-        self.speed = 5
+        self.speed = SPEED['player']
 
     # Move the sprite based on keypresses
     def update(self, pressed_keys, all_sprites):
@@ -34,21 +35,22 @@ class Player(pygame.sprite.Sprite):
         if move_vector.length_squared() != 0:
             move_vector.normalize_ip()
 
+            flipped_surf = pygame.transform.flip(self.original_surf, move_vector.x < 0, False)
+            angle = 0
+            if move_vector.x == 0:
+                angle = 90 if move_vector.y < 0 else 270
+            elif move_vector.x > 0:
+                if move_vector.y == 0: angle = 0
+                else: angle = -45 if move_vector.y > 0 else 45
+            else:
+                if move_vector.y == 0: angle = 0
+                else: angle = 45 if move_vector.y > 0 else -45
+            self.surf = pygame.transform.rotate(flipped_surf, angle)
         # Apply speed to the normalized movement vector
         move_vector *= self.speed
         
-        if move_vector.x > 0:
-            # flip in x-axis
-            self.surf = pygame.transform.flip(self.original_surf, False, False)
-        elif move_vector.x < 0:
-            # flip in x-axis
-            self.surf = pygame.transform.flip(self.original_surf, True, False)
-
         # Move the player
         self.rect.move_ip(move_vector)
-
-        # Keep player on the screen
-        # self.rect.clamp_ip(pygame.Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)) ## not needed anymore
 
         # Update camera position to keep player centered
         camera_offset_x = SCREEN_WIDTH // 2 - self.rect.centerx
@@ -66,6 +68,7 @@ class Enemy(pygame.sprite.Sprite):
         self.surf = pygame.image.load("sprite/missile.png").convert()
         self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.tag = "enemy"
         # The starting position is randomly generated
         quadrant = random.randint(1, 4)
         center = (0, 0)
@@ -79,11 +82,13 @@ class Enemy(pygame.sprite.Sprite):
             center = (random.randint(0, SCREEN_WIDTH), random.randint(SCREEN_HEIGHT, SCREEN_HEIGHT + 20))
 
         self.rect = self.surf.get_rect(center=center)
-        self.speed = 3
+        self.speed = SPEED['enemy']
 
     # Move the enemy based on speed
     # Remove it when it passes the left edge of the screen
     def update(self):
+        if is_out_of_bounds(self.rect): return self.kill()
+
         move_vector = pygame.Vector2(
             CENTER.x - self.rect.centerx,
             CENTER.y - self.rect.centery
@@ -97,29 +102,69 @@ class Enemy(pygame.sprite.Sprite):
 
             move_vector *= self.speed
             self.rect.move_ip(move_vector)
+    
+    def kill(self):
+        super().kill()
 
 
 
 # Define the cloud object extending pygame.sprite.Sprite
 # Use an image for a better looking sprite
 class Cloud(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, center):
         super(Cloud, self).__init__()
+        self.tag = "cloud"
         self.surf = pygame.image.load("sprite/cloud.png").convert()
+        self.surf = pygame.transform.rotozoom(self.surf, 0, random.randint(65, 100) / 100)
+        self.surf = pygame.transform.rotate(self.surf, random.randint(0, 360))
         self.surf.set_colorkey((0, 0, 0), RLEACCEL)
         # The starting position is randomly generated
-        self.rect = self.surf.get_rect(
-            center=(
-                random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
-                random.randint(0, SCREEN_HEIGHT),
-            )
-        )
+        self.rect = self.surf.get_rect(center=(center))
+
 
     # Move the cloud based on a constant speed
     # Remove it when it passes the left edge of the screen
     def update(self):
-        if is_out_of_bounds(self.rect): self.kill()
-        return
-        self.rect.move_ip(-5, 0)
-        if self.rect.right < 0:
+        if is_out_of_bounds(self.rect): return self.kill()
+
+class Bullet(pygame.sprite.Sprite):
+    def __init__(self, target):
+        super(Bullet, self).__init__()
+        self.surf = pygame.image.load("sprite/missile.png").convert()
+        self.surf = pygame.transform.rotozoom(self.surf, 0, 0.55)
+        self.original_surf = self.surf
+        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.speed = SPEED['bullet']
+        self.rect = self.surf.get_rect(center=CENTER)
+        self.target = target
+        self.target_move_vector = pygame.Vector2(0, 0)
+
+    def update(self, enemies):
+        if is_out_of_bounds(self.rect): return self.kill()
+
+        move_vector = pygame.Vector2(
+            self.target.rect.centerx - self.rect.centerx,
+            self.target.rect.centery - self.rect.centery
+        )
+
+        if not self.target.alive(): 
+            move_vector = self.target_move_vector
+        else:
+            self.target_move_vector = move_vector
+
+        move_vector.normalize_ip()
+        move_vector *= self.speed
+        self.rect.move_ip(move_vector)
+
+        # rotate to face movement direction
+        angle = math.degrees(math.atan2(move_vector.y, -move_vector.x)) 
+        self.surf = pygame.transform.rotate(self.original_surf, angle)
+
+        # if collide with any enemies
+        if pygame.sprite.spritecollideany(self, enemies):
+            enemy = pygame.sprite.spritecollideany(self, enemies)
+
+            # remove enemy and bullet
+            # enemy.kill()
             self.kill()
+            enemy.kill()

@@ -18,6 +18,12 @@ from pygame.locals import (
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
+SPEED = {
+    "player": 5,
+    "bullet": 9,
+    "enemy": 3,
+}
+
 import pygame.math as math
 
 # Define the center object as a Vector2 with x and y coordinates
