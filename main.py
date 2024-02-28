@@ -1,125 +1,8 @@
 # Import the pygame module
 import pygame
 
-# Import random for random numbers
-import random
-
-# Import pygame.locals for easier access to key coordinates
-# Updated to conform to flake8 and black standards
-# from pygame.locals import *
-from pygame.locals import (
-    RLEACCEL,
-    K_UP,
-    K_DOWN,
-    K_LEFT,
-    K_RIGHT,
-    K_ESCAPE,
-    K_SPACE,
-    K_a,
-    K_s,
-    K_w,
-    K_d,
-    KEYDOWN,
-    QUIT,
-)
-
-# Define constants for the screen width and height
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-
-
-# Define the Player object extending pygame.sprite.Sprite
-# Instead of a surface, we use an image for a better looking sprite
-class Player(pygame.sprite.Sprite):
-    def __init__(self):
-        super(Player, self).__init__()
-        self.surf = pygame.image.load("jet.png").convert()
-        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
-        self.rect = self.surf.get_rect(
-            center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-        )
-        self.speed = 5
-
-    # Move the sprite based on keypresses
-    def update(self, pressed_keys, all_sprites):
-        # Calculate movement vector based on pressed keys
-        move_x = 0
-        move_y = 0
-        if pressed_keys[K_UP] or pressed_keys[K_w]:
-            move_y -= self.speed
-        if pressed_keys[K_DOWN] or pressed_keys[K_s]:
-            move_y += self.speed
-        if pressed_keys[K_LEFT] or pressed_keys[K_a]:
-            move_x -= self.speed
-        if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
-            move_x += self.speed
-
-        # Move the player
-        self.rect.move_ip(move_x, move_y)
-
-        # Keep player on the screen
-        self.rect.clamp_ip(pygame.Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
-
-        # Update camera position to keep player centered
-        camera_offset_x = SCREEN_WIDTH // 2 - self.rect.centerx
-        camera_offset_y = SCREEN_HEIGHT // 2 - self.rect.centery
-
-        # Adjust the positions of all game elements (e.g., background) by the camera offset
-        for sprite in all_sprites: sprite.rect.move_ip(camera_offset_x, camera_offset_y)
-
-
-# Define the enemy object extending pygame.sprite.Sprite
-# Instead of a surface, we use an image for a better looking sprite
-class Enemy(pygame.sprite.Sprite):
-    def __init__(self):
-        super(Enemy, self).__init__()
-        self.surf = pygame.image.load("missile.png").convert()
-        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
-        # The starting position is randomly generated, as is the speed
-        self.rect = self.surf.get_rect(
-            center=(
-                random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
-                random.randint(0, SCREEN_HEIGHT),
-            )
-        )
-        self.speed = random.randint(5, 20)
-
-    # Move the enemy based on speed
-    # Remove it when it passes the left edge of the screen
-    def update(self):
-        self.rect.move_ip(-self.speed, 0)
-        if self.rect.right < 0:
-            self.kill()
-
-
-# Define the cloud object extending pygame.sprite.Sprite
-# Use an image for a better looking sprite
-class Cloud(pygame.sprite.Sprite):
-    def __init__(self):
-        super(Cloud, self).__init__()
-        self.surf = pygame.image.load("cloud.png").convert()
-        self.surf.set_colorkey((0, 0, 0), RLEACCEL)
-        # The starting position is randomly generated
-        self.rect = self.surf.get_rect(
-            center=(
-                random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
-                random.randint(0, SCREEN_HEIGHT),
-            )
-        )
-
-    # Move the cloud based on a constant speed
-    # Remove it when it passes the left edge of the screen
-    def update(self):
-        self.rect.move_ip(-5, 0)
-        if self.rect.right < 0:
-            self.kill()
-
-class Background(pygame.sprite.Sprite):
-    def __init__(self):
-        super(Background, self).__init__()
-        self.surf = pygame.image.load("background.jpeg").convert()
-        self.surf.set_colorkey((0, 0, 0), RLEACCEL)
-        self.rect = self.surf.get_rect()
+from utils.sprites import Player, Enemy, Cloud
+from utils.constant import *
 
 # Setup for sounds, defaults are good
 pygame.mixer.init()
@@ -133,9 +16,6 @@ clock = pygame.time.Clock()
 # Create the screen object
 # The size is determined by the constant SCREEN_WIDTH and SCREEN_HEIGHT
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
-# Load background image
-background_image = Background()
 
 # Create custom events for adding a new enemy and cloud
 ADDENEMY = pygame.USEREVENT + 1
@@ -153,7 +33,6 @@ player = Player()
 enemies = pygame.sprite.Group()
 clouds = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
-all_sprites.add(background_image)
 all_sprites.add(player)
 
 # Load and play our background music
