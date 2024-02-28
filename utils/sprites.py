@@ -70,14 +70,20 @@ class Enemy(pygame.sprite.Sprite):
                 random.randint(0, SCREEN_HEIGHT),
             )
         )
-        self.speed = random.randint(5, 20)
+        self.speed = random.randint(1, 3)
 
     # Move the enemy based on speed
     # Remove it when it passes the left edge of the screen
     def update(self):
-        self.rect.move_ip(-self.speed, 0)
-        if self.rect.right < 0:
-            self.kill()
+        move_vector = pygame.Vector2(
+            CENTER.x - self.rect.centerx,
+            CENTER.y - self.rect.centery
+        )
+        move_vector.normalize_ip()
+        move_vector *= self.speed
+        self.rect.move_ip(move_vector)
+        print(self.rect.centerx, self.rect.centery)
+
 
 
 # Define the cloud object extending pygame.sprite.Sprite

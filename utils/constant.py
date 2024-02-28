@@ -17,3 +17,10 @@ from pygame.locals import (
 # Define constants for the screen width and height
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
+
+import pygame.math as math
+
+# Define the center object as a Vector2 with x and y coordinates
+CENTER = math.Vector2(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+
+del math
