@@ -4,9 +4,6 @@ import pygame
 from utils.sprites import Player, Enemy, Cloud
 from utils.constant import *
 
-# Setup for sounds, defaults are good
-pygame.mixer.init()
-
 # Initialize pygame
 pygame.init()
 
@@ -34,23 +31,6 @@ enemies = pygame.sprite.Group()
 clouds = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
-
-# Load and play our background music
-# Sound source: http://ccmixter.org/files/Apoxode/59262
-# License: https://creativecommons.org/licenses/by/3.0/
-pygame.mixer.music.load("Apoxode_-_Electric_1.mp3")
-pygame.mixer.music.play(loops=-1)
-
-# Load all our sound files
-# Sound sources: Jon Fincher
-move_up_sound = pygame.mixer.Sound("Rising_putter.ogg")
-move_down_sound = pygame.mixer.Sound("Falling_putter.ogg")
-collision_sound = pygame.mixer.Sound("Collision.ogg")
-
-# Set the base volume for all sounds
-move_up_sound.set_volume(0.5)
-move_down_sound.set_volume(0.5)
-collision_sound.set_volume(0.5)
 
 # Variable to keep our main loop running
 running = True
@@ -109,11 +89,6 @@ while running:
         # If so, remove the player
         player.kill()
 
-        # Stop any moving sounds and play the collision sound
-        move_up_sound.stop()
-        move_down_sound.stop()
-        collision_sound.play()
-
         # Stop the loop
         running = False
 
@@ -122,7 +97,3 @@ while running:
 
     # Ensure we maintain a 30 frames per second rate
     clock.tick(60)
-
-# At this point, we're done, so we can stop and quit the mixer
-pygame.mixer.music.stop()
-pygame.mixer.quit()
