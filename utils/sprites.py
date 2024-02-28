@@ -1,5 +1,6 @@
 import pygame
 import random
+import math
 from utils.constant import * 
 
 # Define the Player object extending pygame.sprite.Sprite
@@ -62,6 +63,7 @@ class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super(Enemy, self).__init__()
         self.surf = pygame.image.load("missile.png").convert()
+        self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         # The starting position is randomly generated, as is the speed
         self.rect = self.surf.get_rect(
@@ -79,10 +81,15 @@ class Enemy(pygame.sprite.Sprite):
             CENTER.x - self.rect.centerx,
             CENTER.y - self.rect.centery
         )
-        move_vector.normalize_ip()
-        move_vector *= self.speed
-        self.rect.move_ip(move_vector)
-        print(self.rect.centerx, self.rect.centery)
+        
+        if move_vector.length_squared() != 0:
+            move_vector.normalize_ip()
+
+            angle = math.degrees(math.atan2(-move_vector.y, move_vector.x)) + 180
+            self.surf = pygame.transform.rotate(self.original_surf, angle)
+
+            move_vector *= self.speed
+            self.rect.move_ip(move_vector)
 
 
 
