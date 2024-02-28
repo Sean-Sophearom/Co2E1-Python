@@ -2,6 +2,7 @@ import pygame
 import random
 import math
 from utils.constant import * 
+from utils.helper import * 
 
 # Define the Player object extending pygame.sprite.Sprite
 # Instead of a surface, we use an image for a better looking sprite
@@ -47,7 +48,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.move_ip(move_vector)
 
         # Keep player on the screen
-        self.rect.clamp_ip(pygame.Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
+        # self.rect.clamp_ip(pygame.Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)) ## not needed anymore
 
         # Update camera position to keep player centered
         camera_offset_x = SCREEN_WIDTH // 2 - self.rect.centerx
@@ -66,12 +67,18 @@ class Enemy(pygame.sprite.Sprite):
         self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         # The starting position is randomly generated
-        self.rect = self.surf.get_rect(
-            center=(
-                random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
-                random.randint(0, SCREEN_HEIGHT),
-            )
-        )
+        quadrant = random.randint(1, 4)
+        center = (0, 0)
+        if quadrant == 1:
+            center = (random.randint(-20, 0), random.randint(0, SCREEN_HEIGHT))
+        elif quadrant == 2:
+            center = (random.randint(SCREEN_WIDTH, SCREEN_WIDTH + 20), random.randint(0, SCREEN_HEIGHT))
+        elif quadrant == 3:
+            center = (random.randint(0, SCREEN_WIDTH), random.randint(-20, 0))
+        else:
+            center = (random.randint(0, SCREEN_WIDTH), random.randint(SCREEN_HEIGHT, SCREEN_HEIGHT + 20))
+
+        self.rect = self.surf.get_rect(center=center)
         self.speed = 3
 
     # Move the enemy based on speed
