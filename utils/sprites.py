@@ -9,7 +9,7 @@ from utils.helper import *
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
-        self.surf = pygame.image.load("jet.png").convert()
+        self.surf = pygame.image.load("sprite/player.png").convert()
         self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(
@@ -63,7 +63,7 @@ class Player(pygame.sprite.Sprite):
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super(Enemy, self).__init__()
-        self.surf = pygame.image.load("missile.png").convert()
+        self.surf = pygame.image.load("sprite/missile.png").convert()
         self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         # The starting position is randomly generated
@@ -105,7 +105,7 @@ class Enemy(pygame.sprite.Sprite):
 class Cloud(pygame.sprite.Sprite):
     def __init__(self):
         super(Cloud, self).__init__()
-        self.surf = pygame.image.load("cloud.png").convert()
+        self.surf = pygame.image.load("sprite/cloud.png").convert()
         self.surf.set_colorkey((0, 0, 0), RLEACCEL)
         # The starting position is randomly generated
         self.rect = self.surf.get_rect(
