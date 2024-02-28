@@ -18,26 +18,32 @@ class Player(pygame.sprite.Sprite):
     # Move the sprite based on keypresses
     def update(self, pressed_keys, all_sprites):
         # Calculate movement vector based on pressed keys
-        move_x = 0
-        move_y = 0
+        move_vector = pygame.Vector2(0, 0)
         if pressed_keys[K_UP] or pressed_keys[K_w]:
-            move_y -= self.speed
+            move_vector += pygame.Vector2(0, -1)
         if pressed_keys[K_DOWN] or pressed_keys[K_s]:
-            move_y += self.speed
+            move_vector += pygame.Vector2(0, 1)
         if pressed_keys[K_LEFT] or pressed_keys[K_a]:
-            move_x -= self.speed
+            move_vector += pygame.Vector2(-1, 0)
         if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
-            move_x += self.speed
+            move_vector += pygame.Vector2(1, 0)
+
+        # Normalize the movement vector if it's not null
+        if move_vector.length_squared() != 0:
+            move_vector.normalize_ip()
+
+        # Apply speed to the normalized movement vector
+        move_vector *= self.speed
         
-        if move_x > 0:
+        if move_vector.x > 0:
             # flip in x-axis
             self.surf = pygame.transform.flip(self.original_surf, False, False)
-        elif move_x < 0:
+        elif move_vector.x < 0:
             # flip in x-axis
             self.surf = pygame.transform.flip(self.original_surf, True, False)
 
         # Move the player
-        self.rect.move_ip(move_x, move_y)
+        self.rect.move_ip(move_vector)
 
         # Keep player on the screen
         self.rect.clamp_ip(pygame.Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
