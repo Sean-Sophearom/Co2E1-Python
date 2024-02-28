@@ -19,6 +19,7 @@ ADDENEMY = pygame.USEREVENT + 1
 # pygame.time.set_timer(ADDENEMY, 250)
 ADDCLOUD = pygame.USEREVENT + 2
 pygame.time.set_timer(ADDCLOUD, 1000)
+pygame.time.set_timer(ADDENEMY, 1000)
 
 # Create our 'player'
 player = Player()
@@ -44,9 +45,9 @@ while running:
             # Was it the Escape key? If so, stop the loop
             if event.key == K_ESCAPE:
                 running = False
-            elif event.key == K_SPACE:
+            # elif event.key == K_SPACE:
                 # Fire the custom event to add an enemy
-                pygame.event.post(pygame.event.Event(ADDENEMY))
+                # pygame.event.post(pygame.event.Event(ADDENEMY))
 
         # Did the user click the window close button? If so, stop the loop
         elif event.type == QUIT:
