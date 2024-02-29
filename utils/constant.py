@@ -22,6 +22,7 @@ SPEED = {
     "player": 5,
     "bullet": 9,
     "enemy": 3,
+    "gem": 7,
 }
 
 import pygame.math as math

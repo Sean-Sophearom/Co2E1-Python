@@ -1,7 +1,7 @@
 # Import the pygame module
 import pygame
 
-from utils.sprites import Player, Enemy, Cloud, Bullet
+from utils.sprites import Player, Enemy, Cloud, Bullet, Gem
 from utils.constant import *
 from utils.helper import find_closest_target, generate_clouds
 
@@ -18,6 +18,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 ADDENEMY = pygame.USEREVENT + 1
 ADDCLOUD = pygame.USEREVENT + 2
 ADDBULLET = pygame.USEREVENT + 3
+ADDGEM = pygame.USEREVENT + 4
 
 pygame.time.set_timer(ADDCLOUD, 1000)
 pygame.time.set_timer(ADDENEMY, 350)
@@ -32,6 +33,7 @@ player = Player()
 enemies = pygame.sprite.Group()
 clouds = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
+gems = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
 
@@ -50,6 +52,7 @@ while running:
             elif event.key == K_SPACE:
                 # Fire the custom event to add a bullet
                 pygame.event.post(pygame.event.Event(ADDBULLET))
+                pygame.event.post(pygame.event.Event(ADDGEM))
 
         # Did the user click the window close button? If so, stop the loop
         elif event.type == QUIT:
@@ -78,6 +81,10 @@ while running:
                 new_bullet = Bullet(target)
                 bullets.add(new_bullet)
                 all_sprites.add(new_bullet)
+        elif event.type == ADDGEM:
+            new_gem = Gem()
+            gems.add(new_gem)
+            all_sprites.add(new_gem)
 
     # Get the set of keys pressed and check for user input
     pressed_keys = pygame.key.get_pressed()
@@ -94,6 +101,7 @@ while running:
     enemies.update()
     clouds.update()
     bullets.update(enemies)
+    gems.update()
 
     # Fill the screen with sky blue
     screen.fill((135, 206, 250))
@@ -101,6 +109,11 @@ while running:
     # Draw all our sprites
     for entity in all_sprites:
         screen.blit(entity.surf, entity.rect)
+
+    # Check if collected any gems
+    if pygame.sprite.spritecollideany(player, gems):
+        gem = pygame.sprite.spritecollideany(player, gems)
+        gem.kill()
 
     # Check if any enemies have collided with the player
     if pygame.sprite.spritecollideany(player, enemies):
