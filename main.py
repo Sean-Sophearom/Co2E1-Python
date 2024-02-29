@@ -20,7 +20,7 @@ ADDCLOUD = pygame.USEREVENT + 2
 ADDBULLET = pygame.USEREVENT + 3
 
 pygame.time.set_timer(ADDCLOUD, 1000)
-pygame.time.set_timer(ADDENEMY, 1000)
+pygame.time.set_timer(ADDENEMY, 350)
 
 # Create our 'player'
 player = Player()
@@ -58,7 +58,7 @@ while running:
         # Should we add a new enemy?
         elif event.type == ADDENEMY:
             # Create the new enemy, and add it to our sprite groups
-            if len(enemies) < 1:
+            if len(enemies) <= 100:
                 new_enemy = Enemy()
                 enemies.add(new_enemy)
                 all_sprites.add(new_enemy)
@@ -74,8 +74,6 @@ while running:
         elif event.type == ADDBULLET:
             # get random target in enemies
             if len(enemies) > 0:
-                # target = random.choice(enemies.sprites())
-                # find target closest to player
                 target = find_closest_target(player, enemies)
                 new_bullet = Bullet(target)
                 bullets.add(new_bullet)
@@ -88,9 +86,9 @@ while running:
     offset_x = SCREEN_WIDTH // 2 - player.rect.centerx
     offset_y = SCREEN_HEIGHT // 2 - player.rect.centery
 
-    for cloud in generate_clouds(clouds):
-        clouds.add(cloud)
-        all_sprites.add(cloud)    
+    # for cloud in generate_clouds(clouds):
+    #     clouds.add(cloud)
+    #     all_sprites.add(cloud)    
 
     # Update the position of our enemies and clouds
     enemies.update()
