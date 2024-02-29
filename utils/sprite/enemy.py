@@ -1,4 +1,5 @@
 from .imp import *
+from ..spawner import Spawner
 
 # Define the enemy object extending pygame.sprite.Sprite
 # Instead of a surface, we use an image for a better looking sprite
@@ -44,4 +45,5 @@ class Enemy(pygame.sprite.Sprite):
             self.rect.move_ip(move_vector)
     
     def kill(self):
+        Spawner.spawn_gem(self.rect.center)
         super().kill()

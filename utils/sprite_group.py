@@ -18,7 +18,6 @@ all_sprites.add(player)
 ADDENEMY = pygame.USEREVENT + 1
 ADDCLOUD = pygame.USEREVENT + 2
 ADDBULLET = pygame.USEREVENT + 3
-ADDGEM = pygame.USEREVENT + 4
 
 pygame.time.set_timer(ADDCLOUD, 1000)
 pygame.time.set_timer(ADDENEMY, 350)
