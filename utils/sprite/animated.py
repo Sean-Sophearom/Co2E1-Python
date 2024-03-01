@@ -27,9 +27,6 @@ class Animated(pygame.sprite.Sprite):
             self.sprite_sheet = pygame.image.load(sprite_sheet).convert_alpha()
             self.load_frames()
             cached[cacheName] = self.frames
-        
-        
-
 
         self.animate()
 
@@ -55,4 +52,4 @@ class Animated(pygame.sprite.Sprite):
         if self.mode == "once" and self.current_frame == len(self.frames) - 1:
             self.kill()
         else:
-            self.surf = self.frames[self.current_frame]
+            self.original_surf = self.surf = self.frames[self.current_frame]

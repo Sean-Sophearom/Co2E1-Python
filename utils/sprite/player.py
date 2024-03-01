@@ -1,14 +1,23 @@
 from .imp import * 
+from .animated import Animated
 
 # Define the Player object extending pygame.sprite.Sprite
 # Instead of a surface, we use an image for a better looking sprite
-class Player(pygame.sprite.Sprite):
+class Player(Animated):
     def __init__(self):
-        super(Player, self).__init__()
+        super().__init__(
+            "asset/images/player.png", 
+            width = 192, 
+            height = 192, 
+            frames = 5, 
+            scale = 0.3,
+            animation_speed = 4,
+            mode = "loop"
+        )
         self.tag = "player"
-        self.surf = pygame.image.load("asset/images/player.png").convert()
-        self.original_surf = self.surf
-        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.target_rotation = 0
+        self.rotation_speed = 2
+        self.current_rotation = 0
         self.rect = self.surf.get_rect(
             center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         )
@@ -16,6 +25,7 @@ class Player(pygame.sprite.Sprite):
 
     # Move the sprite based on keypresses
     def update(self, pressed_keys, all_sprites):
+        super().update()
         # Calculate movement vector based on pressed keys
         move_vector = pygame.Vector2(0, 0)
         if pressed_keys[K_UP] or pressed_keys[K_w]:
@@ -30,18 +40,9 @@ class Player(pygame.sprite.Sprite):
         # Normalize the movement vector if it's not null
         if move_vector.length_squared() != 0:
             move_vector.normalize_ip()
-
-            flipped_surf = pygame.transform.flip(self.original_surf, move_vector.x < 0, False)
-            angle = 0
-            if move_vector.x == 0:
-                angle = 90 if move_vector.y < 0 else 270
-            elif move_vector.x > 0:
-                if move_vector.y == 0: angle = 0
-                else: angle = -45 if move_vector.y > 0 else 45
-            else:
-                if move_vector.y == 0: angle = 0
-                else: angle = 45 if move_vector.y > 0 else -45
-            self.surf = pygame.transform.rotate(flipped_surf, angle)
+            self.target_rotation = move_vector.angle_to(pygame.Vector2(0, 1)) - 90
+            
+        self.surf = pygame.transform.rotate(self.original_surf, self.target_rotation)
         # Apply speed to the normalized movement vector
         move_vector *= self.speed
         
