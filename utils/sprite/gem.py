@@ -1,21 +1,26 @@
 from .imp import * 
+from .animated import Animated
 
-class Gem(pygame.sprite.Sprite):
+
+class Gem(Animated):
     def __init__(self, center=None):
         if not center: center = (random.randint(20, SCREEN_WIDTH - 20), random.randint(20, SCREEN_HEIGHT - 20))
-        super(Gem, self).__init__()
+        super().__init__(
+            "asset/images/gem3.png", 
+            frame_width = 8 * 8, 
+            frame_height = 14 * 8 , 
+            num_frames = 5, 
+            scale = 0.15,
+            animation_speed = 10
+        )
         self.tag = "gem"
-        self.surf = pygame.image.load("asset/images/gem.png").convert_alpha()
-        self.surf = pygame.transform.rotozoom(self.surf, 0, 0.15)
         self.collected = False
         self.speed = SPEED['gem']
         self.rect = self.surf.get_rect(center=center)
-        # self.scale_dir = 1
-        # self.scale = random.uniform(0.15, 0.2)
-        # self.original_surf = self.surf
         
 
     def update(self):
+        super().update()
         if is_out_of_bounds(self.rect): return self.kill()
 
         # if self.collected then move towards center of screen
@@ -33,7 +38,3 @@ class Gem(pygame.sprite.Sprite):
         # check if distance to center of screen is small
         elif math.sqrt((self.rect.centerx - SCREEN_WIDTH // 2) ** 2 + (self.rect.centery - SCREEN_HEIGHT // 2) ** 2) < 200:
             self.collected = True
-        # self.scale += self.scale_dir * 0.002
-        # if self.scale > 0.2 or self.scale < 0.15:
-        #     self.scale_dir *= -1
-        # self.surf = pygame.transform.rotozoom(self.original_surf, 0, self.scale)
