@@ -1,9 +1,8 @@
 # Import the pygame module
 import pygame
 
-from utils.sprites import Enemy, Cloud, Bullet
 from utils.constant import *
-from utils.helper import find_closest_target, generate_clouds
+from utils.helper import find_closest_target
 from utils.spawner import Spawner
 
 # Initialize pygame
@@ -71,6 +70,7 @@ while running:
     enemies.update()
     clouds.update()
     bullets.update(enemies)
+    explosions.update()
     gems.update()
 
     # Fill the screen with sky blue

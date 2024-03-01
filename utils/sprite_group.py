@@ -8,6 +8,7 @@ from utils.sprites import Player
 enemies = pygame.sprite.Group()
 clouds = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
+explosions = pygame.sprite.Group()
 gems = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 

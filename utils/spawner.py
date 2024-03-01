@@ -30,9 +30,18 @@ class Spawner():
     
     @staticmethod
     def spawn_bullet(target):
-        from .sprite_group import all_sprites, bullets, enemies
+        from .sprite_group import all_sprites, bullets
         from .sprites import Bullet
         new_bullet = Bullet(target)
         bullets.add(new_bullet)
         all_sprites.add(new_bullet)
         return new_bullet
+    
+    @staticmethod
+    def spawn_explosion(center):
+        from .sprite_group import all_sprites, explosions
+        from .sprites import Explosion
+        new_explosion = Explosion(center)
+        explosions.add(new_explosion)
+        all_sprites.add(new_explosion)
+        return new_explosion

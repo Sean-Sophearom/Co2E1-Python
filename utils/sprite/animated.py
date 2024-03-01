@@ -1,7 +1,7 @@
 import pygame
 
 class Animated(pygame.sprite.Sprite):
-    def __init__(self, sprite_sheet, width, height, frames, scale=1, animation_speed=5):
+    def __init__(self, sprite_sheet, width, height, frames, scale=1, animation_speed=5, mode="loop"):
         super(Animated, self).__init__()
         self.sprite_sheet = pygame.image.load(sprite_sheet).convert_alpha()
         self.frame_width = width
@@ -9,6 +9,7 @@ class Animated(pygame.sprite.Sprite):
         self.scale = scale
         self.animation_speed = animation_speed
         self.num_frames = frames
+        self.mode = mode
         
         self.frames = []
         self.current_frame = 0
@@ -32,4 +33,8 @@ class Animated(pygame.sprite.Sprite):
         
     def animate(self):
         self.current_frame = (self.current_frame + 1) % self.num_frames
-        self.surf = self.frames[self.current_frame]
+
+        if self.mode == "once" and self.current_frame == len(self.frames) - 1:
+            self.kill()
+        else:
+            self.surf = self.frames[self.current_frame]

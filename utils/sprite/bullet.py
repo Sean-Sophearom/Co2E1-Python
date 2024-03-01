@@ -41,5 +41,8 @@ class Bullet(pygame.sprite.Sprite):
 
             # remove enemy and bullet
             # enemy.kill()
+            from ..spawner import Spawner
+
+            Spawner.spawn_explosion(self.rect.center)
             self.kill()
             enemy.kill()
