@@ -44,16 +44,21 @@ while running:
                 Spawner.spawn_enemy()
 
         # Should we add a new cloud?
-        elif event.type == ADDCLOUD:
+        # elif event.type == ADDCLOUD:
             # Create the new cloud, and add it to our sprite groups
-            if False:
-                Spawner.spawn_cloud()
+            # if False:
+                # Spawner.spawn_cloud()
         
         elif event.type == ADDBULLET:
             # get random target in enemies
             if len(enemies) > 0:
                 target = find_closest_target(player, enemies)
                 Spawner.spawn_bullet(target)
+
+        elif event.type == ADDLIGHTNING:
+            if len(enemies) > 0:
+                target = enemies.sprites()[0]
+                Spawner.spawn_lightning(target)
 
     # Get the set of keys pressed and check for user input
     pressed_keys = pygame.key.get_pressed()
@@ -71,6 +76,7 @@ while running:
     clouds.update()
     bullets.update(enemies)
     explosions.update()
+    lightnings.update(enemies)
     gems.update()
 
     # Fill the screen with sky blue
@@ -84,7 +90,7 @@ while running:
     if pygame.sprite.spritecollideany(player, gems):
         gem = pygame.sprite.spritecollideany(player, gems)
         gem.kill()
-
+    
     # Check if any enemies have collided with the player
     if pygame.sprite.spritecollideany(player, enemies):
         # If so, remove the player

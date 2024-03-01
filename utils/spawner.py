@@ -45,3 +45,12 @@ class Spawner():
         explosions.add(new_explosion)
         all_sprites.add(new_explosion)
         return new_explosion
+    
+    @staticmethod
+    def spawn_lightning(center):
+        from .sprite_group import all_sprites, lightnings
+        from .sprites import Lightning
+        new_lightning = Lightning(center)
+        lightnings.add(new_lightning)
+        all_sprites.add(new_lightning)
+        return new_lightning
