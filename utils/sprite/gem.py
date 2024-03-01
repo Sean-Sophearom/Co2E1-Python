@@ -11,7 +11,7 @@ class Gem(Animated):
             height = 14 * 8 , 
             frames = 5, 
             scale = 0.12,
-            animation_speed = 10
+            animation_speed = 7
         )
         self.tag = "gem"
         self.collected = False
