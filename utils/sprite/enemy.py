@@ -6,7 +6,7 @@ from ..spawner import Spawner
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super(Enemy, self).__init__()
-        self.surf = pygame.image.load("sprite/missile.png").convert()
+        self.surf = pygame.image.load("asset/images/missile.png").convert()
         self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.tag = "enemy"

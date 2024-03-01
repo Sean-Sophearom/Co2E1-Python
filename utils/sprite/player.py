@@ -6,7 +6,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
         self.tag = "player"
-        self.surf = pygame.image.load("sprite/player.png").convert()
+        self.surf = pygame.image.load("asset/images/player.png").convert()
         self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(

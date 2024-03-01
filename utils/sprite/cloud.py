@@ -6,7 +6,7 @@ class Cloud(pygame.sprite.Sprite):
     def __init__(self, center):
         super(Cloud, self).__init__()
         self.tag = "cloud"
-        self.surf = pygame.image.load("sprite/cloud.png").convert()
+        self.surf = pygame.image.load("asset/images/cloud.png").convert()
         self.surf = pygame.transform.rotozoom(self.surf, 0, random.randint(65, 100) / 100)
         self.surf = pygame.transform.rotate(self.surf, random.randint(0, 360))
         self.surf.set_colorkey((0, 0, 0), RLEACCEL)

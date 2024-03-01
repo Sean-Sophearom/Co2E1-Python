@@ -5,7 +5,7 @@ class Gem(pygame.sprite.Sprite):
         if not center: center = (random.randint(20, SCREEN_WIDTH - 20), random.randint(20, SCREEN_HEIGHT - 20))
         super(Gem, self).__init__()
         self.tag = "gem"
-        self.surf = pygame.image.load("sprite/gem.png").convert_alpha()
+        self.surf = pygame.image.load("asset/images/gem.png").convert_alpha()
         self.surf = pygame.transform.rotozoom(self.surf, 0, 0.15)
         self.collected = False
         self.speed = SPEED['gem']

@@ -3,7 +3,7 @@ from .imp import *
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, target):
         super(Bullet, self).__init__()
-        self.surf = pygame.image.load("sprite/missile.png").convert()
+        self.surf = pygame.image.load("asset/images/missile.png").convert()
         self.surf = pygame.transform.rotozoom(self.surf, 0, 0.55)
         self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
