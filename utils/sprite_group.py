@@ -6,7 +6,6 @@ from utils.sprites import Player
 # - clouds is used for position updates
 # - all_sprites isused for rendering
 enemies = pygame.sprite.Group()
-clouds = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
 explosions = pygame.sprite.Group()
 lightnings = pygame.sprite.Group()
@@ -18,11 +17,9 @@ player = Player()
 all_sprites.add(player)
 
 ADDENEMY = pygame.USEREVENT + 1
-# ADDCLOUD = pygame.USEREVENT + 2
 ADDBULLET = pygame.USEREVENT + 3
 ADDLIGHTNING = pygame.USEREVENT + 4
 
-# pygame.time.set_timer(ADDCLOUD, 1000)
 pygame.time.set_timer(ADDENEMY, 350)
 pygame.time.set_timer(ADDLIGHTNING, 1200)
 

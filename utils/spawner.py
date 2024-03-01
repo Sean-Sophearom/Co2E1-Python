@@ -20,15 +20,6 @@ class Spawner():
         return new_enemy
     
     @staticmethod
-    def spawn_cloud():
-        from .sprite_group import all_sprites, clouds
-        from .sprites import Cloud
-        new_cloud = Cloud()
-        clouds.add(new_cloud)
-        all_sprites.add(new_cloud)
-        return new_cloud
-    
-    @staticmethod
     def spawn_bullet(target):
         from .sprite_group import all_sprites, bullets
         from .sprites import Bullet

@@ -43,12 +43,6 @@ while running:
             if len(enemies) <= 100:
                 Spawner.spawn_enemy()
 
-        # Should we add a new cloud?
-        # elif event.type == ADDCLOUD:
-            # Create the new cloud, and add it to our sprite groups
-            # if False:
-                # Spawner.spawn_cloud()
-        
         elif event.type == ADDBULLET:
             # get random target in enemies
             if len(enemies) > 0:
@@ -67,13 +61,9 @@ while running:
     offset_x = SCREEN_WIDTH // 2 - player.rect.centerx
     offset_y = SCREEN_HEIGHT // 2 - player.rect.centery
 
-    # for cloud in generate_clouds(clouds):
-    #     clouds.add(cloud)
-    #     all_sprites.add(cloud)    
 
-    # Update the position of our enemies and clouds
+    # Update the position of all sprites
     enemies.update()
-    clouds.update()
     bullets.update(enemies)
     explosions.update()
     lightnings.update(enemies)
