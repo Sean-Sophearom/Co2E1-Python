@@ -9,7 +9,7 @@ class Explosion(Animated):
             width = 550, 
             height = 550, 
             frames = 10, 
-            scale = 0.07,
+            scale = 0.06,
             animation_speed = 3,
             mode = "once"
         )

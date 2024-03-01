@@ -6,7 +6,7 @@ class Gem(Animated):
     def __init__(self, center=None):
         if not center: center = (random.randint(20, SCREEN_WIDTH - 20), random.randint(20, SCREEN_HEIGHT - 20))
         super().__init__(
-            "asset/images/gem3.png", 
+            "asset/images/gem.png", 
             width = 8 * 8, 
             height = 14 * 8 , 
             frames = 5, 
