@@ -1,22 +1,20 @@
 import pygame
 
 class Animated(pygame.sprite.Sprite):
-    def __init__(self, sprite_sheet, frame_width, frame_height, num_frames, scale=1, animation_speed=5):
+    def __init__(self, sprite_sheet, width, height, frames, scale=1, animation_speed=5):
         super(Animated, self).__init__()
         self.sprite_sheet = pygame.image.load(sprite_sheet).convert_alpha()
-        self.frame_width = frame_width
-        self.frame_height = frame_height
+        self.frame_width = width
+        self.frame_height = height
         self.scale = scale
         self.animation_speed = animation_speed
-        self.num_frames = num_frames
+        self.num_frames = frames
         
         self.frames = []
         self.current_frame = 0
         self.frame_count = 0
         self.load_frames()
-
-        self.image = self.frames[self.current_frame]
-        self.surf = self.image.convert_alpha()
+        self.animate()
 
     def load_frames(self):
         for i in range(self.num_frames):
@@ -34,5 +32,4 @@ class Animated(pygame.sprite.Sprite):
         
     def animate(self):
         self.current_frame = (self.current_frame + 1) % self.num_frames
-        self.image = self.frames[self.current_frame]
-        self.surf = self.image.convert_alpha()
+        self.surf = self.frames[self.current_frame]

@@ -7,17 +7,16 @@ class Gem(Animated):
         if not center: center = (random.randint(20, SCREEN_WIDTH - 20), random.randint(20, SCREEN_HEIGHT - 20))
         super().__init__(
             "asset/images/gem3.png", 
-            frame_width = 8 * 8, 
-            frame_height = 14 * 8 , 
-            num_frames = 5, 
-            scale = 0.15,
+            width = 8 * 8, 
+            height = 14 * 8 , 
+            frames = 5, 
+            scale = 0.12,
             animation_speed = 10
         )
         self.tag = "gem"
         self.collected = False
         self.speed = SPEED['gem']
         self.rect = self.surf.get_rect(center=center)
-        
 
     def update(self):
         super().update()
