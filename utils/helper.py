@@ -11,8 +11,21 @@ def is_out_of_bounds(rect):
         or rect.top > 2 * SCREEN_HEIGHT
     )
 
+def is_on_screen(rect):
+    return (
+        rect.right > 0
+        and rect.left < SCREEN_WIDTH
+        and rect.bottom > 0
+        and rect.top < SCREEN_HEIGHT
+    )
+
 def find_closest_target(player, group):
     return min(group, key=lambda x: (x.rect.centerx - player.rect.centerx)**2 + (x.rect.centery - player.rect.centery)**2)
+
+def find_on_screen_targets(group):
+    for target in group:
+        if is_on_screen(target.rect):
+            return target
 
 def generate_clouds(clouds):
     from utils.sprites import Cloud

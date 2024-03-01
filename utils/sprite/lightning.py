@@ -9,8 +9,8 @@ class Lightning(Animated):
             width = 130, 
             height = 660, 
             frames = 5, 
-            scale = 0.2,
-            animation_speed = 5,
+            scalex = 0.15,
+            animation_speed = 4,
             mode = "once"
         )
         self.tag = "lightning"
@@ -22,7 +22,7 @@ class Lightning(Animated):
         super().update()
         if is_out_of_bounds(self.rect): self.kill()
         # check if collide with enemies
-        if pygame.sprite.spritecollideany(self, enemies):
+        if self.current_frame >= 2 and pygame.sprite.spritecollideany(self, enemies):
             enemy = pygame.sprite.spritecollideany(self, enemies)
             enemy.kill()
 

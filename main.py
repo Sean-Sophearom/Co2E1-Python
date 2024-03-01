@@ -2,7 +2,7 @@
 import pygame
 
 from utils.constant import *
-from utils.helper import find_closest_target
+from utils.helper import find_closest_target, find_on_screen_targets
 from utils.spawner import Spawner
 
 # Initialize pygame
@@ -53,12 +53,12 @@ while running:
             # get random target in enemies
             if len(enemies) > 0:
                 target = find_closest_target(player, enemies)
-                Spawner.spawn_bullet(target)
+                if target: Spawner.spawn_bullet(target)
 
         elif event.type == ADDLIGHTNING:
             if len(enemies) > 0:
-                target = enemies.sprites()[0]
-                Spawner.spawn_lightning(target)
+                target = find_on_screen_targets(enemies)
+                if target: Spawner.spawn_lightning(target)
 
     # Get the set of keys pressed and check for user input
     pressed_keys = pygame.key.get_pressed()

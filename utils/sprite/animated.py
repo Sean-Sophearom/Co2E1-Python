@@ -1,12 +1,14 @@
 import pygame
 
 class Animated(pygame.sprite.Sprite):
-    def __init__(self, sprite_sheet, width, height, frames, scale=1, animation_speed=5, mode="loop"):
+    def __init__(self, sprite_sheet, width, height, frames, scale=1, animation_speed=5, mode="loop", scalex=1, scaley=1):
         super(Animated, self).__init__()
         self.sprite_sheet = pygame.image.load(sprite_sheet).convert_alpha()
         self.frame_width = width
         self.frame_height = height
         self.scale = scale
+        self.scalex = scalex
+        self.scaley = scaley
         self.animation_speed = animation_speed
         self.num_frames = frames
         self.mode = mode
@@ -23,6 +25,8 @@ class Animated(pygame.sprite.Sprite):
             frame.blit(self.sprite_sheet, (0, 0), (i * self.frame_width, 0, self.frame_width, self.frame_height))
             if self.scale != 1: 
                 frame = pygame.transform.rotozoom(frame, 0, self.scale)
+            if self.scalex != 1 or self.scaley != 1:
+                frame = pygame.transform.scale(frame, (int(self.frame_width * self.scalex), int(self.frame_height * self.scaley)))
             self.frames.append(frame)
 
     def update(self):
