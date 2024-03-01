@@ -1,9 +1,11 @@
 import pygame
 
+cached = {}
+
 class Animated(pygame.sprite.Sprite):
     def __init__(self, sprite_sheet, width, height, frames, scale=1, animation_speed=5, mode="loop", scalex=1, scaley=1):
         super(Animated, self).__init__()
-        self.sprite_sheet = pygame.image.load(sprite_sheet).convert_alpha()
+
         self.frame_width = width
         self.frame_height = height
         self.scale = scale
@@ -16,7 +18,19 @@ class Animated(pygame.sprite.Sprite):
         self.frames = []
         self.current_frame = 0
         self.frame_count = 0
-        self.load_frames()
+
+        cacheName = f"{sprite_sheet}{width}{height}{frames}{scale}{animation_speed}{mode}{scalex}{scaley}"
+        
+        if cacheName in cached:
+            self.frames = cached[cacheName]
+        else:
+            self.sprite_sheet = pygame.image.load(sprite_sheet).convert_alpha()
+            self.load_frames()
+            cached[cacheName] = self.frames
+        
+        
+
+
         self.animate()
 
     def load_frames(self):
