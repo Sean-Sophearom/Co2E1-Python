@@ -67,6 +67,7 @@ while running:
     bullets.update(enemies)
     explosions.update()
     lightnings.update(enemies)
+    ui.update()
     gems.update()
 
     # Fill the screen with sky blue
@@ -88,6 +89,14 @@ while running:
 
         # Stop the loop
         running = False
+
+    fps = int(clock.get_fps())
+
+    # Render the FPS text
+    fps_text = pygame.font.Font(None, 24).render(f"FPS: {fps}", True, (0,0,0))
+
+    # Blit the FPS text onto the screen
+    screen.blit(fps_text, (10, 10))
 
     # Flip everything to the display
     pygame.display.flip()

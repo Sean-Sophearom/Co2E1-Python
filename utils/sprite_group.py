@@ -10,6 +10,7 @@ bullets = pygame.sprite.Group()
 explosions = pygame.sprite.Group()
 lightnings = pygame.sprite.Group()
 gems = pygame.sprite.Group()
+ui = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 
 # Create our 'player'

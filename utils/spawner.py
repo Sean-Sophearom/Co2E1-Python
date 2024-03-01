@@ -45,3 +45,12 @@ class Spawner():
         lightnings.add(new_lightning)
         all_sprites.add(new_lightning)
         return new_lightning
+    
+    @staticmethod
+    def spawn_text(center):
+        from .sprite_group import all_sprites, ui
+        from .ui import Text
+        new_text = Text(100, 24, center)
+        ui.add(new_text)
+        all_sprites.add(new_text)
+        return new_text
