@@ -49,7 +49,7 @@ class Spawner():
     @staticmethod
     def spawn_text(center):
         from .sprite_group import all_sprites, ui
-        from .ui import Text
+        from .sprites import Text
         new_text = Text(100, 24, center)
         ui.add(new_text)
         all_sprites.add(new_text)
