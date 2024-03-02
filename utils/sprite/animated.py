@@ -1,9 +1,10 @@
 import pygame
+from utils.constant import TARGET_FPS
 
 cached = {}
 
 class Animated(pygame.sprite.Sprite):
-    def __init__(self, sprite_sheet, width, height, frames, scale=1, animation_speed=5, mode="loop", scalex=1, scaley=1):
+    def __init__(self, sprite_sheet, width, height, frames, scale=1, animation_speed=5, mode="loop", scalex=1, scaley=1, duration=None):
         super(Animated, self).__init__()
 
         self.frame_width = width
@@ -11,7 +12,7 @@ class Animated(pygame.sprite.Sprite):
         self.scale = scale
         self.scalex = scalex
         self.scaley = scaley
-        self.animation_speed = animation_speed
+        self.animation_speed = animation_speed if duration is None else int(duration * TARGET_FPS / frames)
         self.num_frames = frames
         self.mode = mode
         

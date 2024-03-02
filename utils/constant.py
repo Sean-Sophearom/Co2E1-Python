@@ -17,6 +17,7 @@ from pygame.locals import (
 # Define constants for the screen width and height
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
+TARGET_FPS = 60
 
 SPEED = {
     "player": 5,

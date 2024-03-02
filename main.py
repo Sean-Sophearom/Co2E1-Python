@@ -102,4 +102,4 @@ while running:
     pygame.display.flip()
 
     # Ensure we maintain a 30 frames per second rate
-    clock.tick(60)
+    clock.tick(TARGET_FPS)
