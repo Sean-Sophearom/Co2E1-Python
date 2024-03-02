@@ -4,6 +4,7 @@ import pygame
 from utils.constant import *
 from utils.helper import find_closest_target, find_on_screen_targets
 from utils.spawner import Spawner
+from utils.sprites import Background
 
 # Initialize pygame
 pygame.init()
@@ -19,6 +20,7 @@ from utils.sprite_group import *
 
 # Variable to keep our main loop running
 running = True
+background = Background()
 
 # Our main loop
 while running:
@@ -70,8 +72,7 @@ while running:
     ui.update()
     gems.update()
 
-    # Fill the screen with sky blue
-    screen.fill((135, 206, 250))
+    screen.blit(background.surf, background.rect)
 
     # Draw all our sprites
     for entity in all_sprites:
@@ -93,12 +94,11 @@ while running:
     fps = int(clock.get_fps())
 
     # Render the FPS text
-    fps_text = pygame.font.Font(None, 24).render(f"FPS: {fps}", True, (0,0,0))
+    fps_text = pygame.font.Font(None, 24).render(f"FPS: {fps}", True, (255,255,255))
 
     # Blit the FPS text onto the screen
     screen.blit(fps_text, (10, 10))
 
-    # Flip everything to the display
     pygame.display.flip()
 
     # Ensure we maintain a 30 frames per second rate
