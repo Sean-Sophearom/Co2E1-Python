@@ -60,10 +60,6 @@ while running:
     pressed_keys = pygame.key.get_pressed()
     player.update(pressed_keys, all_sprites)
 
-    offset_x = SCREEN_WIDTH // 2 - player.rect.centerx
-    offset_y = SCREEN_HEIGHT // 2 - player.rect.centery
-
-
     # Update the position of all sprites
     enemies.update()
     bullets.update(enemies)
