@@ -20,7 +20,6 @@ from utils.sprite_group import *
 
 # Variable to keep our main loop running
 running = True
-background = Background()
 
 # Our main loop
 while running:
@@ -67,8 +66,11 @@ while running:
     lightnings.update(enemies)
     ui.update()
     gems.update()
+    statics.update()
 
-    screen.blit(background.surf, background.rect)
+    # Draw all statics elements
+    for entity in statics:
+        screen.blit(entity.surf, entity.rect)
 
     # Draw all our sprites
     for entity in all_sprites:
