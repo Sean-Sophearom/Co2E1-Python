@@ -1,5 +1,5 @@
 import pygame
-from utils.sprites import Player, HealthBar, Background
+from utils.sprites import Player, HealthBar, Background, ExpBar
 
 # Create groups to hold enemy sprites, cloud sprites, and all sprites
 # - enemies is used for collision detection and position updates
@@ -20,6 +20,7 @@ all_sprites.add(player)
 
 statics.add(Background())
 statics.add(HealthBar())
+statics.add(ExpBar())
 
 ADDENEMY = pygame.USEREVENT + 1
 ADDBULLET = pygame.USEREVENT + 3

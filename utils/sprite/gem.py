@@ -10,7 +10,7 @@ class Gem(Animated):
             width = 8 * 8, 
             height = 14 * 8 , 
             frames = 5, 
-            scale = 0.12,
+            scale = 0.16,
             animation_speed = 7
         )
         self.tag = "gem"
