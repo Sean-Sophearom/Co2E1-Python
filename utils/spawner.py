@@ -54,3 +54,12 @@ class Spawner():
         ui.add(new_text)
         all_sprites.add(new_text)
         return new_text
+
+    @staticmethod
+    def spawn_star(center=None, *args, **kwargs):
+        from .sprite_group import all_sprites, stars
+        from .sprites import ShinyStar
+        new_star = ShinyStar(center, *args, **kwargs)
+        stars.add(new_star)
+        all_sprites.add(new_star)
+        return new_star

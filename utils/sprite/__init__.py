@@ -5,3 +5,4 @@ from .gem import Gem
 from .explosion import Explosion
 from .lightning import Lightning
 from .background import Background
+from .shiny_star import ShinyStar

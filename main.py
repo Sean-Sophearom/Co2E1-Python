@@ -54,6 +54,9 @@ while running:
             if len(enemies) > 0:
                 target = find_on_screen_targets(enemies)
                 if target: Spawner.spawn_lightning(target)
+            
+        elif event.type == ADDSHINYSTAR:
+            Spawner.spawn_star()
 
     # Get the set of keys pressed and check for user input
     pressed_keys = pygame.key.get_pressed()
@@ -67,6 +70,7 @@ while running:
     ui.update()
     gems.update()
     statics.update()
+    stars.update()
 
     # Draw all statics elements
     for entity in statics:
