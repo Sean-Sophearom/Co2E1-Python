@@ -1,5 +1,5 @@
 import pygame
-from utils.sprites import Player, HealthBar, Background, ExpBar, ShinyStar
+from utils.sprites import Player, HealthBar, Background, ExpBar
 
 # Create groups to hold enemy sprites, cloud sprites, and all sprites
 # - enemies is used for collision detection and position updates
