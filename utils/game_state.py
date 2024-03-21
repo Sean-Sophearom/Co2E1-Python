@@ -14,6 +14,10 @@ class GameState:
     game_status: GAMESTATUS = GAMESTATUS.HOME
     player: Player = None
 
+    gem_radius: int = 200
+    gem_collected: int = 0
+    gem_capacity = 25
+
     speed = Speed(
         player = 5, 
         bullet = 9, 

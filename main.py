@@ -65,6 +65,7 @@ while running:
         # Check if collected any gems
         if pygame.sprite.spritecollideany(GameState.player, gems):
             gem = pygame.sprite.spritecollideany(GameState.player, gems)
+            GameState.gem_collected += gem.value
             gem.kill()
         
         # Check if any enemies have collided with the player

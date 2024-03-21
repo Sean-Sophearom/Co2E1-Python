@@ -16,10 +16,10 @@ class ExpBar(pygame.sprite.Sprite):
         self.fill = fill
         self.draw()
         self.rect = self.surf.get_rect(topright=center)
-        self.frame_count = 0
 
     def update(self):
-        self.frame_count += 1
+        from ..game_state import GameState
+        self.fill = GameState.gem_collected / GameState.gem_capacity
         self.draw()
 
     def draw(self):
@@ -40,8 +40,6 @@ class ExpBar(pygame.sprite.Sprite):
             ), 
             border_radius = border_radius
         )
-
-
 
     def add_amount(self, amount):
         pass
