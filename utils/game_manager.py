@@ -5,6 +5,7 @@ import pygame
 __all__ = ["GameManager"]
 
 class GameManager():
+    timers = []
     def home_screen():
         from .sprites import Text, Background
         from .sprite_group import ui_elements, all_sprites, statics
@@ -27,8 +28,8 @@ class GameManager():
         empty_group(ui_elements)
         GameState.game_status = GAMESTATUS.PLAYING
 
-        pygame.time.set_timer(CUSTOMEVENTS.ADDENEMY, 1000)
-        pygame.time.set_timer(CUSTOMEVENTS.ADDBULLET, 900)
+        GameManager.set_timer(CUSTOMEVENTS.ADDENEMY, 1000)
+        GameManager.set_timer(CUSTOMEVENTS.ADDBULLET, 900)
         
         statics.add(HealthBar())
         statics.add(ExpBar())
@@ -52,6 +53,14 @@ class GameManager():
 
     def skill_menu():
         GameState.game_status = GAMESTATUS.SKILL_MENU
+    
+    def set_timer(timer, duration):
+        GameManager.timers.append(timer)
+        pygame.time.set_timer(timer, duration)
+    
+    def clear_timers():
+        for timer in GameManager.timers: pygame.time.set_timer(timer, 0)
+        GameManager.timers.clear()
     
 
 def empty_group(*groups):
