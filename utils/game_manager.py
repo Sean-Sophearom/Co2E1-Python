@@ -32,3 +32,6 @@ class GameManager():
     
     def game_over():
         GameManager.home_screen()
+
+    def skill_menu():
+        GameState.game_status = GAMESTATUS.SKILL_MENU

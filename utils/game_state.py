@@ -29,5 +29,8 @@ class GameState:
     
     def is_game_over():
         return GameState.game_status == GAMESTATUS.GAME_OVER
-
-del Speed
+    
+    def is_skill_menu():
+        return GameState.game_status == GAMESTATUS.SKILL_MENU
+    
+del Speed, dataclass, Player

@@ -75,13 +75,15 @@ while running:
             GameManager.game_over()
 
     # Update the position of all sprites
-    enemies.update()
-    bullets.update(enemies)
-    explosions.update()
-    lightnings.update(enemies)
-    ui.update()
-    gems.update()
-    statics.update()
+    if GameState.is_playing():
+        enemies.update()
+        bullets.update(enemies)
+        explosions.update()
+        lightnings.update(enemies)
+        ui.update()
+        gems.update()
+        statics.update()
+
     stars.update()
     ui_elements.update()
 

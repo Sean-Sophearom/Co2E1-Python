@@ -19,6 +19,7 @@ class GAMESTATUS(Enum):
     HOME = "home"
     PLAYING = "playing"
     GAME_OVER = "game_over"
+    SKILL_MENU = "skill_menu"
 
 class TAGS(Enum):
     PLAYER = "player"
