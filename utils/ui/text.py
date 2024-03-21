@@ -10,11 +10,11 @@ class Text(pygame.sprite.Sprite):
         self.surf = self.font.render(self.text, True, self.color)
         self.rect = self.surf.get_rect(center = center)
         self.onclick = onclick
-        self.is_hover = False
+        self.is_hovering = False
         self.original_surf = self.surf
 
     def update(self):
-        if self.is_hover and self.onclick:
+        if self.is_hovering:
             self.surf = pygame.transform.scale(self.original_surf, (int(self.rect.width * 1.1), int(self.rect.height * 1.1)))
         else:
             self.surf = pygame.transform.scale(self.original_surf, (self.rect.width, self.rect.height))
@@ -27,7 +27,7 @@ class Text(pygame.sprite.Sprite):
                         self.onclick()
         
         elif event.type == pygame.MOUSEMOTION:
-            if self.rect.collidepoint(event.pos):
-                self.is_hover = True
+            if self.rect.collidepoint(event.pos) and self.onclick:
+                self.is_hovering = True
             else:
-                self.is_hover = False
+                self.is_hovering = False

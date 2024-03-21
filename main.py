@@ -10,9 +10,6 @@ from utils.game_manager import GameManager
 # Initialize pygame
 pygame.init()
 
-# set custom cursor
-pygame.mouse.set_cursor(*pygame.cursors.arrow)
-
 # Setup the clock for a decent framerate
 clock = pygame.time.Clock()
 
@@ -97,6 +94,12 @@ while running:
     # Draw all our sprites
     for entity in all_sprites:
         screen.blit(entity.surf, entity.rect)
+
+    # Check if any ui element is being hovered then change cursor style
+    if any(hasattr(entity, "is_hovering") and entity.is_hovering for entity in ui_elements):
+        pygame.mouse.set_cursor(*pygame.cursors.diamond)
+    else:
+        pygame.mouse.set_cursor(*pygame.cursors.arrow)
 
 
     fps = int(clock.get_fps())
