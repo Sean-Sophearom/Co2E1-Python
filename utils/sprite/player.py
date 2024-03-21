@@ -15,7 +15,7 @@ class Player(Animated):
             animation_speed = 4,
             mode = "loop"
         )
-        self.tag = "player"
+        self.tag = TAGS.PLAYER
         self.target_rotation = 0
         self.rotation_speed = 2
         self.current_rotation = 0

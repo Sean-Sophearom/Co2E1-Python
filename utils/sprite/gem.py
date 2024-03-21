@@ -14,7 +14,7 @@ class Gem(Animated):
             scale = 0.16,
             animation_speed = 7
         )
-        self.tag = "gem"
+        self.tag = TAGS.GEM
         self.collected = False
         self.speed = GameState.speed.gem
         self.rect = self.surf.get_rect(center=center)

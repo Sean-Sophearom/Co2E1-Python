@@ -13,7 +13,7 @@ class Explosion(Animated):
             animation_speed = 3,
             mode = "once"
         )
-        self.tag = "explosion"
+        self.tag = TAGS.EXPLOSION
         self.rect = self.surf.get_rect(center=center)
 
     def update(self):

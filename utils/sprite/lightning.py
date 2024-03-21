@@ -13,7 +13,7 @@ class Lightning(Animated):
             animation_speed = 4,
             mode = "once"
         )
-        self.tag = "lightning"
+        self.tag = TAGS.LIGHTNING
         self.rect = self.surf.get_rect(midbottom=target.rect.center)
         self.target = target
 

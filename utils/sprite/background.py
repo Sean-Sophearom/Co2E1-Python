@@ -9,7 +9,7 @@ class Background(pygame.sprite.Sprite):
         self.surf = pygame.transform.scale(self.surf, (SCREEN_WIDTH, SCREEN_HEIGHT))
         self.rect = self.surf.get_rect()
         self.rect.topleft = (0, 0)
-        self.tag = "background"
+        self.tag = TAGS.BACKGROUND
 
     def update(self):
         pass

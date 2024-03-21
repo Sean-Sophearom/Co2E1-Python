@@ -10,7 +10,7 @@ class Enemy(pygame.sprite.Sprite):
         self.surf = pygame.image.load("asset/images/missile.png").convert()
         self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
-        self.tag = "enemy"
+        self.tag = TAGS.ENEMY
         # The starting position is randomly generated
         quadrant = random.randint(1, 4)
         center = (0, 0)

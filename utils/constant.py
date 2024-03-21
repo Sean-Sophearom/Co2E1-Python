@@ -20,6 +20,19 @@ class GAMESTATUS(Enum):
     PLAYING = "playing"
     GAME_OVER = "game_over"
 
+class TAGS(Enum):
+    PLAYER = "player"
+    ENEMY = "enemy"
+    BULLET = "bullet"
+    GEM = "gem"
+    EXPLOSION = "explosion"
+    LIGHTNING = "lightning"
+    STAR = "star"
+    HEALTHBAR = "healthbar"
+    EXPBAR = "expbar"
+    TEXT = "text"
+    BACKGROUND = "background"
+
 # Define constants for the screen width and height
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720

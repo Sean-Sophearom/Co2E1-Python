@@ -16,7 +16,7 @@ class ShinyStar(Animated):
             animation_speed = 5,
             mode = "once"
         )
-        self.tag = "shiny_star"
+        self.tag = TAGS.STAR
         self.rect = self.surf.get_rect(center=center)
 
     def update(self):
