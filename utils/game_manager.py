@@ -3,8 +3,6 @@ from .constant import GAMESTATUS, SCREEN_WIDTH, SCREEN_HEIGHT
 
 __all__ = ["GameManager"]
 
-
-
 class GameManager():
     def home_screen():
         from .sprites import Text, Background

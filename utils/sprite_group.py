@@ -1,5 +1,6 @@
 import pygame
 from utils.sprites import Player, HealthBar, Background, ExpBar
+from .constant import CUSTOMEVENTS
 
 # Create groups to hold enemy sprites, bullets, explosions and all sprites
 # - enemies is used for collision detection and position updates
@@ -18,13 +19,7 @@ statics = pygame.sprite.Group()
 
 all_sprites = pygame.sprite.Group()
 
-
-ADDENEMY = pygame.USEREVENT + 1
-ADDBULLET = pygame.USEREVENT + 3
-ADDLIGHTNING = pygame.USEREVENT + 4
-ADDSHINYSTAR = pygame.USEREVENT + 5
-
-pygame.time.set_timer(ADDSHINYSTAR, 2000)
+pygame.time.set_timer(CUSTOMEVENTS.ADDSHINYSTAR, 2000)
 
 del pygame
 del Player

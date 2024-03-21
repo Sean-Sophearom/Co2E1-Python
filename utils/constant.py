@@ -1,4 +1,6 @@
 from enum import Enum
+from dataclasses import dataclass
+import pygame
 from pygame.locals import (
     RLEACCEL,
     K_UP,
@@ -34,6 +36,13 @@ class TAGS(Enum):
     TEXT = "text"
     BACKGROUND = "background"
 
+@dataclass
+class CUSTOMEVENTS():
+    ADDENEMY = pygame.USEREVENT + 1
+    ADDBULLET = pygame.USEREVENT + 2
+    ADDLIGHTNING = pygame.USEREVENT + 3
+    ADDSHINYSTAR = pygame.USEREVENT + 4
+
 # Define constants for the screen width and height
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
@@ -45,6 +54,8 @@ import pygame.math as math
 
 # Define the center object as a Vector2 with x and y coordinates
 CENTER = math.Vector2(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+
+
 
 del math
 del Enum

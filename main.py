@@ -43,20 +43,20 @@ while running:
         elif event.type == QUIT:
             running = False
 
-        elif event.type == ADDSHINYSTAR:
+        elif event.type == CUSTOMEVENTS.ADDSHINYSTAR:
                 Spawner.spawn_star()
 
         elif GameState.is_playing():
-            if event.type == ADDENEMY:
+            if event.type == CUSTOMEVENTS.ADDENEMY:
                 if len(enemies) <= 100:
                     Spawner.spawn_enemy()
 
-            elif event.type == ADDBULLET:
+            elif event.type == CUSTOMEVENTS.ADDBULLET:
                 if len(enemies) > 0:
                     target = find_closest_target(enemies)
                     if target: Spawner.spawn_bullet(target)
 
-            elif event.type == ADDLIGHTNING:
+            elif event.type == CUSTOMEVENTS.ADDLIGHTNING:
                 if len(enemies) > 0:
                     target = find_on_screen_targets(enemies)
                     if target: Spawner.spawn_lightning(target)
