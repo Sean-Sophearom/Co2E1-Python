@@ -24,8 +24,6 @@ ADDBULLET = pygame.USEREVENT + 3
 ADDLIGHTNING = pygame.USEREVENT + 4
 ADDSHINYSTAR = pygame.USEREVENT + 5
 
-pygame.time.set_timer(ADDENEMY, 350)
-pygame.time.set_timer(ADDLIGHTNING, 1200)
 pygame.time.set_timer(ADDSHINYSTAR, 2000)
 
 del pygame
