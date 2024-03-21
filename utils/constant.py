@@ -25,13 +25,6 @@ SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 TARGET_FPS = 60
 
-SPEED = {
-    "player": 5,
-    "bullet": 9,
-    "enemy": 3,
-    "gem": 7,
-}
-
 FONTPATH = "asset/font/8-bit-pixel.ttf"
 
 import pygame.math as math

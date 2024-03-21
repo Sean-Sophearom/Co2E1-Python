@@ -4,7 +4,8 @@ import pygame
 from utils.constant import *
 from utils.helper import find_closest_target, find_on_screen_targets
 from utils.spawner import Spawner
-from utils.sprites import Background
+from utils.globals import Global
+from utils.game_manager import GameManager
 
 # Initialize pygame
 pygame.init()
@@ -25,42 +26,46 @@ running = True
 while running:
     # Look at every event in the queue
     for event in pygame.event.get():
-        # Did the user hit a key?
         if event.type == KEYDOWN:
-            # Was it the Escape key? If so, stop the loop
             if event.key == K_ESCAPE:
                 running = False
-            elif event.key == K_SPACE:
-                # Fire the custom event to add a bullet
-                pygame.event.post(pygame.event.Event(ADDBULLET))
+            elif event.key == K_SPACE and Global.game_state == GAMESTATE.HOME:
+                GameManager.start()
 
-        # Did the user click the window close button? If so, stop the loop
         elif event.type == QUIT:
             running = False
 
-        # Should we add a new enemy?
-        elif event.type == ADDENEMY:
-            # Create the new enemy, and add it to our sprite groups
-            if len(enemies) <= 100:
-                Spawner.spawn_enemy()
-
-        elif event.type == ADDBULLET:
-            # get random target in enemies
-            if len(enemies) > 0:
-                target = find_closest_target(player, enemies)
-                if target: Spawner.spawn_bullet(target)
-
-        elif event.type == ADDLIGHTNING:
-            if len(enemies) > 0:
-                target = find_on_screen_targets(enemies)
-                if target: Spawner.spawn_lightning(target)
-            
         elif event.type == ADDSHINYSTAR:
-            Spawner.spawn_star()
+                Spawner.spawn_star()
 
-    # Get the set of keys pressed and check for user input
-    pressed_keys = pygame.key.get_pressed()
-    player.update(pressed_keys, all_sprites)
+        elif Global.game_state == GAMESTATE.PLAYING:
+            if event.type == ADDENEMY:
+                if len(enemies) <= 100:
+                    Spawner.spawn_enemy()
+
+            elif event.type == ADDBULLET:
+                if len(enemies) > 0:
+                    target = find_closest_target(enemies)
+                    if target: Spawner.spawn_bullet(target)
+
+            elif event.type == ADDLIGHTNING:
+                if len(enemies) > 0:
+                    target = find_on_screen_targets(enemies)
+                    if target: Spawner.spawn_lightning(target)
+
+    if Global.game_state == GAMESTATE.PLAYING:
+        pressed_keys = pygame.key.get_pressed()
+        Global.player.update(pressed_keys, all_sprites)
+
+        # Check if collected any gems
+        if pygame.sprite.spritecollideany(Global.player, gems):
+            gem = pygame.sprite.spritecollideany(Global.player, gems)
+            gem.kill()
+        
+        # Check if any enemies have collided with the player
+        if pygame.sprite.spritecollideany(Global.player, enemies):
+            Global.player.kill()
+            running = False
 
     # Update the position of all sprites
     enemies.update()
@@ -80,23 +85,11 @@ while running:
     for entity in all_sprites:
         screen.blit(entity.surf, entity.rect)
 
-    # Check if collected any gems
-    if pygame.sprite.spritecollideany(player, gems):
-        gem = pygame.sprite.spritecollideany(player, gems)
-        gem.kill()
-    
-    # Check if any enemies have collided with the player
-    if pygame.sprite.spritecollideany(player, enemies):
-        # If so, remove the player
-        player.kill()
-
-        # Stop the loop
-        running = False
 
     fps = int(clock.get_fps())
 
     # Render the FPS text
-    fps_text = pygame.font.Font(None, 24).render(f"FPS: {fps}", True, (255,255,255))
+    fps_text = pygame.font.Font(FONTPATH, 24).render(f"FPS: {fps}", True, (255,255,255))
 
     # Blit the FPS text onto the screen
     screen.blit(fps_text, (10, 10))

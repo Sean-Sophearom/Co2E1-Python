@@ -4,6 +4,7 @@ from .animated import Animated
 
 class Gem(Animated):
     def __init__(self, center=None):
+        from utils.globals import Global
         if not center: center = (random.randint(20, SCREEN_WIDTH - 20), random.randint(20, SCREEN_HEIGHT - 20))
         super().__init__(
             "asset/images/gem.png", 
@@ -15,7 +16,7 @@ class Gem(Animated):
         )
         self.tag = "gem"
         self.collected = False
-        self.speed = SPEED['gem']
+        self.speed = Global.speed.gem
         self.rect = self.surf.get_rect(center=center)
 
     def update(self):

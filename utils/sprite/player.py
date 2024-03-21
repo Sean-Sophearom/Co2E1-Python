@@ -5,6 +5,7 @@ from .animated import Animated
 # Instead of a surface, we use an image for a better looking sprite
 class Player(Animated):
     def __init__(self):
+        from utils.globals import Global
         super().__init__(
             "asset/images/player.png", 
             width = 192, 
@@ -21,7 +22,7 @@ class Player(Animated):
         self.rect = self.surf.get_rect(
             center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         )
-        self.speed = SPEED['player']
+        self.speed = Global.speed.player
 
     # Move the sprite based on keypresses
     def update(self, pressed_keys, all_sprites):

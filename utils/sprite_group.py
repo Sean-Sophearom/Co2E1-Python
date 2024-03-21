@@ -15,13 +15,9 @@ statics = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 stars = pygame.sprite.Group()
 
-# Create our 'player'
-player = Player()
-all_sprites.add(player)
-
 statics.add(Background())
-statics.add(HealthBar())
-statics.add(ExpBar())
+# statics.add(HealthBar())
+# statics.add(ExpBar())
 
 ADDENEMY = pygame.USEREVENT + 1
 ADDBULLET = pygame.USEREVENT + 3
@@ -30,7 +26,7 @@ ADDSHINYSTAR = pygame.USEREVENT + 5
 
 pygame.time.set_timer(ADDENEMY, 350)
 pygame.time.set_timer(ADDLIGHTNING, 1200)
-pygame.time.set_timer(ADDSHINYSTAR, 800)
+pygame.time.set_timer(ADDSHINYSTAR, 2000)
 
 del pygame
 del Player
