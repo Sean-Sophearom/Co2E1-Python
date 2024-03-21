@@ -1,7 +1,6 @@
 
 class Spawner():
     # define static method
-    @staticmethod
     def spawn_gem(center = None, *args, **kwargs):
         from .sprite_group import all_sprites, gems
         from .sprites import Gem
@@ -10,7 +9,6 @@ class Spawner():
         all_sprites.add(new_gem)
         return new_gem
     
-    @staticmethod
     def spawn_enemy(*args, **kwargs):
         from .sprite_group import all_sprites, enemies
         from .sprites import Enemy
@@ -19,7 +17,6 @@ class Spawner():
         all_sprites.add(new_enemy)
         return new_enemy
     
-    @staticmethod
     def spawn_bullet(target, *args, **kwargs):
         from .sprite_group import all_sprites, bullets
         from .sprites import Bullet
@@ -28,7 +25,6 @@ class Spawner():
         all_sprites.add(new_bullet)
         return new_bullet
     
-    @staticmethod
     def spawn_explosion(center, *args, **kwargs):
         from .sprite_group import all_sprites, explosions
         from .sprites import Explosion
@@ -37,7 +33,6 @@ class Spawner():
         all_sprites.add(new_explosion)
         return new_explosion
     
-    @staticmethod
     def spawn_lightning(center, *args, **kwargs):
         from .sprite_group import all_sprites, lightnings
         from .sprites import Lightning
@@ -46,7 +41,6 @@ class Spawner():
         all_sprites.add(new_lightning)
         return new_lightning
     
-    @staticmethod
     def spawn_text(center, *args, **kwargs):
         from .sprite_group import all_sprites, ui
         from .sprites import Text
@@ -55,7 +49,6 @@ class Spawner():
         all_sprites.add(new_text)
         return new_text
 
-    @staticmethod
     def spawn_star(center=None, *args, **kwargs):
         from .sprite_group import all_sprites, stars
         from .sprites import ShinyStar
