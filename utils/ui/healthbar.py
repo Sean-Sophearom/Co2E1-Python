@@ -41,8 +41,3 @@ class HealthBar(pygame.sprite.Sprite):
             ), 
             border_radius = border_radius
         )
-
-
-
-    def add_amount(self, amount):
-        pass
