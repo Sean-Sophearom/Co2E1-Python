@@ -13,6 +13,8 @@ class Speed:
 class GameState:
     game_status: GAMESTATUS = GAMESTATUS.HOME
     player: Player = None
+    player_health: int = 100
+    player_max_health: int = 100
 
     gem_radius: int = 200
     gem_collected: int = 0

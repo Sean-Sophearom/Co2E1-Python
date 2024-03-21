@@ -12,15 +12,13 @@ class HealthBar(pygame.sprite.Sprite):
     def __init__(self, fill = 1, center = None):
         if not center: center = (SCREEN_WIDTH - 10, 10)
         super().__init__()
-        # self.max_health = max_health
-        # self.health = max_health
         self.fill = fill
         self.draw()
         self.rect = self.surf.get_rect(topright=center)
-        self.frame_count = 0
 
     def update(self):
-        self.frame_count += 1
+        from ..game_state import GameState
+        self.fill = GameState.player_health / GameState.player_max_health
         self.draw()
 
     def draw(self):
