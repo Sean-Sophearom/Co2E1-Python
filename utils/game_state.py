@@ -21,6 +21,9 @@ class GameState:
         gem = 7
     )
 
+    def change_status(status: GAMESTATUS):
+        GameState.game_status = status
+
     def is_playing():
         return GameState.game_status == GAMESTATUS.PLAYING
     

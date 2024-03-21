@@ -10,7 +10,7 @@ class GameManager():
         from .sprites import Text, Background
         from .sprite_group import ui_elements, all_sprites, statics
 
-        GameState.game_status = GAMESTATUS.HOME
+        GameState.change_status(GAMESTATUS.HOME)
 
         empty_group(all_sprites, statics, ui_elements)
 
@@ -26,7 +26,7 @@ class GameManager():
         GameState.player = Player()
 
         empty_group(ui_elements)
-        GameState.game_status = GAMESTATUS.PLAYING
+        GameState.change_status(GAMESTATUS.PLAYING)
 
         GameManager.set_timer(CUSTOMEVENTS.ADDENEMY, 1000)
         GameManager.set_timer(CUSTOMEVENTS.ADDBULLET, 900)
@@ -40,7 +40,7 @@ class GameManager():
         from .sprites import Text, Background
         from .sprite_group import ui_elements, all_sprites, statics
 
-        GameState.game_status = GAMESTATUS.GAME_OVER
+        GameState.change_status(GAMESTATUS.GAME_OVER)
 
         if GameState.player: GameState.player.kill()
         empty_group(all_sprites, statics, ui_elements)
@@ -52,7 +52,7 @@ class GameManager():
         ui_elements.add(Text("Exit", 40, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 65), lambda: exit(0)))
 
     def skill_menu():
-        GameState.game_status = GAMESTATUS.SKILL_MENU
+        GameState.change_status(GAMESTATUS.SKILL_MENU)
     
     def set_timer(timer, duration):
         GameManager.timers.append(timer)
