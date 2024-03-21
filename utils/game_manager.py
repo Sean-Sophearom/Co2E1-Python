@@ -34,7 +34,19 @@ class GameManager():
         all_sprites.add(GameState.player)
     
     def game_over():
-        GameManager.home_screen()
+        from .sprites import Text, Background
+        from .sprite_group import ui_elements, all_sprites, statics
+
+        GameState.game_status = GAMESTATUS.GAME_OVER
+
+        if GameState.player: GameState.player.kill()
+        empty_group(all_sprites, statics, ui_elements)
+
+        statics.add(Background())
+
+        ui_elements.add(Text("Game Over!", 70, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 65), color=(255, 0, 0)))
+        ui_elements.add(Text("Play again", 40, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2), GameManager.start_game))
+        ui_elements.add(Text("Exit", 40, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 65), lambda: exit(0)))
 
     def skill_menu():
         GameState.game_status = GAMESTATUS.SKILL_MENU
