@@ -15,7 +15,7 @@ from pygame.locals import (
     QUIT,
 )
 
-class GAMESTATE(Enum):
+class GAMESTATUS(Enum):
     HOME = "home"
     PLAYING = "playing"
     GAME_OVER = "game_over"

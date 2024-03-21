@@ -1,23 +1,23 @@
 import pygame
 from utils.sprites import Player, HealthBar, Background, ExpBar
 
-# Create groups to hold enemy sprites, cloud sprites, and all sprites
+# Create groups to hold enemy sprites, bullets, explosions and all sprites
 # - enemies is used for collision detection and position updates
-# - clouds is used for position updates
 # - all_sprites isused for rendering
 enemies = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
 explosions = pygame.sprite.Group()
 lightnings = pygame.sprite.Group()
 gems = pygame.sprite.Group()
-ui = pygame.sprite.Group()
-statics = pygame.sprite.Group()
-all_sprites = pygame.sprite.Group()
+
 stars = pygame.sprite.Group()
 
-statics.add(Background())
-# statics.add(HealthBar())
-# statics.add(ExpBar())
+ui = pygame.sprite.Group()
+ui_elements = pygame.sprite.Group()
+statics = pygame.sprite.Group()
+
+all_sprites = pygame.sprite.Group()
+
 
 ADDENEMY = pygame.USEREVENT + 1
 ADDBULLET = pygame.USEREVENT + 3

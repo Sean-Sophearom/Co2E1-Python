@@ -1,9 +1,9 @@
 from ..sprite.imp import *
 
 width = 120
-height = 15
+height = 12
 fill = 0.6
-border_size = 2
+border_size = 1.5
 offset = 40
 border_radius = 2
 inner = (0, 255, 0)
@@ -13,8 +13,6 @@ class ExpBar(pygame.sprite.Sprite):
     def __init__(self, center = None):
         if not center: center = (SCREEN_WIDTH - 10, 30)
         super().__init__()
-        # self.max_health = max_health
-        # self.health = max_health
         self.fill = fill
         self.draw()
         self.rect = self.surf.get_rect(topright=center)

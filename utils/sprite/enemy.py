@@ -5,7 +5,7 @@ from ..spawner import Spawner
 # Instead of a surface, we use an image for a better looking sprite
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
-        from utils.globals import Global
+        from utils.game_state import GameState
         super(Enemy, self).__init__()
         self.surf = pygame.image.load("asset/images/missile.png").convert()
         self.original_surf = self.surf
@@ -24,7 +24,7 @@ class Enemy(pygame.sprite.Sprite):
             center = (random.randint(0, SCREEN_WIDTH), random.randint(SCREEN_HEIGHT, SCREEN_HEIGHT + 20))
 
         self.rect = self.surf.get_rect(center=center)
-        self.speed = Global.speed.enemy
+        self.speed = GameState.speed.enemy
 
     # Move the enemy based on speed
     # Remove it when it passes the left edge of the screen

@@ -2,13 +2,13 @@ from .imp import *
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, target):
-        from utils.globals import Global
+        from utils.game_state import GameState
         super(Bullet, self).__init__()
         self.surf = pygame.image.load("asset/images/missile.png").convert()
         self.surf = pygame.transform.rotozoom(self.surf, 0, 0.55)
         self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
-        self.speed = Global.speed.bullet
+        self.speed = GameState.speed.bullet
         self.rect = self.surf.get_rect(center=CENTER)
         self.target = target
         self.target_move_vector = pygame.Vector2(0, 0)
