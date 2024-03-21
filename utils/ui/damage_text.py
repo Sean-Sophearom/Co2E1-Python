@@ -1,7 +1,7 @@
 import pygame
 from ..constant import FONTPATH
 
-class Text(pygame.sprite.Sprite):
+class DamageText(pygame.sprite.Sprite):
     def __init__(self, text, size, center):
         super().__init__()
         self.font = pygame.font.Font(FONTPATH, size)

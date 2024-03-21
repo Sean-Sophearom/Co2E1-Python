@@ -43,8 +43,8 @@ class Spawner():
     
     def spawn_text(center, *args, **kwargs):
         from .sprite_group import all_sprites, ui
-        from .sprites import Text
-        new_text = Text(100, 24, center, *args, **kwargs)
+        from .sprites import DamageText
+        new_text = DamageText(100, 24, center, *args, **kwargs)
         ui.add(new_text)
         all_sprites.add(new_text)
         return new_text
