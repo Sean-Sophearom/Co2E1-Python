@@ -23,11 +23,13 @@ class GameManager():
         from .sprites import Player, HealthBar, ExpBar
         from .sprite_group import all_sprites, statics, ui_elements
         
+        GameState.reset()
         GameState.player = Player()
 
         empty_group(ui_elements)
         GameState.change_status(GAMESTATUS.PLAYING)
 
+        GameManager.clear_timers()
         GameManager.set_timer(CUSTOMEVENTS.ADDENEMY, 1000)
         GameManager.set_timer(CUSTOMEVENTS.ADDBULLET, 900)
         

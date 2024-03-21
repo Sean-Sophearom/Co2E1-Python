@@ -3,7 +3,7 @@ from ..sprite.imp import *
 width = 120
 height = 12
 fill = 0
-border_size = 1.5
+border_size = 2
 offset = 40
 border_radius = 2
 inner = (0, 255, 0)
@@ -20,6 +20,8 @@ class ExpBar(pygame.sprite.Sprite):
     def update(self):
         from ..game_state import GameState
         self.fill = GameState.gem_collected / GameState.gem_capacity
+        if self.fill < 0: self.fill = 0
+        elif self.fill > 1: self.fill = 1
         self.draw()
 
     def draw(self):

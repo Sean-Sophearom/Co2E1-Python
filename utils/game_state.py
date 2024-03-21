@@ -42,4 +42,21 @@ class GameState:
     def is_skill_menu():
         return GameState.game_status == GAMESTATUS.SKILL_MENU
     
-del Speed, dataclass, Player
+    def reset():
+        GameState.game_status = GAMESTATUS.HOME
+        GameState.player = None
+        GameState.player_health = 100
+        GameState.player_max_health = 100
+
+        GameState.gem_radius = 200
+        GameState.gem_collected = 0
+        GameState.gem_capacity = 25
+
+        GameState.speed = Speed(
+            player = 5, 
+            bullet = 9, 
+            enemy = 3, 
+            gem = 7
+        )
+    
+del dataclass, Player
