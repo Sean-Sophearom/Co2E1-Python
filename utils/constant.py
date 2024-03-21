@@ -1,3 +1,4 @@
+from enum import Enum
 from pygame.locals import (
     RLEACCEL,
     K_UP,
@@ -13,6 +14,11 @@ from pygame.locals import (
     KEYDOWN,
     QUIT,
 )
+
+class GAMESTATE(Enum):
+    HOME = "home"
+    PLAYING = "playing"
+    GAME_OVER = "game_over"
 
 # Define constants for the screen width and height
 SCREEN_WIDTH = 1280
@@ -32,3 +38,4 @@ import pygame.math as math
 CENTER = math.Vector2(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
 del math
+del Enum
