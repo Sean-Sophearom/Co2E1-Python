@@ -8,11 +8,11 @@ class GameManager():
     timers = []
     def home_screen():
         from .sprites import Text, Background
-        from .sprite_group import ui_elements, all_sprites, statics
+        from .sprite_group import ui_elements, all_sprites, statics, skill_menu_screen_group
 
         GameState.change_status(GAMESTATUS.HOME)
 
-        empty_group(all_sprites, statics, ui_elements)
+        empty_group(all_sprites, statics, ui_elements, skill_menu_screen_group)
 
         statics.add(Background())
 
@@ -21,12 +21,12 @@ class GameManager():
 
     def start_game():
         from .sprites import Player, HealthBar, ExpBar
-        from .sprite_group import all_sprites, statics, ui_elements
+        from .sprite_group import all_sprites, statics, ui_elements, skill_menu_screen_group
         
         GameState.reset()
         GameState.player = Player()
 
-        empty_group(ui_elements)
+        empty_group(ui_elements, skill_menu_screen_group)
         GameState.change_status(GAMESTATUS.PLAYING)
 
         GameManager.clear_timers()
@@ -55,6 +55,15 @@ class GameManager():
 
     def skill_menu():
         GameState.change_status(GAMESTATUS.SKILL_MENU)
+        from .sprites import SkillMenuScreen
+        from .sprite_group import skill_menu_screen_group
+
+        skill_menu_screen_group.add(SkillMenuScreen())
+    
+    def continue_game():
+        GameState.change_status(GAMESTATUS.PLAYING)
+        from .sprite_group import skill_menu_screen_group
+        empty_group(skill_menu_screen_group)
     
     def set_timer(timer, duration):
         GameManager.timers.append(timer)
@@ -66,6 +75,6 @@ class GameManager():
     
 
 def empty_group(*groups):
-        for group in groups:
-            for element in group: element.kill()
-            group.empty()
+    for group in groups:
+        for element in group: element.kill()
+        group.empty()

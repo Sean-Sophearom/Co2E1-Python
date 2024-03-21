@@ -16,6 +16,7 @@ stars = pygame.sprite.Group()
 ui = pygame.sprite.Group()
 ui_elements = pygame.sprite.Group()
 statics = pygame.sprite.Group()
+skill_menu_screen_group = pygame.sprite.Group()
 
 all_sprites = pygame.sprite.Group()
 

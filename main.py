@@ -29,7 +29,7 @@ while running:
 
     # Look at every event in the queue
     for event in pygame.event.get():
-        for element in ui_elements:
+        for element in ui_elements.sprites() + skill_menu_screen_group.sprites():
             if hasattr(element, "handle_event"):
                 element.handle_event(event)
 
@@ -66,6 +66,7 @@ while running:
         if pygame.sprite.spritecollideany(GameState.player, gems):
             gem = pygame.sprite.spritecollideany(GameState.player, gems)
             GameState.gem_collected += gem.value
+            if GameState.gem_collected >= GameState.gem_capacity: GameManager.skill_menu()
             gem.kill()
         
         # Check if any enemies have collided with the player
@@ -80,8 +81,8 @@ while running:
         lightnings.update(enemies)
         ui.update()
         gems.update()
-        statics.update()
 
+    statics.update()
     stars.update()
     ui_elements.update()
 
@@ -94,6 +95,9 @@ while running:
 
     # Draw all our sprites
     for entity in all_sprites:
+        screen.blit(entity.surf, entity.rect)
+
+    for entity in skill_menu_screen_group:
         screen.blit(entity.surf, entity.rect)
 
     # Check if any ui element is being hovered then change cursor style
