@@ -7,7 +7,6 @@ __all__ = ["GameManager"]
 
 class GameManager():
     def home_screen():
-        print("called homescreen")
         from .sprites import Text, Background
         from .sprite_group import ui_elements, all_sprites, statics
 
@@ -21,7 +20,6 @@ class GameManager():
         ui_elements.add(Text("Exit", 40, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 65), lambda: exit(0)))
 
     def start_game():
-        print("called start_game")
         from .sprites import Player, HealthBar, ExpBar
         from .sprite_group import all_sprites, statics, ui_elements
         
