@@ -1,9 +1,10 @@
 import pygame
+from ..constant import FONTPATH
 
 class Text(pygame.sprite.Sprite):
     def __init__(self, text, size, center):
         super().__init__()
-        self.font = pygame.font.Font(None, size)
+        self.font = pygame.font.Font(FONTPATH, size)
         self.text = str(text)
         self.color = (200, 0, 0, 200)
         self.surf = self.font.render(self.text, True, self.color)

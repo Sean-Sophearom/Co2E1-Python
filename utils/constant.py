@@ -32,6 +32,8 @@ SPEED = {
     "gem": 7,
 }
 
+FONTPATH = "asset/font/8-bit-pixel.ttf"
+
 import pygame.math as math
 
 # Define the center object as a Vector2 with x and y coordinates
