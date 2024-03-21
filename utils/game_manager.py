@@ -1,5 +1,6 @@
 from .game_state import GameState
-from .constant import GAMESTATUS, SCREEN_WIDTH, SCREEN_HEIGHT
+from .constant import GAMESTATUS, SCREEN_WIDTH, SCREEN_HEIGHT, CUSTOMEVENTS
+import pygame
 
 __all__ = ["GameManager"]
 
@@ -25,6 +26,9 @@ class GameManager():
 
         empty_group(ui_elements)
         GameState.game_status = GAMESTATUS.PLAYING
+
+        pygame.time.set_timer(CUSTOMEVENTS.ADDENEMY, 1000)
+        pygame.time.set_timer(CUSTOMEVENTS.ADDBULLET, 900)
         
         statics.add(HealthBar())
         statics.add(ExpBar())
