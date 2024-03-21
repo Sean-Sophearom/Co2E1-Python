@@ -53,15 +53,6 @@ class Animated(pygame.sprite.Sprite):
                     frame = pygame.transform.scale(frame, (int(self.frame_width * self.scalex), int(self.frame_height * self.scaley)))
                 self.frames.append(frame)
 
-        # for i in range(self.num_frames):
-        #     frame = pygame.Surface((self.frame_width, self.frame_height), pygame.SRCALPHA)
-        #     frame.blit(self.sprite_sheet, (0, 0), (i * self.frame_width, 0, self.frame_width, self.frame_height))
-        #     if self.scale != 1: 
-        #         frame = pygame.transform.rotozoom(frame, 0, self.scale)
-        #     if self.scalex != 1 or self.scaley != 1:
-        #         frame = pygame.transform.scale(frame, (int(self.frame_width * self.scalex), int(self.frame_height * self.scaley)))
-        #     self.frames.append(frame)
-
     def update(self):
         self.frame_count += 1
         if self.frame_count >= self.animation_speed:
