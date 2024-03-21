@@ -6,8 +6,9 @@ class Gem(Animated):
     def __init__(self, center=None):
         from utils.game_state import GameState
         if not center: center = (random.randint(20, SCREEN_WIDTH - 20), random.randint(20, SCREEN_HEIGHT - 20))
+        value = random.randint(0, 13)
         super().__init__(
-            "asset/images/gem.png", 
+            f"asset/images/gem/{value}.png", 
             width = 8 * 8, 
             height = 14 * 8 , 
             frames = 5, 
