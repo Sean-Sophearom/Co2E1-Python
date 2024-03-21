@@ -11,21 +11,16 @@ class Speed:
 
 @dataclass
 class GameState:
+    player: Player
+    player_health: int
+    player_max_health: int
+
+    gem_radius: int
+    gem_collected: int
+    gem_capacity: int
+
+    speed: Speed
     game_status: GAMESTATUS = GAMESTATUS.HOME
-    player: Player = None
-    player_health: int = 100
-    player_max_health: int = 100
-
-    gem_radius: int = 200
-    gem_collected: int = 0
-    gem_capacity = 25
-
-    speed = Speed(
-        player = 5, 
-        bullet = 9, 
-        enemy = 3, 
-        gem = 7
-    )
 
     def change_status(status: GAMESTATUS):
         GameState.game_status = status
@@ -43,7 +38,6 @@ class GameState:
         return GameState.game_status == GAMESTATUS.SKILL_MENU
     
     def reset():
-        GameState.game_status = GAMESTATUS.HOME
         GameState.player = None
         GameState.player_health = 100
         GameState.player_max_health = 100
