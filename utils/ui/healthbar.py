@@ -2,7 +2,6 @@ from ..sprite.imp import *
 
 width = 160
 height = 15
-fill = 0.6
 inner = (255, 0, 0)
 border_size = 2
 offset = 40
@@ -10,7 +9,7 @@ border_radius = 2
 outer = (255, 255, 255)
 
 class HealthBar(pygame.sprite.Sprite):
-    def __init__(self, center = None):
+    def __init__(self, fill = 1, center = None):
         if not center: center = (SCREEN_WIDTH - 10, 10)
         super().__init__()
         # self.max_health = max_health
@@ -22,10 +21,8 @@ class HealthBar(pygame.sprite.Sprite):
 
     def update(self):
         self.frame_count += 1
-        if self.frame_count >= 50:
-            self.draw()
-            self.frame_count = 0
-            self.fill -= 0.1
+        self.draw()
+
     def draw(self):
         self.surf = pygame.Surface((width, height))
         pygame.draw.rect(
@@ -47,9 +44,5 @@ class HealthBar(pygame.sprite.Sprite):
 
 
 
-    def decrease(self, amount):
-        self.health -= amount
-        if self.health <= 0:
-            self.kill()
-            return True
-        return False
+    def add_amount(self, amount):
+        pass

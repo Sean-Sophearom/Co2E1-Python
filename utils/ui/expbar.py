@@ -2,7 +2,7 @@ from ..sprite.imp import *
 
 width = 120
 height = 12
-fill = 0.6
+fill = 0
 border_size = 1.5
 offset = 40
 border_radius = 2
@@ -20,10 +20,7 @@ class ExpBar(pygame.sprite.Sprite):
 
     def update(self):
         self.frame_count += 1
-        if self.frame_count >= 50:
-            self.draw()
-            self.frame_count = 0
-            self.fill -= 0.1
+        self.draw()
 
     def draw(self):
         self.surf = pygame.Surface((width, height))
@@ -46,9 +43,5 @@ class ExpBar(pygame.sprite.Sprite):
 
 
 
-    def decrease(self, amount):
-        self.health -= amount
-        if self.health <= 0:
-            self.kill()
-            return True
-        return False
+    def add_amount(self, amount):
+        pass
