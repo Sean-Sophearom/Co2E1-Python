@@ -1,9 +1,16 @@
 from ..sprite.imp import *
 from dataclasses import dataclass
 from ..skill_manager import SkillManager
+
 class SkillMenuScreen(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
+        self.draw()
+
+    def update(self):
+        pass
+
+    def draw(self):
         self.surf = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
         self.rect = self.surf.get_rect(topleft=(0, 0))
 
@@ -33,18 +40,7 @@ class SkillMenuScreen(pygame.sprite.Sprite):
         for entity in self.skills:
             self.surf.blit(entity.surf, entity.rect)
 
-    def update(self):
-        is_hovering = False
-        for entity in self.skills:
-            entity.update()
-            if entity.is_hovering: is_hovering = True
-        
-        self.is_hovering = is_hovering
-
-
     def handle_event(self, event):
-        from ..game_manager import GameManager
-
         is_hovering = False
         for entity in self.skills:
             entity.handle_event(event)
