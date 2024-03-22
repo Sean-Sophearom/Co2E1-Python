@@ -23,7 +23,6 @@ class Enemy(pygame.sprite.Sprite):
             center = (random.randint(0, SCREEN_WIDTH), random.randint(SCREEN_HEIGHT, SCREEN_HEIGHT + 20))
 
         self.rect = self.surf.get_rect(center=center)
-        self.speed = GameState.speed.enemy
 
     # Move the enemy based on speed
     # Remove it when it passes the left edge of the screen
@@ -41,7 +40,7 @@ class Enemy(pygame.sprite.Sprite):
             angle = math.degrees(math.atan2(move_vector.y, -move_vector.x)) 
             self.surf = pygame.transform.rotate(self.original_surf, angle)
 
-            move_vector *= self.speed
+            move_vector *= GameState.speed.enemy
             self.rect.move_ip(move_vector)
     
     def kill(self):

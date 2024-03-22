@@ -15,7 +15,6 @@ class Gem(Animated):
         self.value = value
         self.tag = TAGS.GEM
         self.collected = False
-        self.speed = GameState.speed.gem
         self.rect = self.surf.get_rect(center=center)
 
     def update(self):
@@ -31,7 +30,7 @@ class Gem(Animated):
             if move_vector.length_squared() == 0:
                 return self.kill()
             move_vector.normalize_ip()
-            move_vector *= self.speed
+            move_vector *= GameState.speed.gem
             self.rect.move_ip(move_vector)
 
         # check if distance to center of screen is small

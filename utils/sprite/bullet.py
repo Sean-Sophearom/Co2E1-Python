@@ -7,7 +7,6 @@ class Bullet(pygame.sprite.Sprite):
         self.surf = pygame.transform.rotozoom(self.surf, 0, 0.55)
         self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
-        self.speed = GameState.speed.bullet
         self.rect = self.surf.get_rect(center=CENTER)
         self.target = target
         self.target_move_vector = pygame.Vector2(0, 0)
@@ -28,7 +27,7 @@ class Bullet(pygame.sprite.Sprite):
         if move_vector.length_squared() == 0:
             return self.kill()    
         move_vector.normalize_ip()
-        move_vector *= self.speed
+        move_vector *= GameState.speed.bullet
         self.rect.move_ip(move_vector)
 
         # rotate to face movement direction
@@ -40,7 +39,6 @@ class Bullet(pygame.sprite.Sprite):
             enemy = pygame.sprite.spritecollideany(self, enemies)
             self.kill()
             enemy.kill()
-            Spawner.spawn_gem(enemy.rect.center)
     
     def kill(self):
         super().kill()

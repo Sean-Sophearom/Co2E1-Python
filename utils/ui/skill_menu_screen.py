@@ -1,6 +1,6 @@
 from ..sprite.imp import *
 from dataclasses import dataclass
-
+from ..skill_manager import SkillManager
 class SkillMenuScreen(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -17,11 +17,7 @@ class SkillMenuScreen(pygame.sprite.Sprite):
         title_rect = title_surf.get_rect(center=(SCREEN_WIDTH // 2, 100))
 
         skill_names = (
-            # "skill",
-            # "attack",
-            # "defense",
-            # "utility"
-            SkillSO("Ability", "Unlock a new ability OR Enhance existing ability", "skill", None),
+            SkillSO("Ability", "Unlock a new ability OR Enhance existing ability", "skill", SkillManager.increase_speed),
             SkillSO("Attack", "Increase base attack stats, cooldown or attack range", "attack", None),
             SkillSO("Defense", "Increase base defense stats, health or durability", "defense", None),
             SkillSO("Utility", "Increase utility stats, movement speed, or exp gain", "utility", None)
