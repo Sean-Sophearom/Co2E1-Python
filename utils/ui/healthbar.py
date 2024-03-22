@@ -17,7 +17,6 @@ class HealthBar(pygame.sprite.Sprite):
         self.rect = self.surf.get_rect(topright=center)
 
     def update(self):
-        from ..game_state import GameState
         self.fill = GameState.player_health / GameState.player_max_health
         if self.fill < 0: self.fill = 0
         elif self.fill > 1: self.fill = 1

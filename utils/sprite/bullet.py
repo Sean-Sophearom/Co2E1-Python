@@ -2,7 +2,6 @@ from .imp import *
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, target):
-        from utils.game_state import GameState
         super(Bullet, self).__init__()
         self.surf = pygame.image.load("asset/images/missile.png").convert()
         self.surf = pygame.transform.rotozoom(self.surf, 0, 0.55)

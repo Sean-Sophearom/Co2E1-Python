@@ -4,7 +4,6 @@ from .animated import Animated
 
 class Gem(Animated):
     def __init__(self, center, value = 1):
-        from utils.game_state import GameState
         super().__init__(
             f"asset/images/gem/{value - 1}.png", 
             width = 8 * 8, 
@@ -20,7 +19,6 @@ class Gem(Animated):
         self.rect = self.surf.get_rect(center=center)
 
     def update(self):
-        from ..game_state import GameState
         super().update()
         if is_out_of_bounds(self.rect): return self.kill()
 

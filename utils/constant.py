@@ -1,6 +1,7 @@
 from enum import Enum
 from dataclasses import dataclass
 import pygame
+import pygame.math as math
 from pygame.locals import (
     RLEACCEL,
     K_UP,
@@ -49,8 +50,6 @@ SCREEN_HEIGHT = 720
 TARGET_FPS = 60
 
 FONTPATH = "asset/font/8-bit-pixel.ttf"
-
-import pygame.math as math
 
 # Define the center object as a Vector2 with x and y coordinates
 CENTER = math.Vector2(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)

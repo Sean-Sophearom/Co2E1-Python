@@ -18,7 +18,6 @@ class ExpBar(pygame.sprite.Sprite):
         self.rect = self.surf.get_rect(topright=center)
 
     def update(self):
-        from ..game_state import GameState
         self.fill = GameState.gem_collected / GameState.gem_capacity
         if self.fill < 0: self.fill = 0
         elif self.fill > 1: self.fill = 1

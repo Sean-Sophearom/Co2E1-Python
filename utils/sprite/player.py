@@ -5,7 +5,6 @@ from .animated import Animated
 # Instead of a surface, we use an image for a better looking sprite
 class Player(Animated):
     def __init__(self):
-        from utils.game_state import GameState
         super().__init__(
             "asset/images/player.png", 
             width = 192, 

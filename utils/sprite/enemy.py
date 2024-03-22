@@ -5,7 +5,6 @@ from ..spawner import Spawner
 # Instead of a surface, we use an image for a better looking sprite
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
-        from utils.game_state import GameState
         super(Enemy, self).__init__()
         self.surf = pygame.image.load("asset/images/missile.png").convert()
         self.original_surf = self.surf
