@@ -45,3 +45,4 @@ class Bullet(pygame.sprite.Sprite):
     def kill(self):
         super().kill()
         Spawner.spawn_explosion(self.rect.center)
+        Spawner.spawn_damage_text(self.rect.center)

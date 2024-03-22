@@ -1,6 +1,6 @@
 
 class Spawner():
-    # define static method
+    @staticmethod
     def spawn_gem(center = None, *args, **kwargs):
         from .sprite_group import all_sprites, gems
         from .sprites import Gem
@@ -8,7 +8,8 @@ class Spawner():
         gems.add(new_gem)
         all_sprites.add(new_gem)
         return new_gem
-    
+
+    @staticmethod
     def spawn_enemy(*args, **kwargs):
         from .sprite_group import all_sprites, enemies
         from .sprites import Enemy
@@ -16,7 +17,8 @@ class Spawner():
         enemies.add(new_enemy)
         all_sprites.add(new_enemy)
         return new_enemy
-    
+
+    @staticmethod
     def spawn_bullet(target, *args, **kwargs):
         from .sprite_group import all_sprites, bullets
         from .sprites import Bullet
@@ -24,7 +26,8 @@ class Spawner():
         bullets.add(new_bullet)
         all_sprites.add(new_bullet)
         return new_bullet
-    
+
+    @staticmethod
     def spawn_explosion(center, *args, **kwargs):
         from .sprite_group import all_sprites, explosions
         from .sprites import Explosion
@@ -32,7 +35,8 @@ class Spawner():
         explosions.add(new_explosion)
         all_sprites.add(new_explosion)
         return new_explosion
-    
+
+    @staticmethod
     def spawn_lightning(center, *args, **kwargs):
         from .sprite_group import all_sprites, lightnings
         from .sprites import Lightning
@@ -40,8 +44,9 @@ class Spawner():
         lightnings.add(new_lightning)
         all_sprites.add(new_lightning)
         return new_lightning
-    
-    def spawn_text(center, *args, **kwargs):
+
+    @staticmethod
+    def spawn_damage_text(center, *args, **kwargs):
         from .sprite_group import all_sprites, ui
         from .sprites import DamageText
         new_text = DamageText(100, 24, center, *args, **kwargs)
@@ -49,6 +54,7 @@ class Spawner():
         all_sprites.add(new_text)
         return new_text
 
+    @staticmethod
     def spawn_star(center=None, *args, **kwargs):
         from .sprite_group import all_sprites, stars
         from .sprites import ShinyStar
