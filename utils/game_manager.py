@@ -23,7 +23,7 @@ class GameManager():
         from .sprites import Player, HealthBar, ExpBar
         from .sprite_group import all_sprites, statics, ui_elements, skill_menu_screen_group
         
-        GameState.reset()
+        GameManager.reset()
         GameState.player = Player()
 
         empty_group(ui_elements, skill_menu_screen_group)
@@ -73,6 +73,9 @@ class GameManager():
         for timer in GameManager.timers: pygame.time.set_timer(timer, 0)
         GameManager.timers.clear()
     
+    def reset():
+        GameManager.clear_timers()
+        GameState.reset()
 
 def empty_group(*groups):
     for group in groups:
