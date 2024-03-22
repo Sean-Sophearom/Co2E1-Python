@@ -24,7 +24,7 @@ class SkillMenuScreen(pygame.sprite.Sprite):
             SkillSO("Ability", "Unlock a new ability OR Enhance existing ability", "skill", None),
             SkillSO("Attack", "Increase base attack stats, cooldown or attack range", "attack", None),
             SkillSO("Defense", "Increase base defense stats, health or durability", "defense", None),
-            SkillSO("Utility", "Increase utility stats, movement speed, or exp", "utility", None)
+            SkillSO("Utility", "Increase utility stats, movement speed, or exp gain", "utility", None)
         )
 
         self.skills = [

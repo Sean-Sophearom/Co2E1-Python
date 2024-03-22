@@ -4,20 +4,20 @@ from .sprites import Player
 
 @dataclass
 class Speed:
-    player: int
-    bullet: int
-    enemy: int
-    gem: int
+    player: float
+    bullet: float
+    enemy: float
+    gem: float
 
 @dataclass
 class GameState:
     player: Player
-    player_health: int
-    player_max_health: int
+    player_health: float
+    player_max_health: float
 
-    gem_radius: int
-    gem_collected: int
-    gem_capacity: int
+    gem_radius: float
+    gem_collected: float
+    gem_capacity: float
 
     speed: Speed
     game_status: GAMESTATUS = GAMESTATUS.HOME
