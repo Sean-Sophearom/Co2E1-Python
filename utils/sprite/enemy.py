@@ -45,8 +45,6 @@ class Enemy(pygame.sprite.Sprite):
             self.rect.move_ip(move_vector)
     
     def kill(self):
+        super().kill()
         Spawner.spawn_gem(self.rect.center)
         Spawner.spawn_explosion(self.rect.center)
-        Spawner.spawn_text(self.rect.center)
-
-        super().kill()

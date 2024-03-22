@@ -1,5 +1,5 @@
 from .imp import * 
-
+from ..spawner import Spawner
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, target):
         super(Bullet, self).__init__()
@@ -40,3 +40,8 @@ class Bullet(pygame.sprite.Sprite):
             enemy = pygame.sprite.spritecollideany(self, enemies)
             self.kill()
             enemy.kill()
+            Spawner.spawn_gem(enemy.rect.center)
+    
+    def kill(self):
+        super().kill()
+        Spawner.spawn_explosion(self.rect.center)
