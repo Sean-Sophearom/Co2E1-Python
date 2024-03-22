@@ -1,11 +1,14 @@
 from .game_state import GameState
 from .constant import GAMESTATUS, SCREEN_WIDTH, SCREEN_HEIGHT, CUSTOMEVENTS
 import pygame
+from typing import List
 
 __all__ = ["GameManager"]
 
 class GameManager():
-    timers = []
+    timers: List[int] = []
+
+    @staticmethod
     def home_screen():
         from .sprites import Text, Background
         from .sprite_group import ui_elements, all_sprites, statics, skill_menu_screen_group
@@ -18,7 +21,8 @@ class GameManager():
 
         ui_elements.add(Text("Start Game", 60, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2), GameManager.start_game))
         ui_elements.add(Text("Exit", 40, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 65), lambda: exit(0)))
-
+    
+    @staticmethod
     def start_game():
         from .sprites import Player, HealthBar, ExpBar
         from .sprite_group import all_sprites, statics, ui_elements, skill_menu_screen_group
@@ -38,6 +42,7 @@ class GameManager():
 
         all_sprites.add(GameState.player)
     
+    @staticmethod
     def game_over():
         from .sprites import Text, Background
         from .sprite_group import ui_elements, all_sprites, statics
@@ -53,6 +58,7 @@ class GameManager():
         ui_elements.add(Text("Play again", 40, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2), GameManager.start_game))
         ui_elements.add(Text("Exit", 40, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 65), lambda: exit(0)))
 
+    @staticmethod
     def skill_menu():
         GameState.change_status(GAMESTATUS.SKILL_MENU)
         from .sprites import SkillMenuScreen
@@ -60,19 +66,23 @@ class GameManager():
 
         skill_menu_screen_group.add(SkillMenuScreen())
     
+    @staticmethod
     def continue_game():
         GameState.change_status(GAMESTATUS.PLAYING)
         from .sprite_group import skill_menu_screen_group
         empty_group(skill_menu_screen_group)
     
-    def set_timer(timer, duration):
+    @staticmethod
+    def set_timer(timer: int, duration: int):
         GameManager.timers.append(timer)
         pygame.time.set_timer(timer, duration)
     
+    @staticmethod
     def clear_timers():
         for timer in GameManager.timers: pygame.time.set_timer(timer, 0)
         GameManager.timers.clear()
     
+    @staticmethod
     def reset():
         GameManager.clear_timers()
         GameState.reset()

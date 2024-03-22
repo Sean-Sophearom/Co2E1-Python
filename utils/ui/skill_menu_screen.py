@@ -129,7 +129,7 @@ class SkillSO:
     title: str
     description: str
     icon: str
-    onclick: callable
+    onclick: typing.Callable
 
 def renderTextCenteredAt(text, font, x, y, screen, allowed_width,colour=(255,255,255)):
     # first, split the text into words

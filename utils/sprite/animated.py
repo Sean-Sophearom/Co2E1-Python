@@ -1,8 +1,10 @@
 import pygame
 from utils.constant import TARGET_FPS
 from math import ceil
+from typing import Dict, List
 
-cached = {}
+
+cached: Dict[str, List[pygame.Surface]] = {}
 
 class Animated(pygame.sprite.Sprite):
     def __init__(self, sprite_sheet, width, height, frames, scale=1, animation_speed=5, mode="loop", scalex=1, scaley=1, columns=0, gapx=0, gapy=0, duration=None):
@@ -20,7 +22,7 @@ class Animated(pygame.sprite.Sprite):
         self.num_frames = frames
         self.mode = mode
         
-        self.frames = []
+        self.frames: List[pygame.Surface] = []
         self.current_frame = 0
         self.frame_count = 0
 

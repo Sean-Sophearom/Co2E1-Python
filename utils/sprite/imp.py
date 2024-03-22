@@ -1,6 +1,7 @@
 import pygame
 import random
-import math
 from utils.constant import * 
+import math
+import typing
 from utils.helper import * 
 from utils.game_state import GameState

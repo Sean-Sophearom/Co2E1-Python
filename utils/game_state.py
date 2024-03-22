@@ -28,21 +28,27 @@ class GameState:
     speed: Speed
     game_status: GAMESTATUS = GAMESTATUS.HOME
 
+    @staticmethod
     def change_status(status: GAMESTATUS):
         GameState.game_status = status
-
+        
+    @staticmethod
     def is_playing():
         return GameState.game_status == GAMESTATUS.PLAYING
     
+    @staticmethod
     def is_home():
         return GameState.game_status == GAMESTATUS.HOME
     
+    @staticmethod
     def is_game_over():
         return GameState.game_status == GAMESTATUS.GAME_OVER
     
+    @staticmethod
     def is_skill_menu():
         return GameState.game_status == GAMESTATUS.SKILL_MENU
     
+    @staticmethod
     def reset():
         GameState.player = None
         GameState.player_health = 100
