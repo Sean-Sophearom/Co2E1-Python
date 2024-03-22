@@ -101,11 +101,12 @@ while running:
         screen.blit(entity.surf, entity.rect)
 
     # Check if any ui element is being hovered then change cursor style
-    if any(hasattr(entity, "is_hovering") and entity.is_hovering for entity in ui_elements.sprites() + skill_menu_screen_group.sprites()):
-        pygame.mouse.set_cursor(*pygame.cursors.diamond)
-    else:
-        pygame.mouse.set_cursor(*pygame.cursors.arrow)
-
+    is_hovering = any(hasattr(entity, "is_hovering") and entity.is_hovering for entity in ui_elements.sprites() + skill_menu_screen_group.sprites())
+    cursor_style = pygame.cursors.diamond if is_hovering else pygame.cursors.arrow
+    try:
+        pygame.mouse.set_cursor(*cursor_style)
+    except:
+        pass
 
     fps = int(clock.get_fps())
 
