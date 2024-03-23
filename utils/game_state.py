@@ -8,24 +8,8 @@ if TYPE_CHECKING:
 
 __all__ = ["GameState"]
 
-@dataclass
-class Speed:
-    player: float
-    bullet: float
-    enemy: float
-    gem: float
 
-@dataclass
-class SpriteTimer:
-    enemy: int
-    bullet: int
-    lightning: int
 
-    def __getitem__(self, key):
-        return getattr(self, str(key))
-
-    def __setitem__(self, key, value):
-        setattr(self, str(key), value)
 @dataclass
 class GameState:
     player: Player
@@ -93,7 +77,31 @@ class GameState:
         if not hasattr(GameState, "damage_splash_screen") or GameState.damage_splash_screen is None:
             from .sprites import DamageSplashScreen
             GameState.damage_splash_screen = DamageSplashScreen()
-        
     
+class DynamicDataclass:
+    def __getitem__(self, key):
+        return getattr(self, str(key))
+    
+    def __setitem__(self, key, value):
+        setattr(self, str(key), value)
+
+@dataclass
+class Speed:
+    player: float
+    bullet: float
+    enemy: float
+    gem: float
+
+@dataclass
+class SpriteTimer(DynamicDataclass):
+    enemy: int
+    bullet: int
+    lightning: int
+
+@dataclass 
+class SpriteDamage(DynamicDataclass):
+    enemy: float
+    bullet: float
+    lightning: float
     
 del dataclass
