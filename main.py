@@ -105,6 +105,11 @@ while running:
     if hasattr(GameState, "snackbar"):
         GameState.snackbar.update()
         screen.blit(GameState.snackbar.surf, GameState.snackbar.rect)
+    
+    # Draw Damage SplashScreen
+    if hasattr(GameState, "damage_splash_screen"):
+        GameState.damage_splash_screen.update()
+        screen.blit(GameState.damage_splash_screen.surf, GameState.damage_splash_screen.rect)
 
     # Check if any ui element is being hovered then change cursor style
     is_hovering = any(hasattr(entity, "is_hovering") and entity.is_hovering for entity in ui_elements.sprites() + skill_menu_screen_group.sprites())

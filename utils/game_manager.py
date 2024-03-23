@@ -88,15 +88,22 @@ class GameManager():
         GameState.reset()
 
     @staticmethod
+    def take_damage(damage: float):
+        damage_by_fps = damage / TARGET_FPS
+        GameState.player_health -= damage_by_fps
+        GameManager.show_damage_splash_screen()
+        if GameState.player_health <= 0: GameManager.game_over()
+
+    @staticmethod
     def set_snackbar(text: str):
         if hasattr(GameState, "snackbar"):
             GameState.snackbar.set_text(text)
 
     @staticmethod
-    def take_damage(damage: float):
-        damage_by_fps = damage / TARGET_FPS
-        GameState.player_health -= damage_by_fps
-        if GameState.player_health <= 0: GameManager.game_over()
+    def show_damage_splash_screen():
+        if hasattr(GameState, "damage_splash_screen"):
+            GameState.damage_splash_screen.show()
+    
 
 def empty_group(*groups):
     for group in groups:

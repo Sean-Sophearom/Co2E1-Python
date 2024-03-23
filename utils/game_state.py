@@ -70,5 +70,9 @@ class GameState:
         if not hasattr(GameState, "snackbar") or GameState.snackbar is None:
             from .sprites import Snackbar
             GameState.snackbar = Snackbar()
+
+        if not hasattr(GameState, "damage_splash_screen") or GameState.damage_splash_screen is None:
+            from .sprites import DamageSplashScreen
+            GameState.damage_splash_screen = DamageSplashScreen()
     
 del dataclass
