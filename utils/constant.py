@@ -45,8 +45,13 @@ class CUSTOMEVENTS():
     ADDSHINYSTAR = pygame.USEREVENT + 4
 
 # Define constants for the screen width and height
+# For pygame, we will use a larger screen size for better visual experience
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
+    
+# For pygbag, we will use a smaller screen size for better performance in browser emulator
+# SCREEN_WIDTH = 960
+# SCREEN_HEIGHT = 540
 TARGET_FPS = 60
 
 FONTPATH = "asset/font/8-bit-pixel.ttf"

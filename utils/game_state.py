@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from .constant import GAMESTATUS
+from .constant import GAMESTATUS, TARGET_FPS, pygame
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -26,6 +26,10 @@ class GameState:
     sprite_health: SpriteHealth
     sprite_value: SpriteValue
 
+    delta_time: float = 0
+    delta_frame: float = 0
+    _getTicksLastFrame: float = 0
+
     game_status: GAMESTATUS = GAMESTATUS.HOME
 
     @staticmethod
@@ -47,6 +51,13 @@ class GameState:
     @staticmethod
     def is_skill_menu():
         return GameState.game_status == GAMESTATUS.SKILL_MENU
+
+    @staticmethod
+    def update_delta_time():
+        ticks = pygame.time.get_ticks()
+        GameState.delta_time = (ticks - GameState._getTicksLastFrame) / 1000.0
+        GameState.delta_frame = GameState.delta_time * TARGET_FPS
+        GameState._getTicksLastFrame = ticks
     
     @staticmethod
     def reset():

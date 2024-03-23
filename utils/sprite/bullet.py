@@ -28,7 +28,7 @@ class Bullet(pygame.sprite.Sprite):
         if move_vector.length_squared() == 0:
             return self.kill()    
         move_vector.normalize_ip()
-        move_vector *= GameState.sprite_speed.bullet
+        move_vector *= GameState.sprite_speed.bullet * GameState.delta_frame
         self.rect.move_ip(move_vector)
 
         # rotate to face movement direction
