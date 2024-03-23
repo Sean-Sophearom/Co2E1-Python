@@ -71,7 +71,8 @@ while running:
         
         # Check if any enemies have collided with the player
         if pygame.sprite.spritecollideany(GameState.player, enemies):
-            GameManager.game_over()
+            enemy = pygame.sprite.spritecollideany(GameState.player, enemies)
+            GameManager.take_damage(enemy.damage)
 
     # Update the position of all sprites
     if GameState.is_playing():

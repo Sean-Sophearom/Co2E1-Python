@@ -1,5 +1,5 @@
 from .game_state import GameState
-from .constant import GAMESTATUS, SCREEN_WIDTH, SCREEN_HEIGHT, CUSTOMEVENTS
+from .constant import GAMESTATUS, SCREEN_WIDTH, SCREEN_HEIGHT, CUSTOMEVENTS, TARGET_FPS
 import pygame
 from typing import List
 
@@ -91,6 +91,12 @@ class GameManager():
     def set_snackbar(text: str):
         if hasattr(GameState, "snackbar"):
             GameState.snackbar.set_text(text)
+
+    @staticmethod
+    def take_damage(damage: float):
+        damage_by_fps = damage / TARGET_FPS
+        GameState.player_health -= damage_by_fps
+        if GameState.player_health <= 0: GameManager.game_over()
 
 def empty_group(*groups):
     for group in groups:

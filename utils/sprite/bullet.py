@@ -1,7 +1,7 @@
 from .imp import * 
 from ..spawner import Spawner
 class Bullet(pygame.sprite.Sprite):
-    def __init__(self, target):
+    def __init__(self, target, damage = 5):
         super(Bullet, self).__init__()
         self.surf = pygame.image.load("asset/images/missile.png").convert()
         self.surf = pygame.transform.rotozoom(self.surf, 0, 0.55)
@@ -9,6 +9,7 @@ class Bullet(pygame.sprite.Sprite):
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(center=CENTER)
         self.target = target
+        self.damage = 5
         self.target_move_vector = pygame.Vector2(0, 0)
 
     def update(self, enemies):
@@ -37,10 +38,11 @@ class Bullet(pygame.sprite.Sprite):
         # if collide with any enemies
         if pygame.sprite.spritecollideany(self, enemies):
             enemy = pygame.sprite.spritecollideany(self, enemies)
+            enemy.take_damage(self.damage)
             self.kill()
-            enemy.kill()
+            
     
     def kill(self):
         super().kill()
         Spawner.spawn_explosion(self.rect.center)
-        Spawner.spawn_damage_text(self.rect.center)
+        Spawner.spawn_damage_text(self.rect.center, self.damage)

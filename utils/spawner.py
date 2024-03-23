@@ -46,13 +46,14 @@ class Spawner():
         return new_lightning
 
     @staticmethod
-    def spawn_damage_text(center, *args, **kwargs):
+    def spawn_damage_text(center, damage = 0, *args, **kwargs):
         from .sprite_group import all_sprites, ui
         from .sprites import DamageText
-        new_text = DamageText(100, 24, center, *args, **kwargs)
-        ui.add(new_text)
-        all_sprites.add(new_text)
-        return new_text
+        if damage > 0: 
+            new_text = DamageText(damage, 24, center, *args, **kwargs)
+            ui.add(new_text)
+            all_sprites.add(new_text)
+            return new_text
 
     @staticmethod
     def spawn_star(center=None, *args, **kwargs):

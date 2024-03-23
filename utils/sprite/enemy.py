@@ -4,11 +4,13 @@ from ..spawner import Spawner
 # Define the enemy object extending pygame.sprite.Sprite
 # Instead of a surface, we use an image for a better looking sprite
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, damage: float = 5, health: float = 10):
         super(Enemy, self).__init__()
         self.surf = pygame.image.load("asset/images/missile.png").convert()
         self.original_surf = self.surf
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.damage = damage
+        self.health = health
         self.tag = TAGS.ENEMY
         # The starting position is randomly generated
         quadrant = random.randint(1, 4)
@@ -47,3 +49,7 @@ class Enemy(pygame.sprite.Sprite):
         super().kill()
         Spawner.spawn_gem(self.rect.center)
         Spawner.spawn_explosion(self.rect.center)
+
+    def take_damage(self, damage):
+        self.health -= damage
+        if self.health <= 0: self.kill()
