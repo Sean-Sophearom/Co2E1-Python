@@ -1,7 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from .constant import GAMESTATUS, CUSTOMEVENTS
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from .sprites import Player, Snackbar
@@ -16,6 +16,17 @@ class Speed:
     gem: float
 
 @dataclass
+class SpriteTimer:
+    enemy: int
+    bullet: int
+    lightning: int
+
+    def __getitem__(self, key):
+        return getattr(self, str(key))
+
+    def __setitem__(self, key, value):
+        setattr(self, str(key), value)
+@dataclass
 class GameState:
     player: Player
     player_health: float
@@ -26,6 +37,8 @@ class GameState:
     gem_capacity: float
 
     snackbar: Snackbar
+
+    sprite_timer: SpriteTimer
 
     speed: Speed
     game_status: GAMESTATUS = GAMESTATUS.HOME
@@ -58,13 +71,19 @@ class GameState:
 
         GameState.gem_radius = 200
         GameState.gem_collected = 0
-        GameState.gem_capacity = 25
+        GameState.gem_capacity = 3
 
         GameState.speed = Speed(
             player = 5, 
             bullet = 9, 
             enemy = 3, 
             gem = 7
+        )
+
+        GameState.sprite_timer = SpriteTimer(
+            enemy = 1000,
+            bullet = 900,
+            lightning = 2500
         )
 
         if not hasattr(GameState, "snackbar") or GameState.snackbar is None:
@@ -74,5 +93,7 @@ class GameState:
         if not hasattr(GameState, "damage_splash_screen") or GameState.damage_splash_screen is None:
             from .sprites import DamageSplashScreen
             GameState.damage_splash_screen = DamageSplashScreen()
+        
+    
     
 del dataclass

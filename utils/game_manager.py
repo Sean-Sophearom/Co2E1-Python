@@ -34,8 +34,8 @@ class GameManager():
         GameState.change_status(GAMESTATUS.PLAYING)
 
         GameManager.clear_timers()
-        GameManager.set_timer(CUSTOMEVENTS.ADDENEMY, 1000)
-        GameManager.set_timer(CUSTOMEVENTS.ADDBULLET, 900)
+        GameManager.set_timer(CUSTOMEVENTS.ADDENEMY, GameState.sprite_timer.enemy)
+        GameManager.set_timer(CUSTOMEVENTS.ADDBULLET, GameState.sprite_timer.bullet)
         
         statics.add(HealthBar())
         statics.add(ExpBar())
