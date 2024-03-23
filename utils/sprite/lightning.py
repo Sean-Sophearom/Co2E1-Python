@@ -1,5 +1,6 @@
 from .imp import * 
 from .animated import Animated
+from utils.spawner import Spawner
 
 class Lightning(Animated):
     def __init__(self, target):
@@ -13,6 +14,7 @@ class Lightning(Animated):
             animation_speed = 4,
             mode = "once"
         )
+        self.damage = GameState.sprite_damage.lightning
         self.tag = TAGS.LIGHTNING
         self.rect = self.surf.get_rect(midbottom=target.rect.center)
         self.target = target
@@ -41,6 +43,10 @@ class Lightning(Animated):
             move_vector *= 10
             self.rect.move_ip(move_vector)
 
+    def kill(self):
+        super().kill()
+        Spawner.spawn_explosion(self.rect.midbottom)
+        Spawner.spawn_damage_text(self.rect.midbottom, self.damage)
         
 
         

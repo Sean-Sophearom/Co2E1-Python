@@ -23,6 +23,9 @@ class GameState:
     snackbar: Snackbar
 
     sprite_timer: SpriteTimer
+    sprite_damage: SpriteDamage
+    sprite_health: SpriteHealth
+    sprite_value: SpriteValue
 
     speed: Speed
     game_status: GAMESTATUS = GAMESTATUS.HOME
@@ -70,6 +73,20 @@ class GameState:
             lightning = 2500
         )
 
+        GameState.sprite_damage = SpriteDamage(
+            bullet = 5,
+            enemy = 5,
+            lightning = 999
+        )
+
+        GameState.sprite_health = SpriteHealth(
+            enemy = 10
+        )
+
+        GameState.sprite_value = SpriteValue(
+            enemy = 1.1
+        )
+
         if not hasattr(GameState, "snackbar") or GameState.snackbar is None:
             from .sprites import Snackbar
             GameState.snackbar = Snackbar()
@@ -103,5 +120,13 @@ class SpriteDamage(DynamicDataclass):
     enemy: float
     bullet: float
     lightning: float
+
+@dataclass
+class SpriteHealth(DynamicDataclass):
+    enemy: float
+
+@dataclass
+class SpriteValue(DynamicDataclass):
+    enemy: float
     
 del dataclass
