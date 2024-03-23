@@ -1,6 +1,7 @@
 from ..sprite.imp import *
 from dataclasses import dataclass
 from ..skill_manager import SkillManager
+from ..game_manager import GameManager
 
 class SkillMenuScreen(pygame.sprite.Sprite):
     def __init__(self):
@@ -96,7 +97,8 @@ class OneSkillPanel:
             if event.button == 1:
                 if self.is_colliding(event.pos):
                     if self.onclick:
-                        self.onclick()
+                        message = self.onclick()
+                        GameManager.set_snackbar(message)
 
         elif event.type == pygame.MOUSEMOTION:
             if self.is_colliding(event.pos):

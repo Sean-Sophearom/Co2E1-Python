@@ -5,8 +5,8 @@ margin = 20
 padding = (8, 4)
 border_radius = 2
 font_size = 25
-show_duration = 2000
-fade_duration = 500
+show_duration = 3000
+fade_duration = 400
 
 white = 255, 255, 255
 black = 0, 0, 0

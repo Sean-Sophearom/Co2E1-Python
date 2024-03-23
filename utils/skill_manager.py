@@ -16,5 +16,6 @@ class SkillManager:
     @decorator
     def increase_speed():
         GameState.speed.player += 1
+        return "Player speed increased by 1"
 
     
