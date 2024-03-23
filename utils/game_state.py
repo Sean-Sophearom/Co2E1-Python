@@ -23,11 +23,11 @@ class GameState:
     snackbar: Snackbar
 
     sprite_timer: SpriteTimer
+    sprit_speed: SpriteSpeed
     sprite_damage: SpriteDamage
     sprite_health: SpriteHealth
     sprite_value: SpriteValue
 
-    speed: Speed
     game_status: GAMESTATUS = GAMESTATUS.HOME
 
     @staticmethod
@@ -60,7 +60,7 @@ class GameState:
         GameState.gem_collected = 0
         GameState.gem_capacity = 3
 
-        GameState.speed = Speed(
+        GameState.sprit_speed = SpriteSpeed(
             player = 5, 
             bullet = 9, 
             enemy = 3, 
@@ -103,7 +103,7 @@ class DynamicDataclass:
         setattr(self, str(key), value)
 
 @dataclass
-class Speed:
+class SpriteSpeed(DynamicDataclass):
     player: float
     bullet: float
     enemy: float
