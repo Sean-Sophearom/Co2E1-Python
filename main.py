@@ -69,9 +69,9 @@ while running:
             if GameState.gem_collected >= GameState.gem_capacity: GameManager.skill_menu()
             gem.kill()
         
-        # Check if any enemies have collided with the player
-        if pygame.sprite.spritecollideany(GameState.player, enemies):
-            enemy = pygame.sprite.spritecollideany(GameState.player, enemies)
+        # Check all enemies that have collided with player and apply damage accordingly
+        collided_enemies = pygame.sprite.spritecollide(GameState.player, enemies, False)
+        for enemy in collided_enemies:
             GameManager.take_damage(enemy.damage)
 
     # Update the position of all sprites
