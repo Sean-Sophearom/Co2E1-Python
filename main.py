@@ -99,6 +99,11 @@ while running:
 
     for entity in skill_menu_screen_group:
         screen.blit(entity.surf, entity.rect)
+    
+    # Draw snackbar
+    if hasattr(GameState, "snackbar"):
+        GameState.snackbar.update()
+        screen.blit(GameState.snackbar.surf, GameState.snackbar.rect)
 
     # Check if any ui element is being hovered then change cursor style
     is_hovering = any(hasattr(entity, "is_hovering") and entity.is_hovering for entity in ui_elements.sprites() + skill_menu_screen_group.sprites())

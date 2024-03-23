@@ -87,6 +87,11 @@ class GameManager():
         GameManager.clear_timers()
         GameState.reset()
 
+    @staticmethod
+    def set_snackbar(text: str):
+        if hasattr(GameState, "snackbar"):
+            GameState.snackbar.set_text(text)
+
 def empty_group(*groups):
     for group in groups:
         for element in group: element.kill()

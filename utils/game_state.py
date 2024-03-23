@@ -4,7 +4,7 @@ from .constant import GAMESTATUS, CUSTOMEVENTS
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from .sprites import Player
+    from .sprites import Player, Snackbar
 
 __all__ = ["GameState"]
 
@@ -24,6 +24,8 @@ class GameState:
     gem_radius: float
     gem_collected: float
     gem_capacity: float
+
+    snackbar: Snackbar
 
     speed: Speed
     game_status: GAMESTATUS = GAMESTATUS.HOME
@@ -64,5 +66,9 @@ class GameState:
             enemy = 3, 
             gem = 7
         )
+
+        if not hasattr(GameState, "snackbar") or GameState.snackbar is None:
+            from .sprites import Snackbar
+            GameState.snackbar = Snackbar()
     
 del dataclass
