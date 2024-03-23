@@ -1,7 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from .constant import GAMESTATUS, CUSTOMEVENTS
-from typing import TYPE_CHECKING, Any
+from .constant import GAMESTATUS
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .sprites import Player, Snackbar

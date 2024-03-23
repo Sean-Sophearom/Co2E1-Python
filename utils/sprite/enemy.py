@@ -52,5 +52,6 @@ class Enemy(pygame.sprite.Sprite):
         Spawner.spawn_explosion(self.rect.center)
 
     def take_damage(self, damage):
+        Spawner.spawn_damage_text(self.rect.center, damage)
         self.health -= damage
         if self.health <= 0: self.kill()

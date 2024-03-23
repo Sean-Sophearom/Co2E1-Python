@@ -26,7 +26,7 @@ class Lightning(Animated):
         # check if collide with enemies
         if self.current_frame >= 2 and pygame.sprite.spritecollideany(self, enemies):
             enemy = pygame.sprite.spritecollideany(self, enemies)
-            enemy.kill()
+            enemy.take_damage(self.damage)
 
         # if target is dead return
         if not self.target.alive():
@@ -46,7 +46,6 @@ class Lightning(Animated):
     def kill(self):
         super().kill()
         Spawner.spawn_explosion(self.rect.midbottom)
-        Spawner.spawn_damage_text(self.rect.midbottom, self.damage)
         
 
         
