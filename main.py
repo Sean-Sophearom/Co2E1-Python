@@ -1,5 +1,5 @@
 # Import the pygame module
-import pygame
+# import pygame
 
 from utils.constant import *
 from utils.helper import find_closest_target, find_on_screen_targets
