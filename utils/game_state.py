@@ -8,8 +8,6 @@ if TYPE_CHECKING:
 
 __all__ = ["GameState"]
 
-
-
 @dataclass
 class GameState:
     player: Player
@@ -23,7 +21,7 @@ class GameState:
     snackbar: Snackbar
 
     sprite_timer: SpriteTimer
-    sprit_speed: SpriteSpeed
+    sprite_speed: SpriteSpeed
     sprite_damage: SpriteDamage
     sprite_health: SpriteHealth
     sprite_value: SpriteValue
@@ -60,7 +58,7 @@ class GameState:
         GameState.gem_collected = 0
         GameState.gem_capacity = 3
 
-        GameState.sprit_speed = SpriteSpeed(
+        GameState.sprite_speed = SpriteSpeed(
             player = 5, 
             bullet = 9, 
             enemy = 3, 

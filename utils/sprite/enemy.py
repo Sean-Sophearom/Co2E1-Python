@@ -43,7 +43,7 @@ class Enemy(pygame.sprite.Sprite):
             angle = math.degrees(math.atan2(move_vector.y, -move_vector.x)) 
             self.surf = pygame.transform.rotate(self.original_surf, angle)
 
-            move_vector *= GameState.sprit_speed.enemy
+            move_vector *= GameState.sprite_speed.enemy
             self.rect.move_ip(move_vector)
     
     def kill(self):

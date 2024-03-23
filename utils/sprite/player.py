@@ -43,7 +43,7 @@ class Player(Animated):
             
         self.surf = pygame.transform.rotate(self.original_surf, self.target_rotation)
         # Apply speed to the normalized movement vector
-        move_vector *= GameState.sprit_speed.player
+        move_vector *= GameState.sprite_speed.player
         
         # Move the player
         self.rect.move_ip(move_vector)

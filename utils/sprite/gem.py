@@ -31,7 +31,7 @@ class Gem(Animated):
             if move_vector.length_squared() == 0:
                 return self.kill()
             move_vector.normalize_ip()
-            move_vector *= GameState.sprit_speed.gem
+            move_vector *= GameState.sprite_speed.gem
             self.rect.move_ip(move_vector)
 
         # check if distance to center of screen is small
