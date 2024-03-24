@@ -7,7 +7,7 @@ max_gem_img = 13
 class Gem(Animated):
     def __init__(self, center, value: float = 1):
         super().__init__(
-            f"asset/images/gem/{floor(value - 1) % max_gem_img + 1}.png", 
+            f"asset/images/gem/{((value - 1) // 4) % (max_gem_img + 1)}.png", 
             width = 8 * 8, 
             height = 14 * 8 , 
             frames = 5, 
