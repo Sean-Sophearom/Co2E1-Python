@@ -1,5 +1,6 @@
 from .game_state import GameState
 from .constant import GAMESTATUS, SCREEN_WIDTH, SCREEN_HEIGHT, CUSTOMEVENTS, TARGET_FPS
+from .spawner import Spawner
 import pygame
 from typing import List
 
@@ -88,11 +89,24 @@ class GameManager():
         GameState.reset()
 
     @staticmethod
+    def heal_player(heal: float):
+        GameState.player_health += heal
+        if GameState.player_health > GameState.player_max_health: GameState.player_health = GameState.player_max_health
+        Spawner.spawn_health_text(GameState.player.rect.center, heal)
+
+    @staticmethod
     def take_damage(damage: float):
         damage_by_fps = damage / TARGET_FPS
         GameState.player_health -= damage_by_fps
         GameManager.show_damage_splash_screen()
         if GameState.player_health <= 0: GameManager.game_over()
+
+    @staticmethod
+    def collect_gem(gem):
+        GameState.gem_collected += gem.value
+        gem.kill()
+        if GameState.gem_collected >= GameState.gem_capacity: 
+            GameManager.skill_menu()
 
     @staticmethod
     def set_snackbar(text: str):

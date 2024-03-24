@@ -48,9 +48,37 @@ class Spawner():
     @staticmethod
     def spawn_damage_text(center, damage = 0, *args, **kwargs):
         from .sprite_group import all_sprites, ui
-        from .sprites import DamageText
+        from .sprites import FadeUpText
         if damage > 0: 
-            new_text = DamageText(damage, 24, center, *args, **kwargs)
+            color = (255, 0, 0)
+            size = 24
+            new_text = FadeUpText(damage, center, size, color, *args, **kwargs)
+            ui.add(new_text)
+            all_sprites.add(new_text)
+            return new_text
+    
+    @staticmethod
+    def spawn_exp_text(center, exp = 0, *args, **kwargs):
+        from .sprite_group import all_sprites, ui
+        from .sprites import FadeUpText
+        if exp > 0:
+            color = (0, 255, 0)
+            size = 22
+            exp = f"+{exp}"
+            new_text = FadeUpText(exp, center, size, color, *args, **kwargs)
+            ui.add(new_text)
+            all_sprites.add(new_text)
+            return new_text
+    
+    @staticmethod
+    def spawn_health_text(center, health = 0, *args, **kwargs):
+        from .sprite_group import all_sprites, ui
+        from .sprites import FadeUpText
+        if health > 0:
+            color = (255, 0, 0)
+            size = 22
+            health = f"+{health}"
+            new_text = FadeUpText(health, center, size, color, *args, **kwargs)
             ui.add(new_text)
             all_sprites.add(new_text)
             return new_text

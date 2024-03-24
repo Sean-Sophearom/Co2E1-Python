@@ -2,10 +2,10 @@ import pygame
 from ..constant import FONTPATH, SCREEN_HEIGHT, SCREEN_WIDTH
 
 margin = 20
-padding = (8, 4)
-border_radius = 2
+padding = (12, 5)
+border_radius = 5
 font_size = 25
-show_duration = 3000
+show_duration = 4000
 fade_duration = 400
 
 white = 255, 255, 255

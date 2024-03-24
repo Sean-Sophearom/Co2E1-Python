@@ -1,6 +1,7 @@
 from .imp import * 
 from .animated import Animated
 from math import floor
+from ..spawner import Spawner
 max_gem_img = 13
 
 class Gem(Animated):
@@ -37,3 +38,9 @@ class Gem(Animated):
         # check if distance to center of screen is small
         elif math.sqrt((self.rect.centerx - SCREEN_WIDTH // 2) ** 2 + (self.rect.centery - SCREEN_HEIGHT // 2) ** 2) < GameState.gem_radius:
             self.collected = True
+        
+    def kill(self):
+        super().kill()
+        Spawner.spawn_exp_text(self.rect.midtop, self.value)
+        
+        

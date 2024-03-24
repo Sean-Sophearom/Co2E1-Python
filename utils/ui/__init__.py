@@ -1,4 +1,4 @@
-from .damage_text import DamageText
+from .fade_up_text import FadeUpText
 from .healthbar import HealthBar
 from .expbar import ExpBar
 from .text import Text

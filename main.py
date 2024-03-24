@@ -68,9 +68,7 @@ async def main():
             # Check if collected any gems
             if pygame.sprite.spritecollideany(GameState.player, gems):
                 gem = pygame.sprite.spritecollideany(GameState.player, gems)
-                GameState.gem_collected += gem.value
-                if GameState.gem_collected >= GameState.gem_capacity: GameManager.skill_menu()
-                gem.kill()
+                GameManager.collect_gem(gem)
             
             # Check all enemies that have collided with player and apply damage accordingly
             collided_enemies = pygame.sprite.spritecollide(GameState.player, enemies, False)
