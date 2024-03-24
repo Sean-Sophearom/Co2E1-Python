@@ -39,11 +39,26 @@ class TAGS(Enum):
 
 @dataclass
 class CUSTOMEVENTS():
-    ADDENEMY = pygame.USEREVENT + 1
-    ADDBULLET = pygame.USEREVENT + 2
-    ADDLIGHTNING = pygame.USEREVENT + 3
-    ADDSHINYSTAR = pygame.USEREVENT + 4
-    REGEN = pygame.USEREVENT + 5
+    ADDSHINYSTAR = pygame.USEREVENT + 1
+    REGEN = pygame.USEREVENT + 2
+
+    ADDBULLET = pygame.USEREVENT + 3
+    ADDLIGHTNING = pygame.USEREVENT + 4
+    ADDFIREBALL = pygame.USEREVENT + 5
+    ADDFIRERING = pygame.USEREVENT + 6
+    ADDFLAMEBALL = pygame.USEREVENT + 7
+    ADDMAGICARROW = pygame.USEREVENT + 8
+    ADDMAGICORB = pygame.USEREVENT + 9
+    ADDTHUNDERBALL = pygame.USEREVENT + 10
+
+    ADDENEMY = pygame.USEREVENT + 11
+    ADDBAT = pygame.USEREVENT + 12
+    ADDCANINEGRAY = pygame.USEREVENT + 13
+    ADDCANINEWHITE = pygame.USEREVENT + 14
+    ADDGOLEM = pygame.USEREVENT + 15
+    ADDRAT = pygame.USEREVENT + 16
+    ADDSKULL = pygame.USEREVENT + 17
+    ADDSLIME = pygame.USEREVENT + 18
 
 # Define constants for the screen width and height
 # For pygame, we will use a larger screen size for better visual experience

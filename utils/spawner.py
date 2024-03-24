@@ -19,11 +19,10 @@ class Spawner():
         return new_enemy
 
     @staticmethod
-    def spawn_animated_enemy(*args, **kwargs):
+    def spawn_animated_enemy(type, *args, **kwargs):
         from .sprite_group import all_sprites, enemies
         from .sprites import AnimatedEnemy
-        from .enemies_sprite_data import EnemiesSpriteData
-        new_enemy = AnimatedEnemy(EnemiesSpriteData.crab)
+        new_enemy = AnimatedEnemy(type)
         enemies.add(new_enemy)
         all_sprites.add(new_enemy)
         return new_enemy
@@ -38,11 +37,10 @@ class Spawner():
         return new_bullet
 
     @staticmethod
-    def spawn_animated_projectile(target, *args, **kwargs):
+    def spawn_animated_projectile(target, type, *args, **kwargs):
         from .sprite_group import all_sprites, bullets
         from .sprites import AnimatedProjectile
-        from .projectiles_sprite_data import ProjectilesSpriteData
-        new_bullet = AnimatedProjectile(target, ProjectilesSpriteData.fire_ball, *args, **kwargs)
+        new_bullet = AnimatedProjectile(target, type, *args, **kwargs)
         bullets.add(new_bullet)
         all_sprites.add(new_bullet)
         return new_bullet

@@ -4,7 +4,6 @@ import asyncio
 import pygame
 
 from utils.constant import *
-from utils.helper import find_closest_target, find_on_screen_targets
 from utils.spawner import Spawner
 from utils.game_state import GameState
 from utils.game_manager import GameManager
@@ -20,6 +19,7 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 from utils.sprite_group import *
+from utils.helper import handle_spawning
 
 # Variable to keep our main loop running
 running = True
@@ -50,20 +50,7 @@ async def main():
                 GameManager.regen_player(GameState.player_regen)
 
             elif GameState.is_playing():
-                if event.type == CUSTOMEVENTS.ADDENEMY:
-                    if len(enemies) <= 100:
-                        Spawner.spawn_enemy()
-                        Spawner.spawn_animated_enemy()
-
-                elif event.type == CUSTOMEVENTS.ADDBULLET:
-                    if len(enemies) > 0:
-                        target = find_closest_target(enemies)
-                        if target: Spawner.spawn_bullet(target)
-
-                elif event.type == CUSTOMEVENTS.ADDLIGHTNING:
-                    if len(enemies) > 0:
-                        target = find_on_screen_targets(enemies)
-                        if target: Spawner.spawn_lightning(target)
+                handle_spawning(event.type)
 
         if GameState.is_playing():
             pressed_keys = pygame.key.get_pressed()
