@@ -19,6 +19,16 @@ class GameState:
     gem_collected: float
     gem_capacity: float
 
+    gem_value_multiplier: float
+
+    player_damage_multiplier: float
+    player_defense_multiplier: float    
+
+    enemy_speed_multiplier: float
+    enemy_health_multiplier: float
+    enemy_damage_multiplier: float
+    enemy_value_multiplier: float
+
     snackbar: Snackbar
 
     sprite_timer: SpriteTimer
@@ -70,6 +80,16 @@ class GameState:
         GameState.gem_radius = 200
         GameState.gem_collected = 0
         GameState.gem_capacity = 3
+
+        GameState.gem_value_multiplier = 1
+
+        GameState.player_damage_multiplier = 1
+        GameState.player_defense_multiplier = 1    
+
+        GameState.enemy_speed_multiplier = 1
+        GameState.enemy_health_multiplier = 1
+        GameState.enemy_damage_multiplier = 1
+        GameState.enemy_value_multiplier = 1
 
         GameState.sprite_speed = SpriteSpeed()
         GameState.sprite_timer = SpriteTimer()

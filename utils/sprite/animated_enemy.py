@@ -11,15 +11,17 @@ class AnimatedEnemy(Animated):
         center = self.get_random_spawn()
         self.sprite_data = kwargs
 
+        name = self.sprite_data.name
+
         super().__init__(
-            f"asset/images/enemy/{self.sprite_data.name}/run.png", 
+            f"asset/images/enemy/{name}/run.png", 
             **self.sprite_data.run,
             mode = "loop",
         )
         self.tag = TAGS.ENEMY
-        self.value = GameState.sprite_value.enemy
-        self.damage = GameState.sprite_damage.enemy
-        self.health = GameState.sprite_health.enemy
+        self.value = GameState.sprite_value[name] * GameState.enemy_value_multiplier
+        self.damage = GameState.sprite_damage[name] * GameState.enemy_damage_multiplier
+        self.health = GameState.sprite_health[name] * GameState.enemy_health_multiplier
         self.rect = self.surf.get_rect(center=center)
         self.flip = kwargs.flip
         self.flipped = False
@@ -43,7 +45,7 @@ class AnimatedEnemy(Animated):
             if self.flipped:
                 self.surf = pygame.transform.flip(self.original_surf, True, False)
 
-            move_vector *= GameState.sprite_speed.enemy * GameState.delta_frame
+            move_vector *= GameState.sprite_speed.enemy * GameState.delta_frame * GameState.enemy_speed_multiplier
             self.rect.move_ip(move_vector)
     
     def kill(self):

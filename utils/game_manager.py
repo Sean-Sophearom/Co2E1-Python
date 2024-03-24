@@ -98,13 +98,13 @@ class GameManager():
     @staticmethod
     def take_damage(damage: float):
         damage_by_fps = damage / TARGET_FPS
-        GameState.player_health -= damage_by_fps
+        GameState.player_health -= damage_by_fps - (damage_by_fps * (GameState.player_defense_multiplier - 1))
         GameManager.show_damage_splash_screen()
         if GameState.player_health <= 0: GameManager.game_over()
 
     @staticmethod
     def collect_gem(gem):
-        GameState.gem_collected += gem.value
+        GameState.gem_collected += gem.value * GameState.gem_value_multiplier
         gem.kill()
         if GameState.gem_collected >= GameState.gem_capacity: 
             GameManager.skill_menu()

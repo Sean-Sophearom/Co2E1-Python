@@ -11,8 +11,15 @@ class Properties:
     flip: bool = False
 
 
+class DynamicDataclass:
+    def __getitem__(self, key):
+        return getattr(self, str(key))
+    
+    def __setitem__(self, key, value):
+        setattr(self, str(key), value)
+
 @dataclass
-class ProjectilesSpriteData:
+class ProjectilesSpriteData(DynamicDataclass):
     fire_ball: Properties = Properties(
         title = "Fire Ball",
         name = "fire_ball",
