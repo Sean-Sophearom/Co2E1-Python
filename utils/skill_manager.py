@@ -14,6 +14,7 @@ def decorator(func):
         GameManager.continue_game()
         GameState.gem_collected = 0
         GameState.gem_capacity += log10(GameState.gem_capacity) * 1.4
+        GameState.player_health = GameState.player_max_health
         return result
     return wrapper
 
