@@ -37,54 +37,54 @@ class TAGS(Enum):
     TEXT = "text"
     BACKGROUND = "background"
 
-@dataclass
-class CUSTOMEVENTS():
-    ADDSHINYSTAR = pygame.USEREVENT + 1
-    REGEN = pygame.USEREVENT + 2
+class CustomEvents():
+    def __init__(self):
+        self.ADDSHINYSTAR = pygame.USEREVENT + 10
+        self.REGEN = pygame.USEREVENT + 20
 
-    ADDBULLET = pygame.USEREVENT + 3
-    ADDLIGHTNING = pygame.USEREVENT + 4
-    ADDFIREBALL = pygame.USEREVENT + 5
-    ADDFIRERING = pygame.USEREVENT + 6
-    ADDFLAMEBALL = pygame.USEREVENT + 7
-    ADDMAGICARROW = pygame.USEREVENT + 8
-    ADDMAGICORB = pygame.USEREVENT + 9
-    ADDTHUNDERBALL = pygame.USEREVENT + 10
+        self.ADDBULLET = pygame.USEREVENT + 30
+        self.ADDLIGHTNING = pygame.USEREVENT + 40
+        self.ADDFIREBALL = pygame.USEREVENT + 50
+        self.ADDFIRERING = pygame.USEREVENT + 60
+        self.ADDFLAMEBALL = pygame.USEREVENT + 70
+        self.ADDMAGICARROW = pygame.USEREVENT + 80
+        self.ADDMAGICORB = pygame.USEREVENT + 90
+        self.ADDTHUNDERBALL = pygame.USEREVENT + 100
 
-    ADDENEMY = pygame.USEREVENT + 11
-    ADDBAT = pygame.USEREVENT + 12
-    ADDCANINEGRAY = pygame.USEREVENT + 13
-    ADDCANINEWHITE = pygame.USEREVENT + 14
-    ADDGOLEM = pygame.USEREVENT + 15
-    ADDRAT = pygame.USEREVENT + 16
-    ADDSKULL = pygame.USEREVENT + 17
-    ADDSLIME = pygame.USEREVENT + 18
+        self.ADDENEMY = pygame.USEREVENT + 110
+        self.ADDBAT = pygame.USEREVENT + 120
+        self.ADDCANINEGRAY = pygame.USEREVENT + 130
+        self.ADDCANINEWHITE = pygame.USEREVENT + 140
+        self.ADDGOLEM = pygame.USEREVENT + 150
+        self.ADDRAT = pygame.USEREVENT + 160
+        self.ADDSKULL = pygame.USEREVENT + 170
+        self.ADDSLIME = pygame.USEREVENT + 180
 
-    @staticmethod
-    def get_enemy_events():
+    def get_enemy_events(self):
         return [
-            CUSTOMEVENTS.ADDENEMY,
-            CUSTOMEVENTS.ADDBAT,
-            CUSTOMEVENTS.ADDCANINEGRAY,
-            CUSTOMEVENTS.ADDCANINEWHITE,
-            CUSTOMEVENTS.ADDGOLEM,
-            CUSTOMEVENTS.ADDRAT,
-            CUSTOMEVENTS.ADDSKULL,
-            CUSTOMEVENTS.ADDSLIME
+            self.ADDENEMY,
+            self.ADDBAT,
+            self.ADDCANINEGRAY,
+            self.ADDCANINEWHITE,
+            self.ADDGOLEM,
+            self.ADDRAT,
+            self.ADDSKULL,
+            self.ADDSLIME
         ]
 
-    @staticmethod
-    def get_projectile_events():
+    def get_projectile_events(self):
         return [
-            CUSTOMEVENTS.ADDBULLET,
-            CUSTOMEVENTS.ADDLIGHTNING,
-            CUSTOMEVENTS.ADDFIREBALL,
-            CUSTOMEVENTS.ADDFIRERING,
-            CUSTOMEVENTS.ADDFLAMEBALL,
-            CUSTOMEVENTS.ADDMAGICARROW,
-            CUSTOMEVENTS.ADDMAGICORB,
-            CUSTOMEVENTS.ADDTHUNDERBALL
+            self.ADDBULLET,
+            self.ADDLIGHTNING,
+            self.ADDFIREBALL,
+            self.ADDFIRERING,
+            self.ADDFLAMEBALL,
+            self.ADDMAGICARROW,
+            self.ADDMAGICORB,
+            self.ADDTHUNDERBALL
         ]
+
+CUSTOMEVENTS = CustomEvents()
 
 # Define constants for the screen width and height
 # For pygame, we will use a larger screen size for better visual experience
