@@ -13,6 +13,7 @@ class GameState:
     player: Player
     player_health: float
     player_max_health: float
+    player_regen: float
 
     gem_radius: float
     gem_collected: float
@@ -64,6 +65,7 @@ class GameState:
         GameState.player = None
         GameState.player_health = 100
         GameState.player_max_health = 100
+        GameState.player_regen = 1
 
         GameState.gem_radius = 200
         GameState.gem_collected = 0
@@ -79,7 +81,8 @@ class GameState:
         GameState.sprite_timer = SpriteTimer(
             enemy = 1000,
             bullet = 900,
-            lightning = 2500
+            lightning = 2500,
+            regen = 2500
         )
 
         GameState.sprite_damage = SpriteDamage(
@@ -123,6 +126,7 @@ class SpriteTimer(DynamicDataclass):
     enemy: int
     bullet: int
     lightning: int
+    regen: int
 
 @dataclass 
 class SpriteDamage(DynamicDataclass):

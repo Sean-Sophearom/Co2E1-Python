@@ -43,6 +43,7 @@ class CUSTOMEVENTS():
     ADDBULLET = pygame.USEREVENT + 2
     ADDLIGHTNING = pygame.USEREVENT + 3
     ADDSHINYSTAR = pygame.USEREVENT + 4
+    REGEN = pygame.USEREVENT + 5
 
 # Define constants for the screen width and height
 # For pygame, we will use a larger screen size for better visual experience

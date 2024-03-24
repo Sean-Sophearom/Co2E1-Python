@@ -89,10 +89,11 @@ class GameManager():
         GameState.reset()
 
     @staticmethod
-    def heal_player(heal: float):
-        GameState.player_health += heal
-        if GameState.player_health > GameState.player_max_health: GameState.player_health = GameState.player_max_health
-        Spawner.spawn_health_text(GameState.player.rect.center, heal)
+    def regen_player(heal: float):
+        if GameState.player_health < GameState.player_max_health:
+            GameState.player_health += heal
+            if GameState.player_health > GameState.player_max_health: GameState.player_health = GameState.player_max_health
+            Spawner.spawn_health_text(GameState.player.rect.center, heal)
 
     @staticmethod
     def take_damage(damage: float):

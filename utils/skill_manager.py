@@ -24,6 +24,11 @@ class SkillManager:
     def unlock_lightning():
         SkillManager.set_timer(CUSTOMEVENTS.ADDLIGHTNING, GameState.sprite_timer.lightning)
         return "Lightning unlocked !!!"
+
+    @decorator
+    def unlock_regen():
+        SkillManager.set_timer(CUSTOMEVENTS.REGEN, GameState.sprite_timer.regen)
+        return "Player health regen unlocked !!!"
     
     def set_timer(event, time):
         GameState.sprite_timer[event] = time

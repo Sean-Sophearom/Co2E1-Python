@@ -44,7 +44,10 @@ async def main():
                 exit(0)
 
             elif event.type == CUSTOMEVENTS.ADDSHINYSTAR:
-                    Spawner.spawn_star()
+                Spawner.spawn_star()
+            
+            elif event.type == CUSTOMEVENTS.REGEN:
+                GameManager.regen_player(GameState.player_regen)
 
             elif GameState.is_playing():
                 if event.type == CUSTOMEVENTS.ADDENEMY:
