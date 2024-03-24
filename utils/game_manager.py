@@ -111,7 +111,7 @@ class GameManager():
 
     @staticmethod
     def set_snackbar(text: str):
-        if hasattr(GameState, "snackbar"):
+        if hasattr(GameState, "snackbar") and text is not None:
             GameState.snackbar.set_text(text)
 
     @staticmethod
