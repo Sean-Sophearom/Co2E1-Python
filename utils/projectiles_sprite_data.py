@@ -42,7 +42,7 @@ class ProjectilesSpriteData(DynamicDataclass):
             "animation_speed": 1,
             "height": 100,
             "width": 100,
-            "scale": 0.6,
+            "scale": 0.5,
             "columns": 10
         }
     )
@@ -57,7 +57,8 @@ class ProjectilesSpriteData(DynamicDataclass):
             "width": 16,
             "scale": 1.5,
             "columns": 10
-        }
+        },
+        flip=True
     )
     magic_arrow: Properties = Properties(
         title = "Magic Arrow",
@@ -68,9 +69,10 @@ class ProjectilesSpriteData(DynamicDataclass):
             "animation_speed": 1,
             "height": 100,
             "width": 100,
-            "scale": 0.6,
+            "scale": 0.9,
             "columns": 10
-        }
+        },
+        flip=True
     )
     magic_orb: Properties = Properties(
         title = "Magic Orb",
@@ -81,7 +83,7 @@ class ProjectilesSpriteData(DynamicDataclass):
             "animation_speed": 1,
             "height": 32,
             "width": 32,
-            "scale": 1.2,
+            "scale": 0.8,
             "columns": 10
         }
     )
@@ -94,7 +96,7 @@ class ProjectilesSpriteData(DynamicDataclass):
             "animation_speed": 1,
             "height": 32,
             "width": 32,
-            "scale": 1.2,
+            "scale": 0.9,
             "columns": 10
         }
     )
