@@ -7,7 +7,7 @@ from typing import Dict, List
 cached: Dict[str, List[pygame.Surface]] = {}
 
 class Animated(pygame.sprite.Sprite):
-    def __init__(self, sprite_sheet, width, height, frames, scale=1, animation_speed=5, mode="loop", scalex=1, scaley=1, columns=0, gapx=0, gapy=0, duration=None):
+    def __init__(self, sprite_sheet, width, height, frames, scale=1, animation_speed=5, mode="loop", scalex=1, scaley=1, columns=0, gapx=0, gapy=0, duration=None, flipped = False, on_kill = None):
         if columns == 0: columns = frames
         super(Animated, self).__init__()
         self.columns = columns
@@ -21,12 +21,14 @@ class Animated(pygame.sprite.Sprite):
         self.animation_speed = animation_speed if duration is None else int(duration * TARGET_FPS / frames)
         self.num_frames = frames
         self.mode = mode
+        self.flipped = flipped
+        self.on_kill = on_kill
         
         self.frames: List[pygame.Surface] = []
         self.current_frame = 0
         self.frame_count = 0
 
-        cacheName = f"{sprite_sheet}{width}{height}{frames}{scale}{animation_speed}{mode}{scalex}{scaley}{columns}{gapx}{gapy}"
+        cacheName = f"{sprite_sheet}{width}{height}{frames}{scale}{animation_speed}{mode}{scalex}{scaley}{columns}{gapx}{gapy}{duration}{flipped}"
         
         if cacheName in cached:
             self.frames = cached[cacheName]
@@ -53,6 +55,9 @@ class Animated(pygame.sprite.Sprite):
                     frame = pygame.transform.rotozoom(frame, 0, self.scale)
                 if self.scalex != 1 or self.scaley != 1:
                     frame = pygame.transform.scale(frame, (int(self.frame_width * self.scalex), int(self.frame_height * self.scaley)))
+                
+                if self.flipped:
+                    frame = pygame.transform.flip(frame, True, False)
                 self.frames.append(frame)
 
     def update(self):
@@ -66,5 +71,7 @@ class Animated(pygame.sprite.Sprite):
 
         if self.mode == "once" and self.current_frame == len(self.frames) - 1:
             self.kill()
+            if self.on_kill:
+                self.on_kill(self.rect.center)
         else:
             self.original_surf = self.surf = self.frames[self.current_frame]

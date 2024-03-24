@@ -53,6 +53,7 @@ async def main():
                 if event.type == CUSTOMEVENTS.ADDENEMY:
                     if len(enemies) <= 100:
                         Spawner.spawn_enemy()
+                        Spawner.spawn_animated_enemy()
 
                 elif event.type == CUSTOMEVENTS.ADDBULLET:
                     if len(enemies) > 0:
