@@ -95,10 +95,10 @@ CUSTOMEVENTS = CustomEvents()
 
 # Define constants for the screen width and height
 # For pygame, we will use a larger screen size for better visual experience
-# SCREEN_WIDTH = 1280
-# SCREEN_HEIGHT = 720
-SCREEN_WIDTH = 1920 / 1.25
-SCREEN_HEIGHT = 1080 / 1.25
+SCREEN_WIDTH = 1280
+SCREEN_HEIGHT = 720
+# SCREEN_WIDTH = 1920 / 1.25
+# SCREEN_HEIGHT = 1080 / 1.25
     
 # For pygbag, we will use a smaller screen size for better performance in browser emulator
 # SCREEN_WIDTH = 960
