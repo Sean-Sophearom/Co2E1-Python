@@ -38,6 +38,16 @@ class Spawner():
         return new_bullet
 
     @staticmethod
+    def spawn_animated_projectile(target, *args, **kwargs):
+        from .sprite_group import all_sprites, bullets
+        from .sprites import AnimatedProjectile
+        from .projectiles_sprite_data import ProjectilesSpriteData
+        new_bullet = AnimatedProjectile(target, ProjectilesSpriteData.fire_ball, *args, **kwargs)
+        bullets.add(new_bullet)
+        all_sprites.add(new_bullet)
+        return new_bullet
+
+    @staticmethod
     def spawn_explosion(center, *args, **kwargs):
         from .sprite_group import all_sprites, explosions
         from .sprites import Explosion
