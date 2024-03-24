@@ -21,6 +21,7 @@ class AnimatedProjectile(Animated):
         self.flipped = False
 
     def update(self, enemies):
+        super().update()
         if is_out_of_bounds(self.rect): return self.kill()
 
         move_vector = pygame.Vector2(

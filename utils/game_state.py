@@ -71,33 +71,11 @@ class GameState:
         GameState.gem_collected = 0
         GameState.gem_capacity = 3
 
-        GameState.sprite_speed = SpriteSpeed(
-            player = 5, 
-            bullet = 9, 
-            enemy = 3, 
-            gem = 7
-        )
-
-        GameState.sprite_timer = SpriteTimer(
-            enemy = 1000,
-            bullet = 900,
-            lightning = 2500,
-            regen = 2500
-        )
-
-        GameState.sprite_damage = SpriteDamage(
-            bullet = 5,
-            enemy = 5,
-            lightning = 999
-        )
-
-        GameState.sprite_health = SpriteHealth(
-            enemy = 10
-        )
-
-        GameState.sprite_value = SpriteValue(
-            enemy = 1.1
-        )
+        GameState.sprite_speed = SpriteSpeed()
+        GameState.sprite_timer = SpriteTimer()
+        GameState.sprite_damage = SpriteDamage()
+        GameState.sprite_health = SpriteHealth()
+        GameState.sprite_value = SpriteValue()
 
         if not hasattr(GameState, "snackbar") or GameState.snackbar is None:
             from .sprites import Snackbar
@@ -116,30 +94,89 @@ class DynamicDataclass:
 
 @dataclass
 class SpriteSpeed(DynamicDataclass):
-    player: float
-    bullet: float
-    enemy: float
-    gem: float
+    player: float = 5
+    gem: float = 9
+
+    bullet: float = 9
+    lightning: float = 9
+    fire_ball: float = 9
+    fire_ring: float = 9
+    flame_ball: float = 9
+    magic_arrow: float = 9
+    magic_orb: float = 9
+    thunder_ball: float = 9
+    
+    enemy: float = 2
+    bat: float = 4
+    canine_gray: float = 3
+    canine_white: float = 3
+    golem: float = 1
+    rat: float = 2
+    skull: float = 2
+    slime: float = 2
 
 @dataclass
 class SpriteTimer(DynamicDataclass):
-    enemy: int
-    bullet: int
-    lightning: int
-    regen: int
+    regen: int = 2000
+
+    bullet: int = 1000
+    lightning: int = 1000
+    fire_ball: int = 1000
+    fire_ring: int = 1000
+    flame_ball: int = 1000
+    magic_arrow: int = 1000
+    magic_orb: int = 1000
+    thunder_ball: int = 1000
+    
+    enemy: int = 1000
+    bat: int = 1000
+    canine_gray: int = 1000
+    canine_white: int = 1000
+    golem: int = 1000
+    rat: int = 1000
+    skull: int = 1000
+    slime: int = 1000
 
 @dataclass 
 class SpriteDamage(DynamicDataclass):
-    enemy: float
-    bullet: float
-    lightning: float
+    bullet: float = 5
+    lightning: float = 999
+    fire_ball: float = 5
+    fire_ring: float = 5 
+    flame_ball: float = 5
+    magic_arrow: float = 5
+    magic_orb: float = 5
+    thunder_ball: float = 5
+    
+    enemy: float = 5
+    bat: float = 5
+    canine_gray: float = 8
+    canine_white: float = 8
+    golem: float = 10
+    rat: float = 4
+    skull: float = 5
+    slime: float = 5
 
 @dataclass
 class SpriteHealth(DynamicDataclass):
-    enemy: float
+    enemy: float = 10
+    bat: float = 4
+    canine_gray: float = 5
+    canine_white: float = 5
+    golem: float = 10
+    rat: float = 4
+    skull: float = 4
+    slime: float = 4
 
 @dataclass
 class SpriteValue(DynamicDataclass):
-    enemy: float
+    enemy: float = 1.5
+    bat: float = 1
+    canine_gray: float = 3
+    canine_white: float = 3
+    golem: float = 5
+    rat: float = 1
+    skull: float = 1
+    slime: float = 1
     
 del dataclass
