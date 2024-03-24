@@ -60,6 +60,32 @@ class CUSTOMEVENTS():
     ADDSKULL = pygame.USEREVENT + 17
     ADDSLIME = pygame.USEREVENT + 18
 
+    @staticmethod
+    def get_enemy_events():
+        return [
+            CUSTOMEVENTS.ADDENEMY,
+            CUSTOMEVENTS.ADDBAT,
+            CUSTOMEVENTS.ADDCANINEGRAY,
+            CUSTOMEVENTS.ADDCANINEWHITE,
+            CUSTOMEVENTS.ADDGOLEM,
+            CUSTOMEVENTS.ADDRAT,
+            CUSTOMEVENTS.ADDSKULL,
+            CUSTOMEVENTS.ADDSLIME
+        ]
+
+    @staticmethod
+    def get_projectile_events():
+        return [
+            CUSTOMEVENTS.ADDBULLET,
+            CUSTOMEVENTS.ADDLIGHTNING,
+            CUSTOMEVENTS.ADDFIREBALL,
+            CUSTOMEVENTS.ADDFIRERING,
+            CUSTOMEVENTS.ADDFLAMEBALL,
+            CUSTOMEVENTS.ADDMAGICARROW,
+            CUSTOMEVENTS.ADDMAGICORB,
+            CUSTOMEVENTS.ADDTHUNDERBALL
+        ]
+
 # Define constants for the screen width and height
 # For pygame, we will use a larger screen size for better visual experience
 SCREEN_WIDTH = 1280
@@ -74,8 +100,6 @@ FONTPATH = "asset/font/8-bit-pixel.ttf"
 
 # Define the center object as a Vector2 with x and y coordinates
 CENTER = math.Vector2(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
-
-
 
 del math
 del Enum
