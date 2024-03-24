@@ -35,7 +35,8 @@ class GameState:
     sprite_speed: SpriteSpeed
     sprite_damage: SpriteDamage
     sprite_health: SpriteHealth
-    sprite_value: SpriteValue
+    sprite_value: SpriteValue 
+    projectile_level: ProjectileLevel 
 
     delta_time: float = 0
     delta_frame: float = 0
@@ -96,6 +97,7 @@ class GameState:
         GameState.sprite_damage = SpriteDamage()
         GameState.sprite_health = SpriteHealth()
         GameState.sprite_value = SpriteValue()
+        GameState.projectile_level = ProjectileLevel()
 
         if not hasattr(GameState, "snackbar") or GameState.snackbar is None:
             from .sprites import Snackbar
@@ -198,5 +200,14 @@ class SpriteValue(DynamicDataclass):
     rat: float = 1
     skull: float = 1
     slime: float = 1
+
+@dataclass
+class ProjectileLevel(DynamicDataclass):
+    fire_ball: int = None
+    fire_ring: int = None
+    flame_ball: int = None
+    magic_arrow: int = None
+    magic_orb: int = None
+    thunder_ball: int = None
     
 del dataclass

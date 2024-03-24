@@ -1,12 +1,20 @@
 from utils.enemies_sprite_data import EnemiesSpriteData
 from utils.projectiles_sprite_data import ProjectilesSpriteData
 from utils.spawner import Spawner
+from dataclasses import dataclass
 from utils.constant import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     CENTER,
     CUSTOMEVENTS
 )
+from random import choice
+
+@dataclass
+class ProjectileData:
+    name: str
+    event: int
+    data: any
 
 def is_out_of_bounds(rect):
     return (
@@ -35,6 +43,24 @@ def find_on_screen_targets(group):
     for target in group:
         if is_on_screen(target.rect):
             return target
+    
+def find_random_target(group):
+    if not group:
+        return None
+    return choice(group.sprites())
+        
+def get_projectiles_data():
+    from .constant import CUSTOMEVENTS
+    from .projectiles_sprite_data import ProjectilesSpriteData
+
+    return [
+        ProjectileData("fire_ball", CUSTOMEVENTS.ADDFIREBALL, ProjectilesSpriteData.fire_ball),
+        ProjectileData("fire_ring", CUSTOMEVENTS.ADDFIRERING, ProjectilesSpriteData.fire_ring),
+        ProjectileData("flame_ball", CUSTOMEVENTS.ADDFLAMEBALL, ProjectilesSpriteData.flame_ball),
+        ProjectileData("magic_arrow", CUSTOMEVENTS.ADDMAGICARROW, ProjectilesSpriteData.magic_arrow),
+        ProjectileData("magic_orb", CUSTOMEVENTS.ADDMAGICORB, ProjectilesSpriteData.magic_orb),
+        ProjectileData("thunder_ball", CUSTOMEVENTS.ADDTHUNDERBALL, ProjectilesSpriteData.thunder_ball)
+    ]
 
 def handle_spawning(event_type):
     from utils.sprite_group import enemies
@@ -51,27 +77,27 @@ def handle_spawning(event_type):
         if target: Spawner.spawn_lightning(target)
     
     elif event_type == CUSTOMEVENTS.ADDFIREBALL:
-        target = find_closest_target(enemies)
+        target = find_random_target(enemies)
         if target: Spawner.spawn_animated_projectile(target, ProjectilesSpriteData.fire_ball)
     
     elif event_type == CUSTOMEVENTS.ADDFIRERING:
-        target = find_closest_target(enemies)
+        target = find_random_target(enemies)
         if target: Spawner.spawn_animated_projectile(target, ProjectilesSpriteData.fire_ring)
 
     elif event_type == CUSTOMEVENTS.ADDFLAMEBALL:
-        target = find_closest_target(enemies)
+        target = find_random_target(enemies)
         if target: Spawner.spawn_animated_projectile(target, ProjectilesSpriteData.flame_ball)
     
     elif event_type == CUSTOMEVENTS.ADDMAGICARROW:
-        target = find_closest_target(enemies)
+        target = find_random_target(enemies)
         if target: Spawner.spawn_animated_projectile(target, ProjectilesSpriteData.magic_arrow)
     
     elif event_type == CUSTOMEVENTS.ADDMAGICORB:
-        target = find_closest_target(enemies)
+        target = find_random_target(enemies)
         if target: Spawner.spawn_animated_projectile(target, ProjectilesSpriteData.magic_orb)
     
     elif event_type == CUSTOMEVENTS.ADDTHUNDERBALL:
-        target = find_closest_target(enemies)
+        target = find_random_target(enemies)
         if target: Spawner.spawn_animated_projectile(target, ProjectilesSpriteData.thunder_ball)
 
     elif event_type == CUSTOMEVENTS.ADDBAT:

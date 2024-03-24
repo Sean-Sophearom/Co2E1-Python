@@ -25,10 +25,10 @@ class SkillMenuScreen(pygame.sprite.Sprite):
         title_rect = title_surf.get_rect(center=(SCREEN_WIDTH // 2, 100))
 
         skill_names = (
-            SkillSO("Ability", "Unlock a new ability OR Enhance existing ability", "skill", SkillManager.unlock_lightning),
-            SkillSO("Attack", "Increase base attack stats, cooldown or attack range", "attack", None),
-            SkillSO("Defense", "Increase base defense stats, health or durability", "defense", SkillManager.unlock_regen),
-            SkillSO("Utility", "Increase utility stats, movement speed, or exp gain", "utility", SkillManager.increase_speed)
+            SkillSO("Ability", "Unlock a new ability OR Enhance existing ability", "skill", SkillManager.unlock_or_upgrade_ability),
+            SkillSO("Attack", "Increase base attack stats, cooldown or attack range", "attack", SkillManager.upgrade_attack),
+            SkillSO("Defense", "Increase base defense stats, health or durability", "defense", SkillManager.upgrade_defense),
+            SkillSO("Utility", "Increase utility stats, movement speed, or exp gain", "utility", SkillManager.upgrade_utility)
         )
 
         self.skills = [

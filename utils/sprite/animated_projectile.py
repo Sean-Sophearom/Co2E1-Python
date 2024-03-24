@@ -8,8 +8,10 @@ class AnimatedProjectile(Animated):
         self.sprite_data = kwargs
 
         name = self.sprite_data.name
+        level = GameState.projectile_level[name]
+        if level > self.sprite_data.level: level = self.sprite_data.level
         super().__init__(
-            f"asset/images/projectile/{name}/1.png", 
+            f"asset/images/projectile/{name}/{level}.png", 
             **self.sprite_data.data,
             mode = "loop",
         )
@@ -43,10 +45,12 @@ class AnimatedProjectile(Animated):
 
         # rotate to face movement direction
         angle = math.degrees(math.atan2(move_vector.y, -move_vector.x)) 
-        self.surf = pygame.transform.rotate(self.original_surf, angle)
 
         if self.flip:
-            self.surf = pygame.transform.flip(self.surf, True, False)
+            angle -= 180
+
+        self.surf = pygame.transform.rotate(self.original_surf, angle)
+
         # if collide with any enemies
         if pygame.sprite.spritecollideany(self, enemies):
             enemy = pygame.sprite.spritecollideany(self, enemies)
