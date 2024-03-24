@@ -5,7 +5,7 @@ class FadeUpText(pygame.sprite.Sprite):
     def __init__(self, text, center, size, color):
         super().__init__()
         self.font = pygame.font.Font(FONTPATH, size)
-        self.text = str(text)
+        self.text = str(round(float(text), 2))
         self.color = color if len(color) == 4 else (*color, 255)
         self.alpha = self.color[3]
         self.surf = self.font.render(self.text, True, self.color)

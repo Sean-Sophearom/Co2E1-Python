@@ -74,12 +74,12 @@ class AnimatedEnemy(Animated):
         quadrant = random.randint(1, 4)
         center = (0, 0)
         if quadrant == 1:
-            center = (random.randint(-20, 0), random.randint(0, SCREEN_HEIGHT))
+            center = (random.randint(-5, 0), random.randint(0, SCREEN_HEIGHT))
         elif quadrant == 2:
-            center = (random.randint(SCREEN_WIDTH, SCREEN_WIDTH + 20), random.randint(0, SCREEN_HEIGHT))
+            center = (random.randint(SCREEN_WIDTH, SCREEN_WIDTH + 5), random.randint(0, SCREEN_HEIGHT))
         elif quadrant == 3:
-            center = (random.randint(0, SCREEN_WIDTH), random.randint(-20, 0))
+            center = (random.randint(0, SCREEN_WIDTH), random.randint(-5, 0))
         else:
-            center = (random.randint(0, SCREEN_WIDTH), random.randint(SCREEN_HEIGHT, SCREEN_HEIGHT + 20))
+            center = (random.randint(0, SCREEN_WIDTH), random.randint(SCREEN_HEIGHT, SCREEN_HEIGHT + 5))
 
         return center

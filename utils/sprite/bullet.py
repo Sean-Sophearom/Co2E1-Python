@@ -9,7 +9,7 @@ class Bullet(pygame.sprite.Sprite):
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
         self.rect = self.surf.get_rect(center=CENTER)
         self.target = target
-        self.damage = GameState.sprite_damage.bullet
+        self.damage = GameState.sprite_damage.bullet * GameState.player_damage_multiplier
         self.target_move_vector = pygame.Vector2(0, 0)
 
     def update(self, enemies):

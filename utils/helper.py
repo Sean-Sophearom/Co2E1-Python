@@ -9,6 +9,7 @@ from utils.constant import (
     CUSTOMEVENTS
 )
 from random import choice
+from math import log10
 
 @dataclass
 class ProjectileData:
@@ -18,10 +19,10 @@ class ProjectileData:
 
 def is_out_of_bounds(rect):
     return (
-        rect.right < -SCREEN_WIDTH
-        or rect.left > 2 * SCREEN_WIDTH
-        or rect.bottom < -SCREEN_HEIGHT
-        or rect.top > 2 * SCREEN_HEIGHT
+        rect.right < -30
+        or rect.left > SCREEN_WIDTH + 30
+        or rect.bottom < -30
+        or rect.top > SCREEN_HEIGHT + 30
     )
 
 def is_on_screen(rect):
@@ -62,11 +63,44 @@ def get_projectiles_data():
         ProjectileData("thunder_ball", CUSTOMEVENTS.ADDTHUNDERBALL, ProjectilesSpriteData.thunder_ball)
     ]
 
+def get_enemies_data():
+    from .constant import CUSTOMEVENTS
+    from .enemies_sprite_data import EnemiesSpriteData
+
+    return [
+        ProjectileData("bat", CUSTOMEVENTS.ADDBAT, EnemiesSpriteData.bat),
+        ProjectileData("canine_gray", CUSTOMEVENTS.ADDCANINEGRAY, EnemiesSpriteData.canine_gray),
+        ProjectileData("canine_white", CUSTOMEVENTS.ADDCANINEWHITE, EnemiesSpriteData.canine_white),
+        ProjectileData("golem", CUSTOMEVENTS.ADDGOLEM, EnemiesSpriteData.golem),
+        ProjectileData("rat", CUSTOMEVENTS.ADDRAT, EnemiesSpriteData.rat),
+        ProjectileData("skull", CUSTOMEVENTS.ADDSKULL, EnemiesSpriteData.skull),
+        ProjectileData("slime", CUSTOMEVENTS.ADDSLIME, EnemiesSpriteData.slime)
+    ]
+
 def handle_spawning(event_type):
-    from utils.sprite_group import enemies
-    if event_type == CUSTOMEVENTS.ADDENEMY:
-        if len(enemies) <= 100:
-            Spawner.spawn_enemy()
+    from .sprite_group import enemies
+    from .game_state import GameState
+    from .game_manager import GameManager
+
+    if event_type == CUSTOMEVENTS.WAVEUPDATE:
+        
+        GameState.enemy_speed_multiplier += log10(GameState.enemy_speed_multiplier + 0.5) / 3.2
+        GameState.enemy_health_multiplier += log10(GameState.enemy_health_multiplier + 0.5) / 1.4
+        GameState.enemy_damage_multiplier += log10(GameState.enemy_damage_multiplier + 0.5) / 1.4
+        GameState.enemy_value_multiplier += log10(GameState.enemy_value_multiplier + 0.5) / 1.4
+
+        GameState.max_enemies_cap += log10(GameState.max_enemies_cap / 4)
+
+        enemies_data = get_enemies_data()
+        GameManager.clear_timers([enemy.event for enemy in enemies_data])
+        
+        enemy = None
+        while not enemy:
+            enemy = choice(enemies_data)
+            if enemy.name in CUSTOMEVENTS.disabled: enemy = None
+        GameManager.set_timer(enemy.event, GameState.sprite_timer[enemy.name])
+        GameState.sprite_timer[enemy.name] -= 100
+        if GameState.sprite_timer[enemy.name] < 100: GameState.sprite_timer[enemy.name] = 100
 
     elif event_type == CUSTOMEVENTS.ADDBULLET:
         target = find_closest_target(enemies)
@@ -99,6 +133,12 @@ def handle_spawning(event_type):
     elif event_type == CUSTOMEVENTS.ADDTHUNDERBALL:
         target = find_random_target(enemies)
         if target: Spawner.spawn_animated_projectile(target, ProjectilesSpriteData.thunder_ball)
+    
+    elif len(enemies) >= GameState.max_enemies_cap:
+        return
+
+    elif event_type == CUSTOMEVENTS.ADDENEMY:
+        Spawner.spawn_enemy()
 
     elif event_type == CUSTOMEVENTS.ADDBAT:
         Spawner.spawn_animated_enemy(EnemiesSpriteData.bat)
@@ -120,3 +160,9 @@ def handle_spawning(event_type):
     
     elif event_type == CUSTOMEVENTS.ADDSLIME:
         Spawner.spawn_animated_enemy(EnemiesSpriteData.slime)
+
+def format_minute_seconds(milliseconds):
+    seconds = milliseconds // 1000
+    minute = seconds // 60
+    seconds = seconds % 60
+    return f"{minute}:{seconds:02d}"

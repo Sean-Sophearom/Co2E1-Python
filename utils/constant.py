@@ -60,6 +60,13 @@ class CustomEvents():
         self.ADDSKULL = pygame.USEREVENT + 170
         self.ADDSLIME = pygame.USEREVENT + 180
 
+        self.WAVEUPDATE = pygame.USEREVENT + 190
+
+        self.disabled = [
+            "canine_gray",
+            "canine_white",
+        ]
+
     def get_enemy_events(self):
         return [
             self.ADDENEMY,
@@ -88,8 +95,10 @@ CUSTOMEVENTS = CustomEvents()
 
 # Define constants for the screen width and height
 # For pygame, we will use a larger screen size for better visual experience
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 720
+# SCREEN_WIDTH = 1280
+# SCREEN_HEIGHT = 720
+SCREEN_WIDTH = 1920 / 1.25
+SCREEN_HEIGHT = 1080 / 1.25
     
 # For pygbag, we will use a smaller screen size for better performance in browser emulator
 # SCREEN_WIDTH = 960

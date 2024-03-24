@@ -2,25 +2,28 @@ from .imp import *
 from .animated import Animated
 from math import floor
 from ..spawner import Spawner
+from ..game_state import GameState
 max_gem_img = 13
 
 class Gem(Animated):
     def __init__(self, center, value: float = 1):
+        self.value = value * GameState.gem_value_multiplier
         super().__init__(
-            f"asset/images/gem/{floor(((value - 1) // 4) % (max_gem_img + 1))}.png", 
+            f"asset/images/gem/{(floor(self.value - 1) % (max_gem_img + 1))}.png", 
             width = 8 * 8, 
             height = 14 * 8 , 
             frames = 5, 
             scale = 0.16,
             animation_speed = 7
         )
-        self.value = value
         self.tag = TAGS.GEM
         self.collected = False
         self.rect = self.surf.get_rect(center=center)
 
     def update(self):
         super().update()
+        if GameState.is_playing() == False:
+            return
         if is_out_of_bounds(self.rect): return self.kill()
 
         # if self.collected then move towards center of screen
