@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
-__all__ = ["EnemiesSpriteData"]
+__all__ = ["enemies_sprite_data"]
+
 
 @dataclass
 class Actions:
@@ -12,47 +13,59 @@ class Actions:
 
 @dataclass
 class EnemiesSpriteData:
-    golem: Actions = Actions(
-        name = "golem",
-        run = {
+    golem: Actions
+    bat: Actions
+    canine_black: Actions
+    canine_gray: Actions
+    canine_white: Actions
+    crab: Actions
+    rat: Actions
+    skull: Actions
+    slime: Actions
+
+
+enemies_sprite_data = EnemiesSpriteData(
+    golem=Actions(
+        name="golem",
+        run={
             "frames": 4,
             "animation_speed": 4,
             "height": 64,
             "width": 64,
             "scale": 1,
         },
-        death = {
+        death={
             "frames": 9,
             "animation_speed": 4,
             "height": 64,
             "width": 64,
             "scale": 1,
-            "columns": 4
-        }
-    )
-    bat: Actions = Actions(
-        name = "bat",
-        run = {
+            "columns": 4,
+        },
+    ),
+    bat=Actions(
+        name="bat",
+        run={
             "frames": 4,
             "animation_speed": 4,
             "height": 64,
             "width": 64,
-            "scale": 1,
-            "columns": 0
+            "scale": 1.4,
+            "columns": 0,
         },
-        death = {
+        death={
             "frames": 11,
             "animation_speed": 4,
             "height": 64,
             "width": 64,
-            "scale": 1,
-            "columns": 4
+            "scale": 1.4,
+            "columns": 4,
         },
-    )
-    canine_black: Actions = Actions(
-        name = "canine_black",
-        flip = True,
-        run = {
+    ),
+    canine_black=Actions(
+        name="canine_black",
+        flip=True,
+        run={
             "frames": 6,
             "animation_speed": 4,
             "height": 32,
@@ -60,19 +73,19 @@ class EnemiesSpriteData:
             "scale": 1,
             "columns": 4,
         },
-        death = {
+        death={
             "frames": 8,
             "animation_speed": 4,
             "height": 32,
             "width": 48,
             "scale": 1,
             "columns": 4,
-        }
-    )
-    canine_gray: Actions = Actions(
-        name = "canine_gray",
-        flip = True,
-        run = {
+        },
+    ),
+    canine_gray=Actions(
+        name="canine_gray",
+        flip=True,
+        run={
             "frames": 6,
             "animation_speed": 4,
             "height": 32,
@@ -80,19 +93,19 @@ class EnemiesSpriteData:
             "scale": 1,
             "columns": 4,
         },
-        death = {
+        death={
             "frames": 8,
             "animation_speed": 4,
             "height": 32,
             "width": 48,
             "scale": 1,
             "columns": 4,
-        }
-    )
-    canine_white: Actions = Actions(
-        name = "canine_white",
-        flip = True,
-        run = {
+        },
+    ),
+    canine_white=Actions(
+        name="canine_white",
+        flip=True,
+        run={
             "frames": 6,
             "animation_speed": 4,
             "height": 32,
@@ -100,89 +113,89 @@ class EnemiesSpriteData:
             "scale": 1,
             "columns": 4,
         },
-        death = {
+        death={
             "frames": 8,
             "animation_speed": 4,
             "height": 32,
             "width": 48,
             "scale": 1,
             "columns": 4,
-        }
-    )
-    crab: Actions = Actions(
-        name = "crab",
-        run = {
+        },
+    ),
+    crab=Actions(
+        name="crab",
+        run={
             "frames": 6,
             "animation_speed": 4,
             "height": 64,
             "width": 64,
             "scale": 1,
-            "columns": 4
+            "columns": 4,
         },
-        death = {
+        death={
             "frames": 5,
             "animation_speed": 4,
             "height": 64,
             "width": 64,
             "scale": 1,
-            "columns": 4
-        }
-    )
-    rat: Actions = Actions(
-        name = "rat",
-        run = {
+            "columns": 4,
+        },
+    ),
+    rat=Actions(
+        name="rat",
+        run={
             "frames": 6,
             "animation_speed": 4,
             "height": 64,
             "width": 64,
-            "scale": 1,
-            "columns": 4
+            "scale": 1.4,
+            "columns": 4,
         },
-        death = {
+        death={
             "frames": 5,
             "animation_speed": 4,
             "height": 64,
             "width": 64,
-            "scale": 1,
-            "columns": 4
+            "scale": 1.4,
+            "columns": 4,
         },
-    )
-    skull: Actions = Actions(
-        name = "skull",
-        run = {
+    ),
+    skull=Actions(
+        name="skull",
+        run={
             "frames": 8,
             "animation_speed": 4,
             "height": 64,
             "width": 64,
-            "scale": 1,
-            "columns": 4
+            "scale": 1.4,
+            "columns": 4,
         },
-        death = {
+        death={
             "frames": 10,
             "animation_speed": 4,
             "height": 64,
             "width": 64,
-            "scale": 1,
-            "columns": 4
+            "scale": 1.4,
+            "columns": 4,
         },
-    )
-    slime: Actions = Actions(
-        name = "slime",
-        run = {
+    ),
+    slime=Actions(
+        name="slime",
+        run={
             "frames": 4,
             "animation_speed": 4,
             "height": 64,
             "width": 64,
-            "scale": 1,
-            "columns": 4
+            "scale": 1.2,
+            "columns": 4,
         },
-        death = {
+        death={
             "frames": 6,
             "animation_speed": 4,
             "height": 64,
             "width": 64,
-            "scale": 1,
-            "columns": 4
-        }
-    )
-    
+            "scale": 1.2,
+            "columns": 4,
+        },
+    ),
+)
