@@ -8,6 +8,7 @@ if TYPE_CHECKING:
 
 __all__ = ["GameState"]
 
+
 @dataclass
 class GameState:
     player: Player
@@ -23,7 +24,7 @@ class GameState:
     gem_value_multiplier: float
 
     player_damage_multiplier: float
-    player_defense_multiplier: float    
+    player_defense_multiplier: float
 
     enemy_speed_multiplier: float
     enemy_health_multiplier: float
@@ -36,9 +37,9 @@ class GameState:
     sprite_speed: SpriteSpeed
     sprite_damage: SpriteDamage
     sprite_health: SpriteHealth
-    sprite_value: SpriteValue 
+    sprite_value: SpriteValue
     projectile_level: ProjectileLevel
-    
+
     max_enemies_cap: float = 100
 
     delta_time: float = 0
@@ -53,19 +54,19 @@ class GameState:
     @staticmethod
     def change_status(status: GAMESTATUS):
         GameState.game_status = status
-        
+
     @staticmethod
     def is_playing():
         return GameState.game_status == GAMESTATUS.PLAYING
-    
+
     @staticmethod
     def is_home():
         return GameState.game_status == GAMESTATUS.HOME
-    
+
     @staticmethod
     def is_game_over():
         return GameState.game_status == GAMESTATUS.GAME_OVER
-    
+
     @staticmethod
     def is_skill_menu():
         return GameState.game_status == GAMESTATUS.SKILL_MENU
@@ -77,7 +78,7 @@ class GameState:
         GameState.delta_frame = GameState.delta_time * TARGET_FPS
         GameState._getTicksLastFrame = ticks
         GameState.current_level_play_time = ticks - GameState.time_snapshot
-    
+
     @staticmethod
     def reset():
         GameState.player = None
@@ -93,7 +94,7 @@ class GameState:
         GameState.gem_value_multiplier = 1.2
 
         GameState.player_damage_multiplier = 1.5
-        GameState.player_defense_multiplier = 1    
+        GameState.player_defense_multiplier = 1
 
         GameState.enemy_speed_multiplier = 1.2
         GameState.enemy_health_multiplier = 1
@@ -109,18 +110,25 @@ class GameState:
 
         if not hasattr(GameState, "snackbar") or GameState.snackbar is None:
             from .sprites import Snackbar
+
             GameState.snackbar = Snackbar()
 
-        if not hasattr(GameState, "damage_splash_screen") or GameState.damage_splash_screen is None:
+        if (
+            not hasattr(GameState, "damage_splash_screen")
+            or GameState.damage_splash_screen is None
+        ):
             from .sprites import DamageSplashScreen
+
             GameState.damage_splash_screen = DamageSplashScreen()
-    
+
+
 class DynamicDataclass:
     def __getitem__(self, key):
         return getattr(self, str(key))
-    
+
     def __setitem__(self, key, value):
         setattr(self, str(key), value)
+
 
 @dataclass
 class SpriteSpeed(DynamicDataclass):
@@ -134,7 +142,7 @@ class SpriteSpeed(DynamicDataclass):
     magic_arrow: float = 9
     magic_orb: float = 9
     thunder_ball: float = 9
-    
+
     enemy: float = 2
     bat: float = 4
     canine_gray: float = 3
@@ -143,6 +151,7 @@ class SpriteSpeed(DynamicDataclass):
     rat: float = 2
     skull: float = 2
     slime: float = 2
+
 
 @dataclass
 class SpriteTimer(DynamicDataclass):
@@ -156,7 +165,7 @@ class SpriteTimer(DynamicDataclass):
     magic_arrow: int = 3500
     magic_orb: int = 3400
     thunder_ball: int = 4200
-    
+
     enemy: int = int(900 * 0.85)
     bat: int = int(800 * 0.85)
     canine_gray: int = int(1200 * 0.85)
@@ -166,7 +175,8 @@ class SpriteTimer(DynamicDataclass):
     skull: int = int(910 * 0.85)
     slime: int = int(940 * 0.85)
 
-@dataclass 
+
+@dataclass
 class SpriteDamage(DynamicDataclass):
     bullet: float = 6.2
     lightning: float = 999
@@ -176,7 +186,7 @@ class SpriteDamage(DynamicDataclass):
     magic_arrow: float = 5 * 2.2
     magic_orb: float = 5 * 2.1
     thunder_ball: float = 5 * 2.7
-    
+
     enemy: float = 5
     bat: float = 6
     canine_gray: float = 10
@@ -185,6 +195,7 @@ class SpriteDamage(DynamicDataclass):
     rat: float = 5
     skull: float = 7
     slime: float = 6
+
 
 @dataclass
 class SpriteHealth(DynamicDataclass):
@@ -197,6 +208,7 @@ class SpriteHealth(DynamicDataclass):
     skull: float = 11
     slime: float = 12
 
+
 @dataclass
 class SpriteValue(DynamicDataclass):
     enemy: float = 1.5
@@ -208,6 +220,7 @@ class SpriteValue(DynamicDataclass):
     skull: float = 1.6
     slime: float = 1.5
 
+
 @dataclass
 class ProjectileLevel(DynamicDataclass):
     fire_ball: int = None
@@ -216,5 +229,6 @@ class ProjectileLevel(DynamicDataclass):
     magic_arrow: int = None
     magic_orb: int = None
     thunder_ball: int = None
-    
+
+
 del dataclass

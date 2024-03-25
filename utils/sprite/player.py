@@ -1,26 +1,25 @@
-from .imp import * 
+from .imp import *
 from .animated import Animated
+
 
 # Define the Player object extending pygame.sprite.Sprite
 # Instead of a surface, we use an image for a better looking sprite
 class Player(Animated):
     def __init__(self):
         super().__init__(
-            "asset/images/player.png", 
-            width = 192, 
-            height = 192, 
-            frames = 5, 
-            scale = 0.3,
-            animation_speed = 4,
-            mode = "loop"
+            "asset/images/player.png",
+            width=192,
+            height=192,
+            frames=5,
+            scale=0.3,
+            animation_speed=4,
+            mode="loop",
         )
         self.tag = TAGS.PLAYER
         self.target_rotation = 0
         self.rotation_speed = 2
         self.current_rotation = 0
-        self.rect = self.surf.get_rect(
-            center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-        )
+        self.rect = self.surf.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
 
     # Move the sprite based on keypresses
     def update(self, pressed_keys, all_sprites):
@@ -40,11 +39,11 @@ class Player(Animated):
         if move_vector.length_squared() != 0:
             move_vector.normalize_ip()
             self.target_rotation = move_vector.angle_to(pygame.Vector2(0, 1)) - 90
-            
+
         self.surf = pygame.transform.rotate(self.original_surf, self.target_rotation)
         # Apply speed to the normalized movement vector
         move_vector *= GameState.player_speed * GameState.delta_frame
-        
+
         # Move the player
         self.rect.move_ip(move_vector)
 
@@ -53,4 +52,5 @@ class Player(Animated):
         camera_offset_y = SCREEN_HEIGHT // 2 - self.rect.centery
 
         # Adjust the positions of all game elements (e.g., background) by the camera offset
-        for sprite in all_sprites: sprite.rect.move_ip(camera_offset_x, camera_offset_y)
+        for sprite in all_sprites:
+            sprite.rect.move_ip(camera_offset_x, camera_offset_y)

@@ -18,11 +18,13 @@ from pygame.locals import (
     QUIT,
 )
 
+
 class GAMESTATUS(Enum):
     HOME = "home"
     PLAYING = "playing"
     GAME_OVER = "game_over"
     SKILL_MENU = "skill_menu"
+
 
 class TAGS(Enum):
     PLAYER = "player"
@@ -37,7 +39,8 @@ class TAGS(Enum):
     TEXT = "text"
     BACKGROUND = "background"
 
-class CustomEvents():
+
+class CustomEvents:
     def __init__(self):
         self.ADDSHINYSTAR = pygame.USEREVENT + 10
         self.REGEN = pygame.USEREVENT + 20
@@ -76,7 +79,7 @@ class CustomEvents():
             self.ADDGOLEM,
             self.ADDRAT,
             self.ADDSKULL,
-            self.ADDSLIME
+            self.ADDSLIME,
         ]
 
     def get_projectile_events(self):
@@ -88,8 +91,9 @@ class CustomEvents():
             self.ADDFLAMEBALL,
             self.ADDMAGICARROW,
             self.ADDMAGICORB,
-            self.ADDTHUNDERBALL
+            self.ADDTHUNDERBALL,
         ]
+
 
 CUSTOMEVENTS = CustomEvents()
 
@@ -99,7 +103,7 @@ SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 # SCREEN_WIDTH = 1920 / 1.25
 # SCREEN_HEIGHT = 1080 / 1.25
-    
+
 # For pygbag, we will use a smaller screen size for better performance in browser emulator
 # SCREEN_WIDTH = 960
 # SCREEN_HEIGHT = 540

@@ -1,4 +1,5 @@
-from .imp import * 
+from .imp import *
+
 
 # Define the Background object extending pygame.sprite.Sprite
 class Background(pygame.sprite.Sprite):

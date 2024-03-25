@@ -8,6 +8,7 @@ from random import choice, randint
 
 __all__ = ["SkillManager"]
 
+
 def decorator(func):
     def wrapper(*args, **kwargs):
         result = func(*args, **kwargs)
@@ -16,14 +17,18 @@ def decorator(func):
         GameState.gem_capacity += log10(GameState.gem_capacity) * 1.4
         GameState.player_health = GameState.player_max_health
         return result
+
     return wrapper
+
 
 @dataclass
 class SkillManager:
     @decorator
     def unlock_or_upgrade_ability():
         if CUSTOMEVENTS.ADDLIGHTNING not in GameManager.timers:
-            GameManager.set_timer(CUSTOMEVENTS.ADDLIGHTNING, GameState.sprite_timer.lightning)
+            GameManager.set_timer(
+                CUSTOMEVENTS.ADDLIGHTNING, GameState.sprite_timer.lightning
+            )
             return "Lightning unlocked !!!"
 
         all_projectiles = get_projectiles_data()
@@ -34,7 +39,7 @@ class SkillManager:
             if not current_level or current_level < projectile.data.level:
                 maxed_out = False
                 break
-        
+
         if maxed_out:
             return "All abilities are maxed out !!!"
 
@@ -42,12 +47,18 @@ class SkillManager:
             projectile = choice(all_projectiles)
             if not GameState.projectile_level[projectile.name]:
                 GameState.projectile_level[projectile.name] = 1
-                GameManager.set_timer(projectile.event, GameState.sprite_timer[projectile.name])
+                GameManager.set_timer(
+                    projectile.event, GameState.sprite_timer[projectile.name]
+                )
                 return f"{projectile.data.title} unlocked !!!"
             elif GameState.projectile_level[projectile.name] < projectile.data.level:
                 GameState.projectile_level[projectile.name] += 1
-                GameState.sprite_damage[projectile.name] += log10(GameState.sprite_damage[projectile.name]) / 4
-                GameManager.set_timer(projectile.event, GameState.sprite_timer[projectile.name])
+                GameState.sprite_damage[projectile.name] += (
+                    log10(GameState.sprite_damage[projectile.name]) / 4
+                )
+                GameManager.set_timer(
+                    projectile.event, GameState.sprite_timer[projectile.name]
+                )
                 return f"{projectile.data.title} upgraded to level {GameState.projectile_level[projectile.name]}"
 
     @decorator
@@ -59,7 +70,9 @@ class SkillManager:
     def upgrade_defense():
         rand = randint(1, 3)
         if rand == 1:
-            GameState.player_defense_multiplier += log10(GameState.player_defense_multiplier)
+            GameState.player_defense_multiplier += log10(
+                GameState.player_defense_multiplier
+            )
             return "Player defense increased by 10%"
         elif rand == 2:
             GameState.player_max_health += log10(GameState.player_max_health)
@@ -79,7 +92,9 @@ class SkillManager:
             GameState.player_speed += log10(GameState.player_speed) / 2
             return "Player speed increased by 10%"
         else:
-            GameState.gem_value_multiplier += log10(GameState.gem_value_multiplier + 1) * 2
+            GameState.gem_value_multiplier += (
+                log10(GameState.gem_value_multiplier + 1) * 2
+            )
             return "Experience gained increased by 20%"
 
     def set_timer(event, time):

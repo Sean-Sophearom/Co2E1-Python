@@ -1,10 +1,11 @@
-#time crunch no more time to refactor
+# time crunch no more time to refactor
 from .imp import *
 from .animated import Animated
 from ..spawner import Spawner
 
 # self.flip is from sprite
 # self.flipped is from movement
+
 
 class AnimatedEnemy(Animated):
     def __init__(self, kwargs):
@@ -14,9 +15,9 @@ class AnimatedEnemy(Animated):
         name = self.sprite_data.name
 
         super().__init__(
-            f"asset/images/enemy/{name}/run.png", 
+            f"asset/images/enemy/{name}/run.png",
             **self.sprite_data.run,
-            mode = "loop",
+            mode="loop",
         )
         self.tag = TAGS.ENEMY
         self.value = GameState.sprite_value[name] * GameState.enemy_value_multiplier
@@ -30,34 +31,38 @@ class AnimatedEnemy(Animated):
     # Remove it when it passes the left edge of the screen
     def update(self):
         super().update()
-        if is_out_of_bounds(self.rect): return self.kill()
+        if is_out_of_bounds(self.rect):
+            return self.kill()
 
         move_vector = pygame.Vector2(
-            CENTER.x - self.rect.centerx,
-            CENTER.y - self.rect.centery
+            CENTER.x - self.rect.centerx, CENTER.y - self.rect.centery
         )
-        
+
         if move_vector.length_squared() != 0:
             move_vector.normalize_ip()
 
             self.flipped = (move_vector.x < 0) ^ self.flip
-            
+
             if self.flipped:
                 self.surf = pygame.transform.flip(self.original_surf, True, False)
 
-            move_vector *= GameState.sprite_speed.enemy * GameState.delta_frame * GameState.enemy_speed_multiplier
+            move_vector *= (
+                GameState.sprite_speed.enemy
+                * GameState.delta_frame
+                * GameState.enemy_speed_multiplier
+            )
             self.rect.move_ip(move_vector)
-    
+
     def kill(self):
         from ..sprite_group import all_sprites, ui
-        
-        on_kill = lambda center = None: Spawner.spawn_gem(center=center, value=self.value)
+
+        on_kill = lambda center=None: Spawner.spawn_gem(center=center, value=self.value)
         death_animation = Animated(
-            f"asset/images/enemy/{self.sprite_data.name}/death.png", 
+            f"asset/images/enemy/{self.sprite_data.name}/death.png",
             **self.sprite_data.death,
             mode="once",
             flipped=self.flipped,
-            on_kill=on_kill
+            on_kill=on_kill,
         )
         death_animation.rect = death_animation.surf.get_rect(center=self.rect.center)
         all_sprites.add(death_animation)
@@ -68,18 +73,25 @@ class AnimatedEnemy(Animated):
     def take_damage(self, damage):
         Spawner.spawn_damage_text(self.rect.center, damage)
         self.health -= damage
-        if self.health <= 0: self.kill()
-    
+        if self.health <= 0:
+            self.kill()
+
     def get_random_spawn(self):
         quadrant = random.randint(1, 4)
         center = (0, 0)
         if quadrant == 1:
             center = (random.randint(-5, 0), random.randint(0, SCREEN_HEIGHT))
         elif quadrant == 2:
-            center = (random.randint(SCREEN_WIDTH, SCREEN_WIDTH + 5), random.randint(0, SCREEN_HEIGHT))
+            center = (
+                random.randint(SCREEN_WIDTH, SCREEN_WIDTH + 5),
+                random.randint(0, SCREEN_HEIGHT),
+            )
         elif quadrant == 3:
             center = (random.randint(0, SCREEN_WIDTH), random.randint(-5, 0))
         else:
-            center = (random.randint(0, SCREEN_WIDTH), random.randint(SCREEN_HEIGHT, SCREEN_HEIGHT + 5))
+            center = (
+                random.randint(0, SCREEN_WIDTH),
+                random.randint(SCREEN_HEIGHT, SCREEN_HEIGHT + 5),
+            )
 
         return center
