@@ -4,7 +4,7 @@ from .constant import GAMESTATUS, TARGET_FPS, pygame
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from .sprites import Player, Snackbar
+    from .sprites import Player, Snackbar, DamageSplashScreen
 
 __all__ = ["GameState"]
 
@@ -32,6 +32,7 @@ class GameState:
     enemy_value_multiplier: float
 
     snackbar: Snackbar
+    damage_splash_screen: DamageSplashScreen
 
     sprite_timer: SpriteTimer
     sprite_speed: SpriteSpeed
